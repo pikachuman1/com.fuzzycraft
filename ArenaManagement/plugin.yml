@@ -1,3 +1,7 @@
+name: ArenaManagement
+main: com.fuzzycraft.ArenaManagement
+version: 0.02
+
 commands:
    basic:
       description: This is a demo command.
