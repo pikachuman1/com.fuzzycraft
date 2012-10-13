@@ -13,12 +13,12 @@ public class ArenaManagementCommandExecutor implements CommandExecutor {
 		plugin = instance;
 	}
 	
-	private ArenaManagement am = new ArenaManagement();
+	public ArenaManagementPlayerListener pl = new ArenaManagementPlayerListener(plugin);
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("basic")){ // If the player typed /basic then do the following...
-			sender.sendMessage(am.positionLeftClick().toString());
+			sender.sendMessage(pl.locLC.toString());
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("basic2")) {
 			if (!(sender instanceof Player)) {

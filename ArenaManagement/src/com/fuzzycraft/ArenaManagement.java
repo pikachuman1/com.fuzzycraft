@@ -12,8 +12,7 @@ public class ArenaManagement extends JavaPlugin {
 	private ArenaManagementPlayerListener pl = new ArenaManagementPlayerListener(this);
 	
 	public Location positionLeftClick() {
-		Location positionLeftClick = pl.locLC;
-		return positionLeftClick;
+		return pl.locLC; 
 	}
 	
 	public Location positionRightClick() {
