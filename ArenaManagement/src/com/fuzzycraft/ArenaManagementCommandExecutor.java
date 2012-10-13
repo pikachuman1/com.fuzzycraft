@@ -7,16 +7,18 @@ import org.bukkit.entity.Player;
 
 public class ArenaManagementCommandExecutor implements CommandExecutor {
 	
-	private ArenaManagement plugin;
+	public ArenaManagement plugin;
 	 
-	public ArenaManagementCommandExecutor(ArenaManagement plugin) {
-		this.plugin = plugin;
+	public ArenaManagementCommandExecutor(ArenaManagement instance) {
+		plugin = instance;
 	}
- 
+	
+	private ArenaManagement am = new ArenaManagement();
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("basic")){ // If the player typed /basic then do the following...
-			sender.sendMessage("Test.");
+			sender.sendMessage(am.positionLeftClick().toString());
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("basic2")) {
 			if (!(sender instanceof Player)) {

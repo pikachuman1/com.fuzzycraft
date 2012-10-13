@@ -13,3 +13,13 @@ commands:
       usage: /<command>
       permission: <plugin name>.basic
       permission-message: You don't have <permission>
+   basic3:
+      description: This is a demo command.
+      usage: /<command>
+      permission: <plugin name>.basic
+      permission-message: You don't have <permission>
+   basic4:
+      description: This is a demo command.
+      usage: /<command>
+      permission: <plugin name>.basic
+      permission-message: You don't have <permission>
