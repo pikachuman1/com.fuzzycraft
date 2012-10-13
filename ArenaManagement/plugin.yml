@@ -1,25 +1,10 @@
 name: ArenaManagement
 main: com.fuzzycraft.ArenaManagement
-version: 0.02
+version: 0.06
 
 commands:
-   basic:
-      description: This is a demo command.
-      usage: /<command>
-      permission: <plugin name>.basic
-      permission-message: You don't have <permission>
-   basic2:
-      description: This is a demo command.
-      usage: /<command>
-      permission: <plugin name>.basic2
-      permission-message: You don't have <permission>
-   basic3:
-      description: This is a demo command.
-      usage: /<command>
-      permission: <plugin name>.basic3
-      permission-message: You don't have <permission>
-   basic4:
-      description: This is a demo command.
-      usage: /<command>
-      permission: <plugin name>.basic4
-      permission-message: You don't have <permission>
+   ArenaManagement:
+      description: ArenaManagement
+      aliases: am
+      permission: <plugin name>
+      permission-message: You don't have permissions to use this command.

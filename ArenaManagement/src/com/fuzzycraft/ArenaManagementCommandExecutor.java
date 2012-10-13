@@ -15,23 +15,27 @@ public class ArenaManagementCommandExecutor implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("basic")) { // If the player typed /basic then do the following...
-			if (am.locationLeftClick() == null) {
-				sender.sendMessage("FAILURE");
-				return true;
-					
-			} else { 
-				sender.sendMessage(am.locationLeftClick().toString());
-				return true;
+		if (cmd.getName().equalsIgnoreCase("am") || cmd.getName().equalsIgnoreCase("arenamanagement")) { 
+			if (args.length == 0) {
+				sender.sendMessage("/am loc - Display current location selections");
+			} else if (args[0].equals("loc") || args[0].equals("location")) {
+				if (am.locationLeftClick() == null && am.locationRightClick() != null) {
+					sender.sendMessage("First location not set (left click)");
+					return true;
+				} else if (am.locationRightClick() == null && am.locationRightClick() != null) {
+					sender.sendMessage("Second location not set (right click)");
+					return true;
+				} else if (am.locationLeftClick() == null && am.locationRightClick() == null) {
+					sender.sendMessage("First location not set (left click)");
+					sender.sendMessage("Second location not set (right click)");
+					return true;
+				} else {
+					sender.sendMessage(am.locationLeftClick().toString());
+					sender.sendMessage(am.locationRightClick().toString());
+					return true;
+				}
 			}
-		} else if (cmd.getName().equalsIgnoreCase("basic2")) {
-			if (!(sender instanceof Player)) {
-				sender.sendMessage("This command can only be run by a player.");
-			} else {
-				sender.sendMessage("Test.");
-			}
-			return true;
-		}
+		} 
 		return false;
 	}
 

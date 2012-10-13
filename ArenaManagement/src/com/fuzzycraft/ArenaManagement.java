@@ -19,8 +19,7 @@ public class ArenaManagement extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		getLogger().info("onEnable has been invoked!");
-		getCommand("basic").setExecutor(new ArenaManagementCommandExecutor(this));
-		getCommand("basic2").setExecutor(new ArenaManagementCommandExecutor(this));
+		getCommand("ArenaManagement").setExecutor(new ArenaManagementCommandExecutor(this));
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this.pl, this);
 	}

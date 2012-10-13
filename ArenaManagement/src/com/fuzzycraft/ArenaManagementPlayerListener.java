@@ -6,7 +6,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 public class ArenaManagementPlayerListener implements Listener{
 	
@@ -19,11 +18,6 @@ public class ArenaManagementPlayerListener implements Listener{
 		am = instance;
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onPlayerJoin(PlayerJoinEvent evt){
-		evt.getPlayer().sendMessage("Join");
-	}
-    
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerClick(PlayerInteractEvent evt) {
 		
