@@ -13,10 +13,10 @@ public class ArenaManagementPlayerListener implements Listener{
 	public Location locLC;
 	public Location locRC;
 	
-	public ArenaManagement plugin;
+	public ArenaManagement am;
 	
 	public ArenaManagementPlayerListener(ArenaManagement instance) {
-		plugin = instance;
+		am = instance;
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
