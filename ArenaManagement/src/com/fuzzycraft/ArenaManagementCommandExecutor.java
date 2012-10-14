@@ -3,7 +3,6 @@ package com.fuzzycraft;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class ArenaManagementCommandExecutor implements CommandExecutor {
 	
@@ -30,7 +29,13 @@ public class ArenaManagementCommandExecutor implements CommandExecutor {
 					sender.sendMessage("Second location not set (right click)");
 					return true;
 				} else {
-					sender.sendMessage(am.locationLeftClick().toString());
+					ConfigurationSerializableLocation locLC = new ConfigurationSerializableLocation(am.locationLeftClick());
+					am.getConfig().set("Test.Location.position1", locLC.serialize());
+					am.saveConfig();
+					ConfigurationSerializableLocation locRC = new ConfigurationSerializableLocation(am.locationLeftClick());
+					am.getConfig().set("Test.Location.position2", locRC.serialize());
+					am.saveConfig();
+					//ConfigurationSerializableLocation csl = new ConfigurationSerializableLocation(am.config.getConfigurationSection("Test.Location.world").getValues(true);
 					sender.sendMessage(am.locationRightClick().toString());
 					return true;
 				}

@@ -1,6 +1,6 @@
 name: ArenaManagement
 main: com.fuzzycraft.ArenaManagement
-version: 0.06
+version: 0.11
 
 commands:
    ArenaManagement:
