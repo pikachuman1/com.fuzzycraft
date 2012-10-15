@@ -16,13 +16,13 @@ public class ArenaManagement extends JavaPlugin {
 		return ampl.locRC;
 	}
 	
+	private String string = "testshit";
+	
 	@Override
 	public void onEnable() {
 		this.saveDefaultConfig();
 		FileConfiguration config = this.getConfig();
-		config.options().header("The Server.PvP node: Set to true if PvP is enabled, and false if PvP is disabled."); 
-		config.addDefault("Server.PvP", true);
-		config.options().copyDefaults(true);
+		config.options().header("ArenaManagement configuration"); 
 		this.saveConfig();	
 		getCommand("ArenaManagement").setExecutor(new ArenaManagementCommandExecutor(this));	
 		PluginManager pm = getServer().getPluginManager();

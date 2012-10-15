@@ -11,12 +11,12 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
  
 public class ConfigurationSerializableLocation implements ConfigurationSerializable {
     
-	public World world;
-	public double x, y, z;
-    public float yaw;
-    public float pitch;
-    public Location loc;
-    public Chunk chunk;
+	private final World world;
+	private final double x, y, z;
+	private final float yaw;
+	private final float pitch;
+	private final Location loc;
+	private final Chunk chunk;
  
     public ConfigurationSerializableLocation(Location loc) {
     	world = loc.getWorld();

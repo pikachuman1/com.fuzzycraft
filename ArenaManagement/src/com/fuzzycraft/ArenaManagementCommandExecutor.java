@@ -32,11 +32,12 @@ public class ArenaManagementCommandExecutor implements CommandExecutor {
 					ConfigurationSerializableLocation locLC = new ConfigurationSerializableLocation(am.locationLeftClick());
 					am.getConfig().set("Test.Location.position1", locLC.serialize());
 					am.saveConfig();
-					ConfigurationSerializableLocation locRC = new ConfigurationSerializableLocation(am.locationLeftClick());
+					ConfigurationSerializableLocation locRC = new ConfigurationSerializableLocation(am.locationRightClick());
 					am.getConfig().set("Test.Location.position2", locRC.serialize());
 					am.saveConfig();
 					//ConfigurationSerializableLocation csl = new ConfigurationSerializableLocation(am.config.getConfigurationSection("Test.Location.world").getValues(true);
-					sender.sendMessage(am.locationRightClick().toString());
+					Cuboid cuboid = new Cuboid(am.locationLeftClick(), am.locationRightClick());
+					//sender.sendMessage(cuboid.world.toString());
 					return true;
 				}
 			}
