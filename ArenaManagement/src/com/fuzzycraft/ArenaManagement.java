@@ -18,9 +18,9 @@ public class ArenaManagement extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		this.saveDefaultConfig();
+		this.reloadConfig();
 		FileConfiguration config = this.getConfig();
-		config.options().header("ArenaManagement configuration"); 
+		config.options().header("ArenaManagement configuration file."); 
 		this.saveConfig();	
 		getCommand("ArenaManagement").setExecutor(new ArenaManagementCommandExecutor(this));	
 		PluginManager pm = getServer().getPluginManager();
