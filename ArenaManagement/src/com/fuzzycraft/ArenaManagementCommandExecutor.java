@@ -1,5 +1,6 @@
 package com.fuzzycraft;
 
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,19 +31,19 @@ public class ArenaManagementCommandExecutor implements CommandExecutor {
 					return true;
 				} else {
 					ConfigurationSerializableLocation locLC = new ConfigurationSerializableLocation(am.locationLeftClick());
-					am.getConfig().set("Test.Location.position1", locLC.serialize());
+					am.getConfig().set("Test.Location.position1", locLC);
 					am.saveConfig();
 					ConfigurationSerializableLocation locRC = new ConfigurationSerializableLocation(am.locationRightClick());
-					am.getConfig().set("Test.Location.position2", locRC.serialize());
+					am.getConfig().set("Test.Location.position2", locRC);
 					am.saveConfig();
-					//ConfigurationSerializableLocation csl = new ConfigurationSerializableLocation(am.config.getConfigurationSection("Test.Location.world").getValues(true);
-					Cuboid cuboid = new Cuboid(am.locationLeftClick(), am.locationRightClick());
-					//sender.sendMessage(cuboid.world.toString());
+					Location loc = ((ConfigurationSerializableLocation) am.getConfig().get("Test.Location.position2")).getLocation();
+					sender.sendMessage(loc.toString());
+					Cuboid cuboid = new Cuboid(loc, am.locationRightClick());
 					return true;
 				}
 			}
 		} 
 		return false;
 	}
-
+	
 }

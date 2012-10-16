@@ -16,8 +16,6 @@ public class ArenaManagement extends JavaPlugin {
 		return ampl.locRC;
 	}
 	
-	private String string = "testshit";
-	
 	@Override
 	public void onEnable() {
 		this.saveDefaultConfig();

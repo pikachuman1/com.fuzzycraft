@@ -10,7 +10,7 @@ public class Cuboid {
 
 	public Cuboid(Location location1, Location location2) {
 		if (location1.getWorld() != location2.getWorld()) {
-			throw new IllegalArgumentException("locations must be on the same world");
+			throw new IllegalArgumentException("Locations must be on the same world");
 		}
 		world = location1.getWorld().getName();
 		x1 = Math.min(location1.getBlockX(), location2.getBlockX());
@@ -20,4 +20,9 @@ public class Cuboid {
 		y2 = Math.max(location1.getBlockY(), location2.getBlockY());
 		z2 = Math.max(location1.getBlockZ(), location2.getBlockZ());
 	}
+	
+	public int integer() {
+		return x1;
+	}
+	
 }

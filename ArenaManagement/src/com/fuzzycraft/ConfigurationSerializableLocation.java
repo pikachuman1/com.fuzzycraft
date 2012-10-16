@@ -2,7 +2,7 @@ package com.fuzzycraft;
 
 import java.util.HashMap;
 import java.util.Map;
- 
+
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -13,8 +13,7 @@ public class ConfigurationSerializableLocation implements ConfigurationSerializa
     
 	private final World world;
 	private final double x, y, z;
-	private final float yaw;
-	private final float pitch;
+	private final float yaw, pitch;
 	private final Location loc;
 	private final Chunk chunk;
  
@@ -51,5 +50,10 @@ public class ConfigurationSerializableLocation implements ConfigurationSerializa
         map.put("pitch", Float.floatToIntBits(loc.getPitch()));
         return map;
     }
- 
+    
+    public Location getLocation() {
+        Location location = new Location(world,x,y,z,yaw,pitch);
+        return location;
+    }
+    
 }
