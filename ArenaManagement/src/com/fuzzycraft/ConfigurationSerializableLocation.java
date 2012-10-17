@@ -52,8 +52,7 @@ public class ConfigurationSerializableLocation implements ConfigurationSerializa
     }
     
     public Location getLocation() {
-        Location location = new Location(world, x, y, z, yaw, pitch);
-        return location;
+        return loc;
     }
     
 }
