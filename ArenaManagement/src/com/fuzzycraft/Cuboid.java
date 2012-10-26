@@ -1,5 +1,12 @@
 package com.fuzzycraft;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class Cuboid {
@@ -61,16 +68,36 @@ public class Cuboid {
 		return (maxZ - minZ) + 1;
 	}
 	
-	public int[][][] array () {
-		int[][][] locArray = new int[getSizeX()][getSizeY()][getSizeZ()];
+	public void saveBlockData() {
+		File file = new File("data" + ".schematic");
+		try {
+		    if(!file.exists())
+		    {
+		        FileOutputStream fos = new FileOutputStream(file);
+		        fos.flush();
+		        fos.close();
+		    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		for (int x = minX; x <= maxX; x++) {
 		    for (int y = minY; y <= maxY; y++) {
 		        for (int z = minZ; z <= maxZ; z++) {
-		        	locArray[x][y][z] = x + y + z;
+		        	Location loc = new Location(Bukkit.getServer().getWorld(world), x, y, z, 0, 0);
+		        	try {
+			        	BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+			            {
+			                bw.write(loc.getBlock() + "");
+			                bw.newLine();
+			            }
+			            bw.flush();
+			            bw.close();
+		        	} catch (IOException e) {
+		    			e.printStackTrace();
+		    		}
 		        }
 		    }
 		}
-		return locArray;
 	}
 	
 }

@@ -60,6 +60,7 @@ public class ArenaManagementCommandExecutor implements CommandExecutor {
 				sender.sendMessage(x1.toString() + y1.toString() + z1.toString());
 				sender.sendMessage(x2.toString() + y2.toString() + z2.toString());
 				sender.sendMessage(sizeX.toString() + sizeY.toString() + sizeZ.toString());
+				cuboid.saveBlockData();
 			}
 		} 
 		return false;
