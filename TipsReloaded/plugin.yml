@@ -1,11 +1,6 @@
 name: TipsReloaded
-main: com.fuzzycraft.ArenaManagement
+main: com.fuzzycraft.TipsReloaded
 version: 0.01
-authorEmail: fuzzy@fuzzycraft.com
-
-originalAuthor: JesÃºs A. Ã�lvarez
-originalAuthorEmail: zydeco@namedfork.net
-originalAuthorUrl: http://namedfork.net
 
 commands:
   tips:

@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,8 +20,13 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Tips for Bukkit
  *
  * @author JesÃºs A. Ã�lvarez
+ * 
+ * @author MissingScrews
+ * date: 12/20/2012
+ * revision: Create config.yml on server start
+ * 
  */
-public class Tips extends JavaPlugin {
+public class TipsReloaded extends JavaPlugin {
     private ArrayList<TipSet> tipSets;
     private Random rng;
     
@@ -29,7 +35,10 @@ public class Tips extends JavaPlugin {
         rng = new Random(System.currentTimeMillis());
         
         // Load config
-        loadConfig(null);
+        this.reloadConfig();
+		FileConfiguration config = this.getConfig();
+		config.options().header("Tips Reloaded configuration file."); 
+		this.saveConfig();	
 
         // commands
         getCommand("tips").setExecutor(new TipsCommand(this));
