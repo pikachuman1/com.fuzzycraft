@@ -1,4 +1,4 @@
-package net.namedfork.bukkit.Tips;
+package com.fuzzycraft;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,4 +1,4 @@
-package net.namedfork.bukkit.Tips;
+package com.fuzzycraft;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * Tips for Bukkit
  *
- * @author Jesús A. Álvarez
+ * @author JesÃºs A. Ã�lvarez
  */
 public class Tips extends JavaPlugin {
     private ArrayList<TipSet> tipSets;

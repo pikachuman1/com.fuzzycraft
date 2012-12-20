@@ -1,4 +1,4 @@
-package net.namedfork.bukkit.Tips;
+package com.fuzzycraft;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
