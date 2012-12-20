@@ -68,8 +68,8 @@ public class Cuboid {
 		return (maxZ - minZ) + 1;
 	}
 	
-	public void saveBlockData() {
-		File file = new File("data" + ".schematic");
+	public void saveBlockData(String filename) {
+		File file = new File(filename + ".schematic");
 		try {
 		    if(!file.exists())
 		    {
