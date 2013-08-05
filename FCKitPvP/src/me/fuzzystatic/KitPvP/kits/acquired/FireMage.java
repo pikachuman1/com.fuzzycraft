@@ -38,10 +38,10 @@ public class FireMage extends Kit implements CommandExecutor {
 		    setPotionEffects(player);
 		    setInventory(player);
 
-		    playerKit.setKit(player.toString(), kit);
+			playerKit.setKit(player.toString(), kit);
 		}
 		return false;
-	}
+	}	
 	
 	public static void setPotionEffects(Player player) {
 		new RemovePotionEffects().removeAll(player);

@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class KitPvP extends JavaPlugin {
 	
 	private PlayerListener pl = new PlayerListener(this);
+	private MagicListener ml = new MagicListener(this);
 	
 	public void onEnable(){
 		getConfig().options().copyDefaults(true);
@@ -16,8 +17,9 @@ public class KitPvP extends JavaPlugin {
         
         PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this.pl, this);
-        
-        getCommand("kit").setExecutor(new KitPermCheck(this));
+		pm.registerEvents(this.ml, this);
+
+		getCommand("kit").setExecutor(new KitPermCheck(this));
 		getCommand("kits").setExecutor(new KitPermCheck(this));
 		
 		getCommand("squire").setExecutor(new Squire(this));
