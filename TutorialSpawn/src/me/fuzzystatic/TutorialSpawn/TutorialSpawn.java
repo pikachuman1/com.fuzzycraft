@@ -10,49 +10,51 @@ public class TutorialSpawn extends JavaPlugin {
 	
 	private TSPlayerListener tspl = new TSPlayerListener(this);
 	
+	FileConfiguration config;
+	
+	private String world = "";
+	private double x, y, z;
+	private float yaw, pitch;
+	
+	public String tsMarker = "[TutorialSpawn]";
+	public String spawnYml = "tutorialspawn.spawn";
+	public String exitYml = "tutorialspawn.exit";
+	public String phraseYml = "tutorialspawn.passphrase";
+	
 	public void onEnable() {
-		 PluginManager pm = getServer().getPluginManager();
+		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(this.tspl, this);
+				
+		config = getConfig();
 		
-		FileConfiguration config;
-		
-		try {
-			config = getConfig();
-			
-			File TutorialSpawn = new File("plugins" + File.separator + "TutorialSpawn" + File.separator + "config.yml");
-			TutorialSpawn.mkdir();
-			
-			if(!config.contains("tutorialspawn.location.world")) {
-				config.set("tutorialspawn.location.world", "");
-			}
-			
-			if(!config.contains("tutorialspawn.location.x")) {
-				config.set("tutorialspawn.location.x", "");
-			}
-			
-			if(!config.contains("tutorialspawn.location.y")) {
-				config.set("tutorialspawn.location.y", "");
-			}
-			
-			if(!config.contains("tutorialspawn.location.z")) {
-				config.set("tutorialspawn.location.z", "");
-			}
-			
-			if(!config.contains("tutorialspawn.location.pitch")) {
-				config.set("tutorialspawn.location.pitch", "");
-			}
-			
-			if(!config.contains("tutorialspawn.location.yaw")) {
-				config.set("tutorialspawn.location.yaw", "");
-			}
-	        
+		File UserData = new File(getDataFolder() + File.separator + "userdata");
+		UserData.mkdir();
+
+		try{			
+			if(!config.contains(phraseYml)) {
+				config.set(phraseYml, "putwhateverphraseyoulike");
+			}	
+			if(!config.contains(spawnYml)) {
+				config.set(spawnYml + ".world", world);
+				config.set(spawnYml + ".x", x);
+				config.set(spawnYml + ".y", y);
+				config.set(spawnYml + ".z", z);
+				config.set(spawnYml + ".yaw", yaw);
+				config.set(spawnYml + ".pitch", pitch);
+			}		
+			if(!config.contains(exitYml)) {
+				config.set(exitYml + ".world", world);
+				config.set(exitYml + ".x", x);
+				config.set(exitYml + ".y", y);
+				config.set(exitYml + ".z", z);
+				config.set(exitYml + ".yaw", yaw);
+				config.set(exitYml + ".pitch", pitch);
+			}	
 			saveConfig();
 		} catch(Exception e1){
 			e1.printStackTrace();
 		}
-
+		
+		getCommand("ts").setExecutor(new TSCommands(this));
 	}
-	
-
 }
-

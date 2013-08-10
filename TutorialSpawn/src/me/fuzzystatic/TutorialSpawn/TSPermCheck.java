@@ -6,8 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class TSPermCheck implements CommandExecutor {
-	@SuppressWarnings("unused")
+	
 	private TutorialSpawn plugin;
+	
 	public TSPermCheck(TutorialSpawn plugin) {
 		this.plugin = plugin;
 	}

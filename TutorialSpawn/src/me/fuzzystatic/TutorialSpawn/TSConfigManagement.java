@@ -5,16 +5,15 @@ import java.io.IOException;
  
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
  
 public class TSConfigManagement {
-	public JavaPlugin plugin;
-    public String fileName;
- 
-    public TSConfigManagement(JavaPlugin plugin) {
-    	this.plugin = plugin;
-    }
- 
+	
+	public TutorialSpawn plugin;
+    
+	public TSConfigManagement(TutorialSpawn plugin) {
+		this.plugin = plugin;
+	}
+	 
     public FileConfiguration createConfig(String name) {
         String pluginDir = plugin.getDataFolder().toString();
         File dir = new File(pluginDir);
@@ -34,11 +33,10 @@ public class TSConfigManagement {
         	try {
         		file.createNewFile();
         	} catch (IOException e) {
-        		// TODO Auto-generated catch block
         		e.printStackTrace();
         	} // creates a new file if it doesn't exist
         }
-        return YamlConfiguration.loadConfiguration(file);// returns the newly created configuration object.
+        return YamlConfiguration.loadConfiguration(file); // returns the newly created configuration object.
 	}
  
 	public void saveConfig(String name) {
