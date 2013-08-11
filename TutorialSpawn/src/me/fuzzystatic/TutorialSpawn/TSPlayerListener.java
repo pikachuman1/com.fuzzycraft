@@ -48,11 +48,10 @@ public final class TSPlayerListener implements Listener {
 				userdata.save(plugin.getDataFolder() + File.separator + user);
 			} catch(Exception e1){
 				e1.printStackTrace();
-			}
-			
+			}	
+			plugin.getConfig();	
 			if(userdata.get("completedTutorial").toString().equalsIgnoreCase("false")) {
 				if(!plugin.config.get(plugin.spawnYml + ".world").equals("")) {
-			    	plugin.getConfig();
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("world", plugin.config.get(plugin.spawnYml + ".world"));
 				    map.put("x", plugin.config.get(plugin.spawnYml + ".x"));
@@ -64,7 +63,6 @@ public final class TSPlayerListener implements Listener {
 			    	player.teleport(tssl.getLocation());
 				}
 			}
-
 	    }
 	}
 }
