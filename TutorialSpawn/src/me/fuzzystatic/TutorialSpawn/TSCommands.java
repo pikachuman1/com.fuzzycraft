@@ -22,10 +22,10 @@ public class TSCommands implements CommandExecutor {
 	private TSSimpleClasses tssc = new TSSimpleClasses();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("ts") || cmd.getName().equalsIgnoreCase("tutorialspawn")) {
 			if (args.length > 0) {
-				Player player = (Player) sender;
-				if (args[0].equalsIgnoreCase("setspawn")) {
+				if (args[0].equalsIgnoreCase("setspawn") && sender.hasPermission("tutorialspawn.setspawn")) {
 					TSSerializableLocation tssl = new TSSerializableLocation(player.getLocation());
 				    Map<String, Object> map = tssl.serialize();
 					plugin.getConfig();
@@ -39,7 +39,7 @@ public class TSCommands implements CommandExecutor {
 				    tssc.logMessage(plugin.tsMarker + " New tutorial spawn set.");
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New tutorial spawn set.");
 				}
-				if (args[0].equalsIgnoreCase("setexit")) {
+				if (args[0].equalsIgnoreCase("setexit") && sender.hasPermission("tutorialspawn.exit")) {
 					TSSerializableLocation tssl = new TSSerializableLocation(player.getLocation());
 				    Map<String, Object> map = tssl.serialize();
 					plugin.getConfig();
@@ -53,7 +53,7 @@ public class TSCommands implements CommandExecutor {
 				    tssc.logMessage(plugin.tsMarker + " New tutorial exit set.");
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New tutorial exit set.");
 				}
-				if (args[0].equalsIgnoreCase("setphrase")) {	
+				if (args[0].equalsIgnoreCase("setphrase") && sender.hasPermission("tutorialspawn.setphrase")) {	
 					if (args.length > 1) {
 					    plugin.getConfig();
 					    plugin.config.set(plugin.phraseYml, args[1]);
@@ -65,7 +65,7 @@ public class TSCommands implements CommandExecutor {
 						sender.sendMessage(ChatColor.DARK_RED + "Please enter a passphrase.");
 					}
 				}
-				if (args[0].equalsIgnoreCase("phrase")) {	
+				if (args[0].equalsIgnoreCase("phrase") && sender.hasPermission("tutorialspawn.phrase")) {	
 					if (args.length > 1) {
 					    plugin.getConfig();
 					    if(args[1].equalsIgnoreCase(plugin.config.get(plugin.phraseYml).toString())) {

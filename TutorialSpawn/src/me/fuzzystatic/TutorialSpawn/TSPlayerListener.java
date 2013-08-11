@@ -10,8 +10,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-public class TSPlayerListener implements Listener {
+public final class TSPlayerListener implements Listener {
 
 	public TutorialSpawn plugin;
     
@@ -22,32 +24,47 @@ public class TSPlayerListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onJoin(PlayerJoinEvent event) {		
 		Player player = event.getPlayer();
-		
-		String user = File.separator + "userdata" + File.separator + player.getName() + ".yml";
-		FileConfiguration userdata = new TSConfigManagement(plugin).getConfig(user);
+		BukkitTask task = new PlayerTeleport(this.plugin, player).runTaskLater(this.plugin, 10);
+	}
+	
+	public class PlayerTeleport extends BukkitRunnable {
+		 
+		private TutorialSpawn plugin;
+		private Player player;
 
-		if(!userdata.contains("completedTutorial")) {
-			userdata.set("completedTutorial", "false");
+		public PlayerTeleport(TutorialSpawn plugin, Player player) {
+			this.plugin = plugin;
+			this.player = player;
 		}
-		try {
-			userdata.save(plugin.getDataFolder() + File.separator + user);
-		} catch(Exception e1){
-			e1.printStackTrace();
-		}
-		
-		if(userdata.get("completedTutorial").toString().equalsIgnoreCase("false")) {
-			if(!plugin.config.get(plugin.spawnYml + ".world").equals("")) {
-				plugin.getConfig();
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("world", plugin.config.get(plugin.spawnYml + ".world"));
-			    map.put("x", plugin.config.get(plugin.spawnYml + ".x"));
-				map.put("y", plugin.config.get(plugin.spawnYml + ".y"));
-			  	map.put("z", plugin.config.get(plugin.spawnYml + ".z"));
-			  	map.put("yaw", plugin.config.get(plugin.spawnYml + ".yaw"));
-			   	map.put("pitch", plugin.config.get(plugin.spawnYml + ".pitch"));
-				TSSerializableLocation tssl = new TSSerializableLocation(map);
-		        player.teleport(tssl.getLocation());
+	 
+	    public void run() { 		    	
+			String user = File.separator + "userdata" + File.separator + player.getName() + ".yml";
+			FileConfiguration userdata = new TSConfigManagement(plugin).getConfig(user);
+
+			if(!userdata.contains("completedTutorial")) {
+				userdata.set("completedTutorial", "false");
 			}
-		}
+			try {
+				userdata.save(plugin.getDataFolder() + File.separator + user);
+			} catch(Exception e1){
+				e1.printStackTrace();
+			}
+			
+			if(userdata.get("completedTutorial").toString().equalsIgnoreCase("false")) {
+				if(!plugin.config.get(plugin.spawnYml + ".world").equals("")) {
+			    	plugin.getConfig();
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("world", plugin.config.get(plugin.spawnYml + ".world"));
+				    map.put("x", plugin.config.get(plugin.spawnYml + ".x"));
+					map.put("y", plugin.config.get(plugin.spawnYml + ".y"));
+				  	map.put("z", plugin.config.get(plugin.spawnYml + ".z"));
+				  	map.put("yaw", plugin.config.get(plugin.spawnYml + ".yaw"));
+				   	map.put("pitch", plugin.config.get(plugin.spawnYml + ".pitch"));
+					TSSerializableLocation tssl = new TSSerializableLocation(map);
+			    	player.teleport(tssl.getLocation());
+				}
+			}
+
+	    }
 	}
 }
