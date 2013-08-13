@@ -36,8 +36,6 @@ public class TSCommands implements CommandExecutor {
 					else {
 						sender.sendMessage(ChatColor.DARK_RED + "Please enter a passphrase.");
 					}
-				} else {
-					sender.sendMessage(ChatColor.DARK_RED + "Insufficient permissions");
 				}
 				if (args[0].equalsIgnoreCase("setspawn") && sender.hasPermission("tutorialspawn.setspawn")) {
 					TSSerializableLocation tssl = new TSSerializableLocation(player.getLocation());
@@ -52,10 +50,8 @@ public class TSCommands implements CommandExecutor {
 				    plugin.saveConfig();
 				    tssc.logMessage(plugin.tsMarker + " New tutorial spawn set.");
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New tutorial spawn set.");
-				} else {
-					sender.sendMessage(ChatColor.DARK_RED + "Insufficient permissions");
 				}
-				if (args[0].equalsIgnoreCase("setexit") && sender.hasPermission("tutorialspawn.exit")) {
+				if (args[0].equalsIgnoreCase("setexit") && sender.hasPermission("tutorialspawn.setexit")) {
 					TSSerializableLocation tssl = new TSSerializableLocation(player.getLocation());
 				    Map<String, Object> map = tssl.serialize();
 					plugin.getConfig();
@@ -68,21 +64,13 @@ public class TSCommands implements CommandExecutor {
 				    plugin.saveConfig();
 				    tssc.logMessage(plugin.tsMarker + " New tutorial exit set.");
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New tutorial exit set.");
-				} else {
-					sender.sendMessage(ChatColor.DARK_RED + "Insufficient permissions");
 				}
 				if (args[0].equalsIgnoreCase("phrase") && sender.hasPermission("tutorialspawn.phrase")) {	
 					if (args.length > 1) {
 					    if(args[1].equalsIgnoreCase(plugin.config.get(plugin.phraseYml).toString())) {
 					    	String user = File.separator + "userdata" + File.separator + player.getName() + ".yml";
 							FileConfiguration userdata = new TSConfigManagement(plugin).getConfig(user);
-							userdata.set("completedTutorial", "true");
-							try {
-								userdata.save(plugin.getDataFolder() + File.separator + user);
-							} catch(Exception e1){
-								e1.printStackTrace();
-							}
-							if(!userdata.get("completedTutorial").toString().equalsIgnoreCase("false")) {
+							if(userdata.get("completedTutorial").toString().equalsIgnoreCase("false")) {
 								plugin.getConfig();
 								if(!plugin.config.get(plugin.exitYml + ".world").equals("")) {
 									Map<String, Object> map = new HashMap<String, Object>();
@@ -94,9 +82,15 @@ public class TSCommands implements CommandExecutor {
 								   	map.put("pitch", plugin.config.get(plugin.exitYml + ".pitch"));
 									TSSerializableLocation tssl = new TSSerializableLocation(map);
 							        player.teleport(tssl.getLocation());
+							    	sender.sendMessage(ChatColor.GREEN + "Correct! Teleporting out...");
+								}
+								userdata.set("completedTutorial", "true");
+								try {
+									userdata.save(plugin.getDataFolder() + File.separator + user);
+								} catch(Exception e1){
+									e1.printStackTrace();
 								}
 							}
-					    	sender.sendMessage(ChatColor.GREEN + "Correct! Teleporting out...");
 					    } else {
 					    	sender.sendMessage(ChatColor.DARK_RED + "Incorrect passphrase.");
 					    }
@@ -104,10 +98,8 @@ public class TSCommands implements CommandExecutor {
 					else {
 						sender.sendMessage(ChatColor.DARK_RED + "Please enter a passphrase.");
 					}
-				} else {
-					sender.sendMessage(ChatColor.DARK_RED + "Insufficient permissions");
 				}
-				if (args[0].equalsIgnoreCase("spawn") && sender.hasPermission("tutorialspawn.phrase")) {	
+				if (args[0].equalsIgnoreCase("spawn") && sender.hasPermission("tutorialspawn.spawn")) {	
 			    	plugin.getConfig();
 					if(!plugin.config.get(plugin.spawnYml + ".world").equals("")) {
 						Map<String, Object> map = new HashMap<String, Object>();
@@ -119,11 +111,11 @@ public class TSCommands implements CommandExecutor {
 					   	map.put("pitch", plugin.config.get(plugin.spawnYml + ".pitch"));
 						TSSerializableLocation tssl = new TSSerializableLocation(map);
 				    	player.teleport(tssl.getLocation());
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "Spawn not set");
 					}
-				} else {
-					sender.sendMessage(ChatColor.DARK_RED + "Insufficient permissions");
 				}
-				if (args[0].equalsIgnoreCase("exit") && sender.hasPermission("tutorialspawn.phrase")) {	
+				if (args[0].equalsIgnoreCase("exit") && sender.hasPermission("tutorialspawn.exit")) {	
 					plugin.getConfig();
 					if(!plugin.config.get(plugin.exitYml + ".world").equals("")) {
 						Map<String, Object> map = new HashMap<String, Object>();
@@ -135,9 +127,9 @@ public class TSCommands implements CommandExecutor {
 					   	map.put("pitch", plugin.config.get(plugin.exitYml + ".pitch"));
 						TSSerializableLocation tssl = new TSSerializableLocation(map);
 				    	player.teleport(tssl.getLocation());
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "Exit not set");
 					}
-				} else {
-					sender.sendMessage(ChatColor.DARK_RED + "Insufficient permissions");
 				}
 			} else {
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "/ts setphrase <passphrase> - Set passphrase");

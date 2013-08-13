@@ -11,7 +11,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 public final class TSPlayerListener implements Listener {
 
@@ -24,7 +23,7 @@ public final class TSPlayerListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onJoin(PlayerJoinEvent event) {		
 		Player player = event.getPlayer();
-		BukkitTask task = new PlayerTeleport(this.plugin, player).runTaskLater(this.plugin, 10);
+		new PlayerTeleport(this.plugin, player).runTaskLater(this.plugin, 10);
 	}
 	
 	public class PlayerTeleport extends BukkitRunnable {
