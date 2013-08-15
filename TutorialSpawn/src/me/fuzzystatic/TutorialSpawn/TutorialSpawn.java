@@ -10,16 +10,25 @@ public class TutorialSpawn extends JavaPlugin {
 	
 	private TSPlayerListener tspl = new TSPlayerListener(this);
 	
-	FileConfiguration config;
+	public FileConfiguration config;
 	
 	private String world = "";
 	private double x, y, z;
 	private float yaw, pitch;
 	
-	public String tsMarker = "[TutorialSpawn]";
-	public String spawnYml = "tutorialspawn.spawn";
-	public String exitYml = "tutorialspawn.exit";
-	public String phraseYml = "tutorialspawn.passphrase";
+	public final String tsMarker = "[TutorialSpawn]";
+	
+	public final String phraseYml = "tutorialspawn.passphrase";
+	public final String defaultPhrase = "putwhateverphraseyoulike";
+	
+	public final String maxJoinEventsYml = "tutorialspawn.maxJoinEvents";
+	public final int defaultMaxJoinEvents = -1;
+	
+	public final String spawnYml = "tutorialspawn.spawn";
+	public final String exitYml = "tutorialspawn.exit";
+	
+	public final String teleportDelayYml = "tutorialspawn.teleportDelay";
+	public final double defaultTeleportDelay = 0.5;
 	
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
@@ -32,7 +41,10 @@ public class TutorialSpawn extends JavaPlugin {
 
 		try{			
 			if(!config.contains(phraseYml)) {
-				config.set(phraseYml, "putwhateverphraseyoulike");
+				config.set(phraseYml, defaultPhrase);
+			}
+			if(!config.contains(maxJoinEventsYml)) {
+				config.set(maxJoinEventsYml, defaultMaxJoinEvents);
 			}	
 			if(!config.contains(spawnYml)) {
 				config.set(spawnYml + ".world", world);
@@ -50,11 +62,26 @@ public class TutorialSpawn extends JavaPlugin {
 				config.set(exitYml + ".yaw", yaw);
 				config.set(exitYml + ".pitch", pitch);
 			}	
+			if(!config.contains(teleportDelayYml)) {
+				config.set(teleportDelayYml, defaultTeleportDelay);
+			}
 			saveConfig();
 		} catch(Exception e1){
 			e1.printStackTrace();
 		}
 		
-		getCommand("ts").setExecutor(new TSCommands(this));
+		getCommand("tsphrase").setExecutor(new TSCommands(this));
+		getCommand("tssetphrase").setExecutor(new TSCommands(this));
+		getCommand("tsgetphrase").setExecutor(new TSCommands(this));
+		getCommand("tsspawn").setExecutor(new TSCommands(this));
+		getCommand("tssetspawn").setExecutor(new TSCommands(this));
+		getCommand("tsexit").setExecutor(new TSCommands(this));
+		getCommand("tssetexit").setExecutor(new TSCommands(this));
+		getCommand("tssetmje").setExecutor(new TSCommands(this));
+		getCommand("tsgetmje").setExecutor(new TSCommands(this));
+		getCommand("tsphrase").setExecutor(new TSCommands(this));
+		getCommand("tssettd").setExecutor(new TSCommands(this));
+		getCommand("tsphrase").setExecutor(new TSCommands(this));
+		getCommand("tsgettd").setExecutor(new TSCommands(this));
 	}
 }
