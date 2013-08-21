@@ -79,9 +79,7 @@ public class TutorialSpawn extends JavaPlugin {
 		getCommand("tssetexit").setExecutor(new TSCommands(this));
 		getCommand("tssetmje").setExecutor(new TSCommands(this));
 		getCommand("tsgetmje").setExecutor(new TSCommands(this));
-		getCommand("tsphrase").setExecutor(new TSCommands(this));
 		getCommand("tssettd").setExecutor(new TSCommands(this));
-		getCommand("tsphrase").setExecutor(new TSCommands(this));
 		getCommand("tsgettd").setExecutor(new TSCommands(this));
 	}
 }

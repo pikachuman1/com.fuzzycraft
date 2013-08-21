@@ -22,13 +22,13 @@ public class TSCommands implements CommandExecutor {
 	private TSSimpleClasses tssc = new TSSimpleClasses();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		Player player = (Player) sender;
 		if (cmd.getName().equalsIgnoreCase("tsphrase")) {
 			if (!(sender instanceof Player)) {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {
 				if (args.length > 0) {
 				    if(args[0].equalsIgnoreCase(plugin.config.get(plugin.phraseYml).toString())) {
+				    	Player player = (Player) sender;
 				    	String user = File.separator + "userdata" + File.separator + player.getName() + ".yml";
 						FileConfiguration userdata = new TSConfigManagement(plugin).getConfig(user);
 						if(userdata.getBoolean("completedTutorial") == false) {
@@ -82,6 +82,7 @@ public class TSCommands implements CommandExecutor {
 			} else {
 		    	plugin.getConfig();
 				if(!plugin.config.get(plugin.spawnYml + ".world").equals("")) {
+					Player player = (Player) sender;
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("world", plugin.config.get(plugin.spawnYml + ".world"));
 				    map.put("x", plugin.config.get(plugin.spawnYml + ".x"));
@@ -100,6 +101,7 @@ public class TSCommands implements CommandExecutor {
 			if (!(sender instanceof Player)) {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {
+				Player player = (Player) sender;
 				TSSerializableLocation tssl = new TSSerializableLocation(player.getLocation());
 			    Map<String, Object> map = tssl.serialize();
 				plugin.getConfig();
@@ -120,6 +122,7 @@ public class TSCommands implements CommandExecutor {
 			} else {	
 				plugin.getConfig();
 				if(!plugin.config.get(plugin.exitYml + ".world").equals("")) {
+					Player player = (Player) sender;
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("world", plugin.config.get(plugin.exitYml + ".world"));
 				    map.put("x", plugin.config.get(plugin.exitYml + ".x"));
@@ -138,6 +141,7 @@ public class TSCommands implements CommandExecutor {
 			if (!(sender instanceof Player)) {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {	
+				Player player = (Player) sender;
 				TSSerializableLocation tssl = new TSSerializableLocation(player.getLocation());
 			    Map<String, Object> map = tssl.serialize();
 				plugin.getConfig();
