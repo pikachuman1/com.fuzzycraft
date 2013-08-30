@@ -24,6 +24,9 @@ public class TutorialSpawn extends JavaPlugin {
 	public final String maxJoinEventsYml = "tutorialspawn.maxJoinEvents";
 	public final int defaultMaxJoinEvents = -1;
 	
+	public final String reusePassphraseYml = "tutorialspawn.reusePassphrase";
+	public final boolean reusePassphrase = false;
+	
 	public final String spawnYml = "tutorialspawn.spawn";
 	public final String exitYml = "tutorialspawn.exit";
 	
@@ -46,6 +49,9 @@ public class TutorialSpawn extends JavaPlugin {
 			if(!config.contains(maxJoinEventsYml)) {
 				config.set(maxJoinEventsYml, defaultMaxJoinEvents);
 			}	
+			if(!config.contains(reusePassphraseYml)) {
+				config.set(reusePassphraseYml, reusePassphrase);
+			}
 			if(!config.contains(spawnYml)) {
 				config.set(spawnYml + ".world", world);
 				config.set(spawnYml + ".x", x);
@@ -79,6 +85,8 @@ public class TutorialSpawn extends JavaPlugin {
 		getCommand("tssetexit").setExecutor(new TSCommands(this));
 		getCommand("tssetmje").setExecutor(new TSCommands(this));
 		getCommand("tsgetmje").setExecutor(new TSCommands(this));
+		getCommand("tssetrp").setExecutor(new TSCommands(this));
+		getCommand("tsgetrp").setExecutor(new TSCommands(this));
 		getCommand("tssettd").setExecutor(new TSCommands(this));
 		getCommand("tsgettd").setExecutor(new TSCommands(this));
 	}

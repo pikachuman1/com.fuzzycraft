@@ -1,8 +1,8 @@
-package me.fuzzystatic.TutorialSpawn;
+package me.fuzzystatic.TutorialSpawn.utils;
 
 import org.bukkit.Bukkit;
 
-public class TSSimpleClasses {	
+public class SimpleClasses {	
 	public void logMessage(String message){
 	    Bukkit.getConsoleSender().sendMessage(message);
 	}
