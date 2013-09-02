@@ -2,6 +2,8 @@ package me.fuzzystatic.TutorialSpawn;
 
 import java.io.File;
 
+import me.fuzzystatic.TutorialSpawn.utils.YMLLocation;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -53,20 +55,10 @@ public class TutorialSpawn extends JavaPlugin {
 				config.set(reusePassphraseYml, reusePassphrase);
 			}
 			if(!config.contains(spawnYml)) {
-				config.set(spawnYml + ".world", world);
-				config.set(spawnYml + ".x", x);
-				config.set(spawnYml + ".y", y);
-				config.set(spawnYml + ".z", z);
-				config.set(spawnYml + ".yaw", yaw);
-				config.set(spawnYml + ".pitch", pitch);
+				new YMLLocation().setBlankLocation(config, spawnYml);
 			}		
 			if(!config.contains(exitYml)) {
-				config.set(exitYml + ".world", world);
-				config.set(exitYml + ".x", x);
-				config.set(exitYml + ".y", y);
-				config.set(exitYml + ".z", z);
-				config.set(exitYml + ".yaw", yaw);
-				config.set(exitYml + ".pitch", pitch);
+				new YMLLocation().setBlankLocation(config, exitYml);
 			}	
 			if(!config.contains(teleportDelayYml)) {
 				config.set(teleportDelayYml, defaultTeleportDelay);
