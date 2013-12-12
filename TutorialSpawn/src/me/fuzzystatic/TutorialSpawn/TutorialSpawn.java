@@ -2,7 +2,13 @@ package me.fuzzystatic.TutorialSpawn;
 
 import java.io.File;
 
-import me.fuzzystatic.TutorialSpawn.utils.YMLLocation;
+import me.fuzzystatic.TutorialSpawn.commands.Exit;
+import me.fuzzystatic.TutorialSpawn.commands.MaxJoinEvents;
+import me.fuzzystatic.TutorialSpawn.commands.Phrase;
+import me.fuzzystatic.TutorialSpawn.commands.ReusePhrase;
+import me.fuzzystatic.TutorialSpawn.commands.Spawn;
+import me.fuzzystatic.TutorialSpawn.commands.TeleportDelay;
+import me.fuzzystatic.TutorialSpawn.utilities.YMLLocation;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -13,10 +19,6 @@ public class TutorialSpawn extends JavaPlugin {
 	private TSPlayerListener tspl = new TSPlayerListener(this);
 	
 	public FileConfiguration config;
-	
-	private String world = "";
-	private double x, y, z;
-	private float yaw, pitch;
 	
 	public final String tsMarker = "[TutorialSpawn]";
 	
@@ -68,18 +70,18 @@ public class TutorialSpawn extends JavaPlugin {
 			e1.printStackTrace();
 		}
 		
-		getCommand("tsphrase").setExecutor(new TSCommands(this));
-		getCommand("tssetphrase").setExecutor(new TSCommands(this));
-		getCommand("tsgetphrase").setExecutor(new TSCommands(this));
-		getCommand("tsspawn").setExecutor(new TSCommands(this));
-		getCommand("tssetspawn").setExecutor(new TSCommands(this));
-		getCommand("tsexit").setExecutor(new TSCommands(this));
-		getCommand("tssetexit").setExecutor(new TSCommands(this));
-		getCommand("tssetmje").setExecutor(new TSCommands(this));
-		getCommand("tsgetmje").setExecutor(new TSCommands(this));
-		getCommand("tssetrp").setExecutor(new TSCommands(this));
-		getCommand("tsgetrp").setExecutor(new TSCommands(this));
-		getCommand("tssettd").setExecutor(new TSCommands(this));
-		getCommand("tsgettd").setExecutor(new TSCommands(this));
+		getCommand("tsphrase").setExecutor(new Phrase(this));
+		getCommand("tssetphrase").setExecutor(new Phrase(this));
+		getCommand("tsgetphrase").setExecutor(new Phrase(this));
+		getCommand("tsspawn").setExecutor(new Spawn(this));
+		getCommand("tssetspawn").setExecutor(new Spawn(this));
+		getCommand("tsexit").setExecutor(new Exit(this));
+		getCommand("tssetexit").setExecutor(new Exit(this));
+		getCommand("tssetmje").setExecutor(new MaxJoinEvents(this));
+		getCommand("tsgetmje").setExecutor(new MaxJoinEvents(this));
+		getCommand("tssetrp").setExecutor(new ReusePhrase(this));
+		getCommand("tsgetrp").setExecutor(new ReusePhrase(this));
+		getCommand("tssettd").setExecutor(new TeleportDelay(this));
+		getCommand("tsgettd").setExecutor(new TeleportDelay(this));
 	}
 }

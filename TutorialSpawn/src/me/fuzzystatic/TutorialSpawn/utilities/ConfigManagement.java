@@ -1,4 +1,4 @@
-package me.fuzzystatic.TutorialSpawn.utils;
+package me.fuzzystatic.TutorialSpawn.utilities;
 
 import java.io.File;
 import java.io.IOException;

@@ -2,10 +2,10 @@ package me.fuzzystatic.TutorialSpawn;
 
 import java.io.File;
 
-import me.fuzzystatic.TutorialSpawn.utils.ConfigManagement;
-import me.fuzzystatic.TutorialSpawn.utils.SerializableLocation;
-import me.fuzzystatic.TutorialSpawn.utils.SimpleClasses;
-import me.fuzzystatic.TutorialSpawn.utils.YMLLocation;
+import me.fuzzystatic.TutorialSpawn.utilities.ConfigManagement;
+import me.fuzzystatic.TutorialSpawn.utilities.SerializableLocation;
+import me.fuzzystatic.TutorialSpawn.utilities.SimpleClasses;
+import me.fuzzystatic.TutorialSpawn.utilities.YMLLocation;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

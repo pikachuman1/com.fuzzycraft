@@ -2,9 +2,9 @@ package me.fuzzystatic.TutorialSpawn;
 
 import java.io.File;
 
-import me.fuzzystatic.TutorialSpawn.utils.ConfigManagement;
-import me.fuzzystatic.TutorialSpawn.utils.SerializableLocation;
-import me.fuzzystatic.TutorialSpawn.utils.YMLLocation;
+import me.fuzzystatic.TutorialSpawn.utilities.ConfigAccessor;
+import me.fuzzystatic.TutorialSpawn.utilities.SerializableLocation;
+import me.fuzzystatic.TutorialSpawn.utilities.YMLLocation;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -47,32 +47,29 @@ public final class TSPlayerListener implements Listener {
 		}
 	 
 	    public void run() { 	
-	    	//Creates (if needed), modifies, and saves the user file
-			String user = File.separator + "userdata" + File.separator + player.getName() + ".yml";
-			FileConfiguration userdata = new ConfigManagement(plugin).getConfig(user);
-			
-			if(!userdata.contains(completedTutorialYml)) {
-				userdata.set(completedTutorialYml, defaultCompleteTutorial);
+			String fileName = "userdata" + File.separator + player.getName() + ".yml";
+			ConfigAccessor configAccessor = new ConfigAccessor(plugin, fileName);		
+			FileConfiguration userConfig = configAccessor.getConfig();
+					
+			if(!userConfig.contains(completedTutorialYml)) {
+				userConfig.set(completedTutorialYml, defaultCompleteTutorial);
 			}
-			if(!userdata.contains(joinEventsYml)) {
-				userdata.set(joinEventsYml, defaultJoinEvents);
+			if(!userConfig.contains(joinEventsYml)) {
+				userConfig.set(joinEventsYml, defaultJoinEvents);
 			}	
 			
 			int maxJoinEvents = plugin.config.getInt(plugin.maxJoinEventsYml);
-			int playerJoinEvents = userdata.getInt(joinEventsYml);
-			boolean completedTutorial = userdata.getBoolean(completedTutorialYml);
+			int playerJoinEvents = userConfig.getInt(joinEventsYml);
+			boolean completedTutorial = userConfig.getBoolean(completedTutorialYml);
 			
 			if(playerJoinEvents <= maxJoinEvents) {
-				userdata.set(joinEventsYml, userdata.getInt(joinEventsYml) + 1);
+				userConfig.set(joinEventsYml, userConfig.getInt(joinEventsYml) + 1);
 			}
 			if(playerJoinEvents == maxJoinEvents) {
-				userdata.set(completedTutorialYml, true);
+				userConfig.set(completedTutorialYml, true);
 			}
-			try {
-				userdata.save(plugin.getDataFolder() + File.separator + user);
-			} catch(Exception e1){
-				e1.printStackTrace();
-			}	
+			
+			configAccessor.saveConfig();
 			
 			// Determines if teleport is needed and executes the teleport
 			plugin.getConfig();	
