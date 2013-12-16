@@ -4,8 +4,8 @@ import java.io.File;
 
 import me.fuzzystatic.TutorialSpawn.TutorialSpawn;
 import me.fuzzystatic.TutorialSpawn.utilities.ConfigManagement;
+import me.fuzzystatic.TutorialSpawn.utilities.ConsoleLog;
 import me.fuzzystatic.TutorialSpawn.utilities.SerializableLocation;
-import me.fuzzystatic.TutorialSpawn.utilities.SimpleClasses;
 import me.fuzzystatic.TutorialSpawn.utilities.YMLLocation;
 
 import org.bukkit.ChatColor;
@@ -23,7 +23,7 @@ public class Phrase implements CommandExecutor {
 		this.plugin = plugin;
 	}
 		
-	private SimpleClasses sc = new SimpleClasses();
+	private ConsoleLog cl = new ConsoleLog();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("tsphrase")) {
@@ -68,7 +68,7 @@ public class Phrase implements CommandExecutor {
 				plugin.getConfig();
 				plugin.config.set(plugin.phraseYml, args[0]);
 				plugin.saveConfig();
-				sc.logMessage(plugin.tsMarker + " New tutorial passphrase set.");
+				cl.message(plugin.tsMarker + " New tutorial passphrase set.");
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "New tutorial passphrase set.");
 			} else {
 				sender.sendMessage(ChatColor.DARK_RED + "Please enter a passphrase.");

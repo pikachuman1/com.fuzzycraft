@@ -1,7 +1,8 @@
-package me.fuzzystatic.TutorialSpawn;
+package me.fuzzystatic.TutorialSpawn.deprecated;
 
 import java.io.File;
 
+import me.fuzzystatic.TutorialSpawn.TutorialSpawn;
 import me.fuzzystatic.TutorialSpawn.utilities.ConfigManagement;
 import me.fuzzystatic.TutorialSpawn.utilities.SerializableLocation;
 import me.fuzzystatic.TutorialSpawn.utilities.SimpleClasses;

@@ -1,8 +1,8 @@
 package me.fuzzystatic.TutorialSpawn.commands;
 
 import me.fuzzystatic.TutorialSpawn.TutorialSpawn;
+import me.fuzzystatic.TutorialSpawn.utilities.ConsoleLog;
 import me.fuzzystatic.TutorialSpawn.utilities.SerializableLocation;
-import me.fuzzystatic.TutorialSpawn.utilities.SimpleClasses;
 import me.fuzzystatic.TutorialSpawn.utilities.YMLLocation;
 
 import org.bukkit.ChatColor;
@@ -19,7 +19,7 @@ public class Exit implements CommandExecutor {
 		this.plugin = plugin;
 	}
 		
-	private SimpleClasses sc = new SimpleClasses();
+	private ConsoleLog cl = new ConsoleLog();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("tsexit")) {
@@ -47,7 +47,7 @@ public class Exit implements CommandExecutor {
 				YMLLocation ymlLocation = new YMLLocation();
 				ymlLocation.setLocation(sl.serialize(), plugin.config, plugin.exitYml);
 			    plugin.saveConfig();
-			    sc.logMessage(plugin.tsMarker + " New tutorial exit set.");
+			    cl.message(plugin.tsMarker + " New tutorial exit set.");
 			    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New tutorial exit set.");
 			}
 		}

@@ -1,7 +1,7 @@
 package me.fuzzystatic.TutorialSpawn.commands;
 
 import me.fuzzystatic.TutorialSpawn.TutorialSpawn;
-import me.fuzzystatic.TutorialSpawn.utilities.SimpleClasses;
+import me.fuzzystatic.TutorialSpawn.utilities.ConsoleLog;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -16,7 +16,7 @@ public class MaxJoinEvents implements CommandExecutor {
 		this.plugin = plugin;
 	}
 		
-	private SimpleClasses sc = new SimpleClasses();
+	private ConsoleLog cl = new ConsoleLog();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("tsgetmje")) {
@@ -28,7 +28,7 @@ public class MaxJoinEvents implements CommandExecutor {
 			    plugin.getConfig();
 			    plugin.config.set(plugin.maxJoinEventsYml, Integer.parseInt(args[0]));
 			    plugin.saveConfig();
-			    sc.logMessage(plugin.tsMarker + " New maximum join events value set.");
+			    cl.message(plugin.tsMarker + " New maximum join events value set.");
 			    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New maximum join events value set.");
 			    return true;
 			}
