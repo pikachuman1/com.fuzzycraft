@@ -22,44 +22,59 @@ import com.sk89q.worldedit.bukkit.BukkitUtil;
 public class EventStart implements CommandExecutor {
 
 	private EventManager plugin;
-	private final EventConfigurationStructure ecs;
-	private final PlayerItems playerItems;
-	private final Reminder reminder;
-	private final Spawning spawning;
-	private final WorldConditions worldConditions;
 	
 	public EventStart(EventManager plugin) {
 		this.plugin = plugin;
-		this.ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
-		this.playerItems = new PlayerItems(this.plugin);
-		this.reminder = new Reminder(this.plugin);
-		this.spawning = new Spawning(this.plugin);
-		this.worldConditions = new WorldConditions(this.plugin);
 	}
 				
-	public void start() {
-		Bukkit.getServer().broadcastMessage(ChatColor.GREEN + " Dragon event is starting! Type /warp de or take the portal at spawn to join!");
-		ecs.getPasteLocation().getWorld().spawnEntity(ecs.getPasteLocation(), EntityType.ENDER_DRAGON);
-		try {
-			WorldEditSession worldEditSession = new WorldEditSession(plugin, ecs.getPasteLocation().getWorld());
-		   	CuboidClipboard clipboard = worldEditSession.loadSchematic(EventName.getName());
-			clipboard.paste(worldEditSession.getEditSession(), BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir());
-		} catch (MaxChangedBlocksException e) {
-			e.printStackTrace();
+	public boolean start() {
+		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
+		ecs.createFileStructure();
+		if(ecs.existsPasteLocation()) {
+			Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Dragon event is starting! Type /warp de or take the portal at spawn to join!");
+			ecs.getPasteLocation().getWorld().spawnEntity(ecs.getPasteLocation(), EntityType.ENDER_DRAGON);
+			try {
+				WorldEditSession worldEditSession = new WorldEditSession(plugin, ecs.getPasteLocation().getWorld());
+			   	CuboidClipboard clipboard = worldEditSession.loadSchematic(EventName.getName());
+				clipboard.paste(worldEditSession.getEditSession(), BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir());
+			} catch (MaxChangedBlocksException e) {
+				e.printStackTrace();
+			}
+			return true;
 		}
+		return false;
 	}
 	
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {	
+	public boolean onCommand(final CommandSender sender, Command cmd, String commandLabel, String[] args) {	
 		if (cmd.getName().equalsIgnoreCase("emStart")) {
+			EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 				public void run() {
 					EventStop eventStop = new EventStop(plugin);
-					eventStop.stop();
-					start();
-					spawning.start();
-					worldConditions.start();
-					reminder.start();
-					playerItems.start();
+					PlayerItems playerItems = new PlayerItems(plugin);
+					Reminder reminder = new Reminder(plugin);
+					Spawning spawning = new Spawning(plugin);
+					WorldConditions worldConditions = new WorldConditions(plugin);
+					
+					if(eventStop.stop()) {
+						sender.sendMessage(ChatColor.LIGHT_PURPLE + "All events stopped.");
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "Error stopping event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + ".");	
+					}
+					if(eventStop.clearEntities()) {
+						sender.sendMessage(ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + " cleared.");
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "Paste location does not exist. Event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + " not cleared.");	
+					}
+					if(start()) {
+						spawning.start();
+						worldConditions.start();
+						reminder.start();
+						playerItems.start();
+						sender.sendMessage(ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + " has started.");
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "Paste location does not exist. Event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + " not started.");	
+					}
 				}
 			}, 0, ecs.getCycleTime() * 20);
 			return true;

@@ -31,6 +31,7 @@ public class EventConfigurationStructure {
 	private static final boolean defaultNoAir = false;
 	private static final long defaultWorldConditionsTime = 18000;
 	private static final long defaultWorldConditionsTimeCycleTime = 60;
+	private static final String defaultReminderMessage = "";
 	private static final long defaultReminderCycleTime = -1;
 	
 	private final ConfigAccessor configAccessor;
@@ -97,26 +98,51 @@ public class EventConfigurationStructure {
 		if(this.config.get(NO_AIR) == null) setNoAir(defaultNoAir);
 		if(this.config.get(WORLD_CONDITIONS_TIME) == null) setWorldConditionsTime(defaultWorldConditionsTime);
 		if(this.config.get(WORLD_CONDITIONS_TIME_CYCLE_TIME) == null) setWorldConditionsTimeCycleTime(defaultWorldConditionsTimeCycleTime);
+		if(this.config.get(REMINDER_MESSAGE) == null) setReminderMessage(defaultReminderMessage);
 		if(this.config.get(REMINDER_CYCLE_TIME) == null) setReminderCycleTime(defaultReminderCycleTime);
-		if(this.config.get(PASTE_LOCATION) == null) new YMLLocation().setBlankLocation(this.config, PASTE_LOCATION);
-		if(this.config.get(ENTRANCE) == null) new YMLLocation().setBlankLocation(this.config, ENTRANCE);
-		if(this.config.get(EXIT) == null) new YMLLocation().setBlankLocation(this.config, EXIT);
+		//if(new YMLLocation().getLocation(config, PASTE_LOCATION).containsValue(null)) new YMLLocation().setBlankLocation(this.config, PASTE_LOCATION);
+		//if(new YMLLocation().getLocation(config, ENTRANCE).containsValue(null)) new YMLLocation().setBlankLocation(this.config, ENTRANCE);
+		//if(new YMLLocation().getLocation(config, EXIT).containsValue(null)) new YMLLocation().setBlankLocation(this.config, EXIT);
 		this.configAccessor.saveConfig();
 	}
 	
 	public Location getPasteLocation() {
-		YMLLocation ymlLocation = new YMLLocation();
-		return new SerializableLocation(ymlLocation.getLocation(config, PASTE_LOCATION)).getLocation();
+		Map<String, Object> map = new YMLLocation().getLocation(config, PASTE_LOCATION);
+		return new SerializableLocation(map).getLocation();
+	}
+	
+	public boolean existsPasteLocation() {
+		if(this.config.get(PASTE_LOCATION) == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public Location getEntrance() {
-		YMLLocation ymlLocation = new YMLLocation();
-		return new SerializableLocation(ymlLocation.getLocation(config, ENTRANCE)).getLocation();
+		Map<String, Object> map = new YMLLocation().getLocation(config, ENTRANCE);
+		return new SerializableLocation(map).getLocation();
+	}
+	
+	public boolean existsEntrance() {
+		if(this.config.get(ENTRANCE) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public Location getExit() {
-		YMLLocation ymlLocation = new YMLLocation();
-		return new SerializableLocation(ymlLocation.getLocation(config, EXIT)).getLocation();
+		Map<String, Object> map = new YMLLocation().getLocation(config, EXIT);
+		return new SerializableLocation(map).getLocation();
+	}
+	
+	public boolean existsExit() {
+		if(this.config.get(EXIT) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public int getCreatureLimit() {

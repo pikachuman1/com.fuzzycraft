@@ -28,20 +28,22 @@ public class Spawning {
 	private int spawnLimit;
 	
 	public void start() {
-		for (String spawnName : ecs.getSpawns()) {
-			final SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
-			this.bossIDs = new ArrayList<Integer>();
-			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
-				public void run() {
-					World world = scs.getLocation().getWorld();
-					EventEntities eventEntities = new EventEntities(world);
-					if(eventEntities.bossAlive()) {
-						spawn(scs, ecs.getCreatureLimit() - eventEntities.getMobs().size());
-						for(Integer integer : getBossIDs()) bossIDs.add(integer);
-					}			
-					ConsoleLogs.message(bossIDs.toString());
-				}	
-			}, scs.getStartTime() * 20, scs.getCycleTime() * 20);
+		if (ecs.getSpawns() != null) {
+			for (String spawnName : ecs.getSpawns()) {
+				final SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
+				this.bossIDs = new ArrayList<Integer>();
+				Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
+					public void run() {
+						World world = scs.getLocation().getWorld();
+						EventEntities eventEntities = new EventEntities(world);
+						if(eventEntities.bossAlive()) {
+							spawn(scs, ecs.getCreatureLimit() - eventEntities.getMobs().size());
+							for(Integer integer : getBossIDs()) bossIDs.add(integer);
+						}			
+						ConsoleLogs.message(bossIDs.toString());
+					}	
+				}, scs.getStartTime() * 20, scs.getCycleTime() * 20);
+			}
 		}
 	}
 	

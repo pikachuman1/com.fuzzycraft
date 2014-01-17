@@ -88,7 +88,7 @@ public class SpawnConfigurationStructure {
 	}
 	
 	public void setMob(String mob) {
-		this.config.set(this.mobYML, getEntityType(mob));
+		this.config.set(this.mobYML, mob);
 		this.configAccessor.saveConfig();
 	}
 	

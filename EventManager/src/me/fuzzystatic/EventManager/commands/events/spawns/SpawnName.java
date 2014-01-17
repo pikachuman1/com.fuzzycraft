@@ -17,7 +17,7 @@ public class SpawnName implements CommandExecutor {
 		this.plugin = plugin;
 	}
 		
-	private static String spawnName;
+	private static String spawnName = "myFirstSpawn";
 	
 	public void setName(String spawnName) {
 		SpawnName.spawnName = spawnName;

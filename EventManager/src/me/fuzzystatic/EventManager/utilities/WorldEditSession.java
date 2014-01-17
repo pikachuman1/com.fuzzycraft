@@ -3,7 +3,7 @@ package me.fuzzystatic.EventManager.utilities;
 import java.io.File;
 import java.io.IOException;
 
-import me.fuzzystatic.EventManager.schematics.SchematicsStructure;
+import me.fuzzystatic.EventManager.configurations.DirectoryStructure;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -56,7 +56,7 @@ public class WorldEditSession {
 	}
 	
 	public void saveSchematic(String eventName) {
-		File file = new File(plugin.getDataFolder() + File.separator + SchematicsStructure.DIRECTORY + File.separator + eventName + ".schematic");
+		File file = new File(plugin.getDataFolder() + File.separator + DirectoryStructure.SCHEMATICS_DIR + File.separator + eventName + ".schematic");
 		try {
 		    SchematicFormat.MCEDIT.save(clipboard, file);	
 		    this.player.sendMessage(ChatColor.GREEN + "Schematic saved.");
@@ -68,7 +68,7 @@ public class WorldEditSession {
 	
 	public CuboidClipboard loadSchematic(String eventName) {
 		CuboidClipboard clipboard = null;
-		File file = new File(this.plugin.getDataFolder() + File.separator + SchematicsStructure.DIRECTORY + File.separator + eventName + ".schematic");
+		File file = new File(this.plugin.getDataFolder() + File.separator + DirectoryStructure.SCHEMATICS_DIR + File.separator + eventName + ".schematic");
 		try {
 			clipboard = SchematicFormat.MCEDIT.load(file);	
 		} catch (IOException | DataException e) {

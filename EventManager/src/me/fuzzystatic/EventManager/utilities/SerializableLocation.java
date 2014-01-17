@@ -26,13 +26,13 @@ public class SerializableLocation implements ConfigurationSerializable {
     }
  
     public SerializableLocation(Map<String, Object> map) {
-    	world = Bukkit.getWorld(map.get("world").toString());
-    	x = (Double) map.get("x");
-        y = (Double) map.get("y");
-        z = (Double) map.get("z");
-        pitch = Float.intBitsToFloat((Integer) map.get("pitch"));    
-        yaw = Float.intBitsToFloat((Integer) map.get("yaw"));
-        location = new Location(world, x, y, z, yaw, pitch);
+    	this.world = Bukkit.getWorld(map.get("world").toString());
+    	this.x = (Double) map.get("x");
+    	this.y = (Double) map.get("y");
+    	this.z = (Double) map.get("z");
+    	this.pitch = Float.intBitsToFloat((Integer) map.get("pitch"));    
+    	this.yaw = Float.intBitsToFloat((Integer) map.get("yaw"));
+    	this.location = new Location(world, x, y, z, yaw, pitch);
     }
  
     @Override

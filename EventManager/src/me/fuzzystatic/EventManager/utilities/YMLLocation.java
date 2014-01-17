@@ -40,7 +40,7 @@ public class YMLLocation {
 		config.set(ymlKey + ".x", x);
 		config.set(ymlKey + ".y", y);
 		config.set(ymlKey + ".z", z);
-		config.set(ymlKey + ".yaw", yaw);
-		config.set(ymlKey + ".pitch", pitch);
+		config.set(ymlKey + ".yaw", Float.floatToIntBits(yaw));
+		config.set(ymlKey + ".pitch", Float.floatToIntBits(pitch));
 	}
 }

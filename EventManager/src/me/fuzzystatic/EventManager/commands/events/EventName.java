@@ -20,7 +20,7 @@ public class EventName implements CommandExecutor {
 		this.plugin = plugin;
 	}
 	
-	private static String eventName = "default";
+	private static String eventName = "myFirstEvent";
 	
 	public static void setName(String eventName) {
 		EventName.eventName = eventName;
