@@ -26,7 +26,7 @@ public class EventCycle implements CommandExecutor {
 				FileConfiguration eventConfig = eventAccessor.getConfig();
 				eventConfig.set(EventConfigurationStructure.CYCLE, Long.parseLong(String.valueOf(args[0])));
 				eventAccessor.saveConfig();
-				ConsoleLogs.logMessage("New event cycle set.");
+				ConsoleLogs.message("New event cycle set.");
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event cycle set to" + ChatColor.DARK_AQUA + args[0] + ".");
 				return true;
 			} else {

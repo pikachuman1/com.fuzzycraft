@@ -1,5 +1,7 @@
 package me.fuzzystatic.EventManager.configurations;
 
+import me.fuzzystatic.EventManager.EventManager;
+import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
 import me.fuzzystatic.EventManager.utilities.SerializableLocation;
 import me.fuzzystatic.EventManager.utilities.YMLLocation;
@@ -67,8 +69,8 @@ public class SpawnConfigurationStructure {
 		return mobEntityType;
 	}
 	
-	public SpawnConfigurationStructure(ConfigAccessor configAccessor, String spawnName) {
-		this.configAccessor = configAccessor;
+	public SpawnConfigurationStructure(EventManager plugin, String spawnName) {
+		this.configAccessor = new ConfigAccessor(plugin, EventName.getName());
 		this.config = configAccessor.getConfig();
 		this.spawnPrefix = SPAWNS + "." + spawnName + ".";
 		this.locationYML = spawnPrefix + "location";

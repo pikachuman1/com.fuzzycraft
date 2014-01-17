@@ -1,9 +1,7 @@
 package me.fuzzystatic.EventManager.commands.events.spawns;
 
 import me.fuzzystatic.EventManager.EventManager;
-import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.configurations.SpawnConfigurationStructure;
-import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -25,8 +23,7 @@ public class SpawnCycle implements CommandExecutor {
 				if (!(sender instanceof Player)) {
 					sender.sendMessage("This command can only be run by a player.");
 				} else {
-		    		ConfigAccessor eventAccessor = new ConfigAccessor(plugin, EventName.getFilename());			
-		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(eventAccessor, SpawnName.getName());			
+		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());			
 		    		scs.setCycle(Long.valueOf(args[0]));
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn cycle time set.");
 				    return true;

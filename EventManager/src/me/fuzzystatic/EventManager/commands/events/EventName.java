@@ -4,7 +4,6 @@ import java.io.File;
 
 import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -41,8 +40,7 @@ public class EventName implements CommandExecutor {
 			} else {
 				if(args.length > 0) {
 					setName(args[0]);
-					ConfigAccessor eventAccessor = new ConfigAccessor(plugin, EventConfigurationStructure.DIRECTORY + File.separator + eventName + ".yml");
-					EventConfigurationStructure ecs = new EventConfigurationStructure(eventAccessor);
+					EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);
 					ecs.createFileStructure();
 					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + " selected.");
 					return true;

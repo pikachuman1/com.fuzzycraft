@@ -34,7 +34,7 @@ public class EventLocations implements CommandExecutor {
 				YMLLocation ymlLocation = new YMLLocation();
 				ymlLocation.setLocation(sl.serialize(), eventConfig, EventConfigurationStructure.ENTRANCE);
 			    eventAccessor.saveConfig();
-			    ConsoleLogs.logMessage("New event entrance set.");
+			    ConsoleLogs.message("New event entrance set.");
 			    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event entrance set.");
 			    return true;
 			}
@@ -50,7 +50,7 @@ public class EventLocations implements CommandExecutor {
 				YMLLocation ymlLocation = new YMLLocation();
 				ymlLocation.setLocation(sl.serialize(), eventConfig, EventConfigurationStructure.EXIT);
 				eventAccessor.saveConfig();
-				ConsoleLogs.logMessage("New event exit set.");
+				ConsoleLogs.message("New event exit set.");
 			    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event exit set.");
 			    return true;
 			}

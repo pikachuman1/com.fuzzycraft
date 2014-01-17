@@ -1,9 +1,7 @@
 package me.fuzzystatic.EventManager.commands.events.spawns;
 
 import me.fuzzystatic.EventManager.EventManager;
-import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.configurations.SpawnConfigurationStructure;
-import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,12 +34,11 @@ public class SpawnName implements CommandExecutor {
 			} else {
 				if(args.length > 0) {
 					setName(args[0]);
-					ConfigAccessor eventAccessor = new ConfigAccessor(plugin, EventName.getFilename());
-					SpawnConfigurationStructure scs = new SpawnConfigurationStructure(eventAccessor, spawnName);
+					SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
 					scs.createFileStructure();
 					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spawn " + ChatColor.DARK_AQUA + spawnName + " selected.");
 					return true;
-				} else if(!(EventName.getName().equals(null))) {
+				} else if(!(getName().equals(null))) {
 					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Current selected spawn is " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + ". Use /emspawnname [name] to change selected spawn.");
 					return true;
 				}

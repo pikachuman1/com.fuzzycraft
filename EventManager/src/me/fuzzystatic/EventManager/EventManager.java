@@ -18,13 +18,11 @@ public class EventManager extends JavaPlugin {
 	public FileConfiguration config;
 	
 	private EventManager plugin = this;
-
-	private ConsoleLogs sc = new ConsoleLogs();
 		
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
 		if(!pm.isPluginEnabled("WorldEdit")) {
-			sc.logMessage("EventManager requires the WorldEdit plugin");
+			ConsoleLogs.message("EventManager requires the WorldEdit plugin");
 		}
 		pm.registerEvents(this.el, this);
 		

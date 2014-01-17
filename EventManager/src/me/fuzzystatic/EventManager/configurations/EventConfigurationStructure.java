@@ -2,10 +2,14 @@ package me.fuzzystatic.EventManager.configurations;
 
 import java.io.File;
 import java.util.Map;
+import java.util.Set;
 
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
+import me.fuzzystatic.EventManager.utilities.SerializableLocation;
 import me.fuzzystatic.EventManager.utilities.YMLLocation;
 
 public class EventConfigurationStructure {
@@ -25,8 +29,8 @@ public class EventConfigurationStructure {
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;
 	
-	public EventConfigurationStructure(ConfigAccessor configAccessor) {
-		this.configAccessor = configAccessor;
+	public EventConfigurationStructure(EventManager plugin, String eventName) {
+		this.configAccessor = new ConfigAccessor(plugin, eventName);
 		this.config = configAccessor.getConfig();
 	}
 	
@@ -72,7 +76,34 @@ public class EventConfigurationStructure {
 		EventDir.mkdir();
 	}
 	
+	public Location getPasteLocation() {
+		YMLLocation ymlLocation = new YMLLocation();
+		return new SerializableLocation(ymlLocation.getLocation(config, PASTE_LOCATION)).getLocation();
+	}
+	
+	public Location getEntrance() {
+		YMLLocation ymlLocation = new YMLLocation();
+		return new SerializableLocation(ymlLocation.getLocation(config, ENTRANCE)).getLocation();
+	}
+	
+	public Location getExit() {
+		YMLLocation ymlLocation = new YMLLocation();
+		return new SerializableLocation(ymlLocation.getLocation(config, EXIT)).getLocation();
+	}
+	
 	public int getCreatureLimit() {
 		return config.getInt(CREATURE_LIMIT);
+	}
+	
+	public long getCycle() {
+		return config.getLong(CYCLE);
+	}
+	
+	public boolean getNoAir() {
+		return config.getBoolean(NO_AIR);
+	}
+	
+	public Set<String> getSpawns() {
+		return config.getConfigurationSection(SpawnConfigurationStructure.SPAWNS).getKeys(false);
 	}
 }
