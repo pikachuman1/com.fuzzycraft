@@ -9,11 +9,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SpawnCycle implements CommandExecutor {
+public class SpawnCycleTime implements CommandExecutor {
 	
 	private EventManager plugin;
 	
-	public SpawnCycle(EventManager plugin) {
+	public SpawnCycleTime(EventManager plugin) {
 		this.plugin = plugin;
 	}
 		
@@ -24,7 +24,7 @@ public class SpawnCycle implements CommandExecutor {
 					sender.sendMessage("This command can only be run by a player.");
 				} else {
 		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());			
-		    		scs.setCycle(Long.valueOf(args[0]));
+		    		scs.setCycleTime(Long.valueOf(args[0]));
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn cycle time set.");
 				    return true;
 				}

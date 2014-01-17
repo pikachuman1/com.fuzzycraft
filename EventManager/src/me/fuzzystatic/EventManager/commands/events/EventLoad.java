@@ -2,10 +2,7 @@ package me.fuzzystatic.EventManager.commands.events;
 
 import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
-import me.fuzzystatic.EventManager.utilities.SerializableLocation;
 import me.fuzzystatic.EventManager.utilities.WorldEditSession;
-import me.fuzzystatic.EventManager.utilities.YMLLocation;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -32,10 +29,8 @@ public class EventLoad implements CommandExecutor {
 			try {
 				WorldEditSession worldEditSession = new WorldEditSession(plugin, player);
 				CuboidClipboard clipboard = worldEditSession.loadSchematic(EventName.getName());
-				ConfigAccessor eventAccessor = new ConfigAccessor(plugin, EventName.getFilename());
-				YMLLocation ymlLocation = new YMLLocation();
-				SerializableLocation sl = new SerializableLocation(ymlLocation.getLocation(eventAccessor.getConfig(), EventConfigurationStructure.PASTE_LOCATION));
-				clipboard.paste(worldEditSession.getEditSession(), BukkitUtil.toVector(sl.getLocation()), false);
+	    		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());			
+				clipboard.paste(worldEditSession.getEditSession(), BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir());
 				return true;
 			} catch (EmptyClipboardException e) {
 				player.sendMessage(ChatColor.DARK_PURPLE + "Clipboard is empty.");

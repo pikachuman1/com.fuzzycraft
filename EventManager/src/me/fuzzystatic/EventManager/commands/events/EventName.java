@@ -3,6 +3,7 @@ package me.fuzzystatic.EventManager.commands.events;
 import java.io.File;
 
 import me.fuzzystatic.EventManager.EventManager;
+import me.fuzzystatic.EventManager.configurations.DirectoryStructure;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
 
 import org.bukkit.ChatColor;
@@ -19,7 +20,7 @@ public class EventName implements CommandExecutor {
 		this.plugin = plugin;
 	}
 	
-	private static String eventName;
+	private static String eventName = "default";
 	
 	public static void setName(String eventName) {
 		EventName.eventName = eventName;
@@ -30,7 +31,7 @@ public class EventName implements CommandExecutor {
 	}
 	
 	public static String getFilename() {
-		return EventConfigurationStructure.DIRECTORY + File.separator + getName() + File.separator + ".yml";
+		return DirectoryStructure.EVENT_DIR + File.separator + getName() + File.separator + ".yml";
 	}
 			
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -42,7 +43,7 @@ public class EventName implements CommandExecutor {
 					setName(args[0]);
 					EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);
 					ecs.createFileStructure();
-					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + " selected.");
+					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " selected.");
 					return true;
 				} else if(!(getName() == null)) {
 					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Current selected event is " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + ". Use /emname [name] to change selected event.");

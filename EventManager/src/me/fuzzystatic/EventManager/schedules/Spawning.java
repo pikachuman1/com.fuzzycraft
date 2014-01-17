@@ -1,8 +1,9 @@
-package me.fuzzystatic.EventManager;
+package me.fuzzystatic.EventManager.schedules;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventManager.configurations.SpawnConfigurationStructure;
@@ -11,7 +12,6 @@ import me.fuzzystatic.EventManager.utilities.ConsoleLogs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 
 public class Spawning {
 	
@@ -27,19 +27,17 @@ public class Spawning {
 	
 	private int spawnLimit;
 	
-	public void startSpawns() {
+	public void start() {
 		for (String spawnName : ecs.getSpawns()) {
 			final SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
 			this.bossIDs = new ArrayList<Integer>();
-			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 				public void run() {
 					World world = scs.getLocation().getWorld();
 					EventEntities eventEntities = new EventEntities(world);
 					if(eventEntities.bossAlive()) {
 						spawn(scs, ecs.getCreatureLimit() - eventEntities.getMobs().size());
-						for(Integer integer : getBossIDs()) {
-							bossIDs.add(integer);
-						}
+						for(Integer integer : getBossIDs()) bossIDs.add(integer);
 					}			
 					ConsoleLogs.message(bossIDs.toString());
 				}	
@@ -54,12 +52,11 @@ public class Spawning {
 			this.spawnLimit = scs.getAmount();
 		}
 		for(int i = 0; i < spawnLimit; i++) {
-			Entity entity = scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob());
-			if(scs.getIsBoss() == true) bossIDs.add(entity.getEntityId());
+			if(scs.getIsBoss() == true) bossIDs.add(scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob()).getEntityId());
 		}
 	}	
 	
 	public List<Integer> getBossIDs() {
-		return bossIDs;
+		return this.bossIDs;
 	}
 }

@@ -2,9 +2,7 @@ package me.fuzzystatic.EventManager;
 
 import me.fuzzystatic.EventManager.commands.events.*;
 import me.fuzzystatic.EventManager.commands.events.spawns.*;
-import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventManager.listeners.EventListener;
-import me.fuzzystatic.EventManager.schematics.SchematicsStructure;
+import me.fuzzystatic.EventManager.configurations.DirectoryStructure;
 import me.fuzzystatic.EventManager.utilities.ConsoleLogs;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class EventManager extends JavaPlugin {
 		
-	private EventListener el = new EventListener(this);
+	//private EventListener el = new EventListener(this);
 	
 	public FileConfiguration config;
 	
@@ -24,13 +22,15 @@ public class EventManager extends JavaPlugin {
 		if(!pm.isPluginEnabled("WorldEdit")) {
 			ConsoleLogs.message("EventManager requires the WorldEdit plugin");
 		}
-		pm.registerEvents(this.el, this);
+		//pm.registerEvents(this.el, this);
 		
-		EventConfigurationStructure.createDirectoryStructure(getDataFolder());
-		SchematicsStructure.createDirectoryStructure(getDataFolder());
+		// Create directory structure
+		getDataFolder().mkdir();
+		DirectoryStructure.createEventDirectory(getDataFolder());
+		DirectoryStructure.createSchematicDirectory(getDataFolder());
 		
-		getCommand("emsetcycle").setExecutor(new EventCycle(plugin));
-		getCommand("emgetcycle").setExecutor(new EventCycle(plugin));
+		getCommand("emsetcycle").setExecutor(new EventCycleTime(plugin));
+		getCommand("emgetcycle").setExecutor(new EventCycleTime(plugin));
 		getCommand("emload").setExecutor(new EventLoad(plugin));
 		getCommand("emname").setExecutor(new EventName(plugin));
 		getCommand("emsetentrance").setExecutor(new EventLocations(plugin));
@@ -40,12 +40,12 @@ public class EventManager extends JavaPlugin {
 		getCommand("emstop").setExecutor(new EventStop(plugin));
 		
 		getCommand("emspawnamount").setExecutor(new SpawnAmount(plugin));
-		getCommand("emspawncycle").setExecutor(new SpawnCycle(plugin));
+		getCommand("emspawncycle").setExecutor(new SpawnCycleTime(plugin));
 		getCommand("emspawnisboss").setExecutor(new SpawnIsBoss(plugin));
 		getCommand("emspawnlocation").setExecutor(new SpawnLocation(plugin));
 		getCommand("emspawnmob").setExecutor(new SpawnMob(plugin));
 		getCommand("emspawnname").setExecutor(new SpawnName(plugin));
-		getCommand("emspawnstart").setExecutor(new SpawnStart(plugin));
+		getCommand("emspawnstart").setExecutor(new SpawnStartTime(plugin));
 		
 		/*long ticks = plugin.config.getLong(Strings.DC_EVENT_CYCLE.toString()) * 20;	
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {

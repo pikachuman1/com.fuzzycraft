@@ -19,8 +19,8 @@ public class EventStop implements CommandExecutor {
 		this.ecs = new EventConfigurationStructure(plugin, EventName.getName());
 	}
 	
-	public void stopEvent() {
-		Bukkit.getScheduler().cancelTasks(plugin); 	
+	public void stop() {
+		Bukkit.getScheduler().cancelTasks(this.plugin); 	
 		if(!(ecs.getPasteLocation() == null) && !(ecs.getExit() == null)) {
 			EventEntities eventEntities = new EventEntities(ecs.getPasteLocation().getWorld());
 			eventEntities.teleportAllPlayers(ecs.getExit());
@@ -30,7 +30,7 @@ public class EventStop implements CommandExecutor {
 			
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {	
 		if (cmd.getName().equalsIgnoreCase("emStop")) {						
-			stopEvent();
+			stop();
 			return true;
 		}
 		return false;

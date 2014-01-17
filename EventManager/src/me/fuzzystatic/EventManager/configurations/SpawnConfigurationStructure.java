@@ -70,7 +70,7 @@ public class SpawnConfigurationStructure {
 	}
 	
 	public SpawnConfigurationStructure(EventManager plugin, String spawnName) {
-		this.configAccessor = new ConfigAccessor(plugin, EventName.getName());
+		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + EventName.getName() + ".yml");
 		this.config = configAccessor.getConfig();
 		this.spawnPrefix = SPAWNS + "." + spawnName + ".";
 		this.locationYML = spawnPrefix + "location";
@@ -97,12 +97,12 @@ public class SpawnConfigurationStructure {
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setStart(long seconds) {
+	public void setStartTime(long seconds) {
 		this.config.set(this.startTimeYML, seconds);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setCycle(long seconds) {
+	public void setCycleTime(long seconds) {
 		this.config.set(this.cycleTimeYML , seconds);
 		this.configAccessor.saveConfig();
 	}
@@ -116,8 +116,8 @@ public class SpawnConfigurationStructure {
 		if(this.config.get(this.locationYML) == null) new YMLLocation().setBlankLocation(this.config, this.locationYML);;
 		if(this.config.get(this.mobYML) == null) setMob(defaultMob);
 		if(this.config.get(this.amountYML) == null) setAmount(defaultAmount);
-		if(this.config.get(this.startTimeYML) == null) setStart(defaultStart);
-		if(this.config.get(this.cycleTimeYML) == null) setCycle(defaultCycle);
+		if(this.config.get(this.startTimeYML) == null) setStartTime(defaultStart);
+		if(this.config.get(this.cycleTimeYML) == null) setCycleTime(defaultCycle);
 		if(this.config.get(this.isBossYML) == null) setIsBoss(defaultIsBoss);
 		this.configAccessor.saveConfig();
 	}

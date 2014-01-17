@@ -36,7 +36,7 @@ public class SpawnName implements CommandExecutor {
 					setName(args[0]);
 					SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
 					scs.createFileStructure();
-					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spawn " + ChatColor.DARK_AQUA + spawnName + " selected.");
+					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + " selected.");
 					return true;
 				} else if(!(getName().equals(null))) {
 					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Current selected spawn is " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + ". Use /emspawnname [name] to change selected spawn.");
