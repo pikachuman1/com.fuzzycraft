@@ -1,9 +1,7 @@
 package me.fuzzystatic.EventManager.listeners;
 
-import java.util.Collection;
-
 import me.fuzzystatic.EventManager.EventManager;
-import me.fuzzystatic.EventManager.schedules.EventSchedulerMultimap;
+import me.fuzzystatic.EventManager.entities.EventBossMap;
 import me.fuzzystatic.EventManager.schedules.StopEvent;
 
 import org.bukkit.event.EventHandler;
@@ -20,13 +18,13 @@ public final class BossDeathListener implements Listener {
 		
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {	// Sets up the delay for the player teleport
-		EventSchedulerMultimap esm = new EventSchedulerMultimap();
-		if(esm.get().containsValue(event.getEntity())) {
-			Collection<String> eventNames = esm.getInvert().get(event.getEntity().getEntityId());
-			for (String eventName : eventNames) {
-				StopEvent stopEvent = new StopEvent(plugin, eventName);
-				stopEvent.stop();
-			}
+		EventBossMap ebm = new EventBossMap();
+		Integer enitityId = event.getEntity().getEntityId();
+		if(ebm.get().containsKey(enitityId)) {
+			String eventName = ebm.get().get(enitityId);
+			StopEvent stopEvent = new StopEvent(plugin, eventName);
+			stopEvent.stop();
+			ebm.get().remove(enitityId);
 		}
 	}
 }

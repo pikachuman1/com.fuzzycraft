@@ -4,6 +4,7 @@ import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventManager.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventManager.entities.Entities;
+import me.fuzzystatic.EventManager.entities.EventBossMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -34,8 +35,8 @@ public class Spawning {
 						spawn(scs, ecs.getCreatureLimit() - eventEntities.getMobs().size());	
 					}	
 				}, scs.getStartTime() * 20, scs.getCycleTime() * 20);
-				EventSchedulerMultimap esm = new EventSchedulerMultimap();
-				esm.set(eventName, id);
+				EventSchedulerMap esm = new EventSchedulerMap();
+				esm.set(id, eventName);
 			}
 		}
 	}
@@ -49,8 +50,8 @@ public class Spawning {
 		for(int i = 0; i < this.spawnLimit; i++) {
 			Entity entity = scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob());
 			if(scs.getIsBoss()) {
-				EventSchedulerMultimap esm = new EventSchedulerMultimap();
-				esm.set(eventName, entity.getEntityId());
+				EventBossMap esm = new EventBossMap();
+				esm.set(entity.getEntityId(), eventName);
 			} 
 		}
 	}	

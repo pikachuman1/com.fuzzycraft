@@ -45,7 +45,7 @@ public class PlayerItems {
 				}	
 			}
 		}, 60* 20, 90 * 20);
-		EventSchedulerMultimap esm = new EventSchedulerMultimap();
-		esm.set(eventName, id);
+		EventSchedulerMap esm = new EventSchedulerMap();
+		esm.set(id, eventName);
 	}
 }

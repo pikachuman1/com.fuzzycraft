@@ -23,7 +23,7 @@ public class WorldConditions {
 				ecs.getPasteLocation().getWorld().setTime(ecs.getWorldConditionsTime());
 			}
 		}, 0, ecs.getWorldConditionsTimeCycleTime() * 20);
-		EventSchedulerMultimap esm = new EventSchedulerMultimap();
-		esm.set(eventName, id);
+		EventSchedulerMap esm = new EventSchedulerMap();
+		esm.set(id, eventName);
 	}
 }
