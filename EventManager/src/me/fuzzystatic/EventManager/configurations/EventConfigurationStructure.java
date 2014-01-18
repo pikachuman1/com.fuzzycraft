@@ -10,8 +10,9 @@ import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
 import me.fuzzystatic.EventManager.utilities.SerializableLocation;
 import me.fuzzystatic.EventManager.utilities.YMLLocation;
+import me.fuzzystatic.interfaces.FileStructure;
 
-public class EventConfigurationStructure {
+public class EventConfigurationStructure implements FileStructure {
 	
 	public static final String PASTE_LOCATION = "pasteLocation";
 	public static final String ENTRANCE = "entrance";
@@ -99,6 +100,7 @@ public class EventConfigurationStructure {
 		this.configAccessor.saveConfig();
 	}
 	
+	@Override
 	public void createFileStructure() {
 		if(this.config.get(CREATURE_LIMIT) == null) setCreatureLimit(defaultCreatureLimit);
 		if(this.config.get(CYCLE_TIME) == null) setCycleTime(defaultCycle);

@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventManager.schedules;
 
 import me.fuzzystatic.EventManager.EventManager;
-import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventManager.entities.Entities;
 
@@ -12,12 +11,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerItems {
+	
 	private EventManager plugin;
+	private final String eventName;
 	private final EventConfigurationStructure ecs;
 	
-	public PlayerItems(EventManager plugin) {
+	public PlayerItems(EventManager plugin, String eventName) {
 		this.plugin = plugin;
-		this.ecs = new EventConfigurationStructure(plugin, EventName.getName());
+		this.eventName = eventName;
+		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}
 	
 	private final ItemStack bow = new ItemStack(Material.BOW, 1);
@@ -25,7 +27,7 @@ public class PlayerItems {
 	private final ItemStack food = new ItemStack(Material.BREAD, 6);
 	
 	public void start() {
-		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+		int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run() {
 				Entities eventEntities = new Entities(ecs.getPasteLocation().getWorld());
 				for (Player player : eventEntities.getPlayers()) {
@@ -43,5 +45,7 @@ public class PlayerItems {
 				}	
 			}
 		}, 60* 20, 90 * 20);
+		EventSchedulerMultimap esm = new EventSchedulerMultimap();
+		esm.set(eventName, id);
 	}
 }

@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventManager.schedules;
 
 import me.fuzzystatic.EventManager.EventManager;
-import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
 
 import org.bukkit.Bukkit;
@@ -9,18 +8,22 @@ import org.bukkit.Bukkit;
 public class WorldConditions {
 	
 	private EventManager plugin;
+	private final String eventName;
 	private final EventConfigurationStructure ecs;
 	
-	public WorldConditions(EventManager plugin) {
+	public WorldConditions(EventManager plugin, String eventName) {
 		this.plugin = plugin;
-		this.ecs = new EventConfigurationStructure(plugin, EventName.getName());
+		this.eventName = eventName;
+		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}
 	
 	public void start() {
-		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+		int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run() {
 				ecs.getPasteLocation().getWorld().setTime(ecs.getWorldConditionsTime());
 			}
 		}, 0, ecs.getWorldConditionsTimeCycleTime() * 20);
+		EventSchedulerMultimap esm = new EventSchedulerMultimap();
+		esm.set(eventName, id);
 	}
 }

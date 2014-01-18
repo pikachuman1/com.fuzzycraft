@@ -5,12 +5,13 @@ import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.utilities.ConfigAccessor;
 import me.fuzzystatic.EventManager.utilities.SerializableLocation;
 import me.fuzzystatic.EventManager.utilities.YMLLocation;
+import me.fuzzystatic.interfaces.FileStructure;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 
-public class SpawnConfigurationStructure {
+public class SpawnConfigurationStructure implements FileStructure{
 	
 	public static final String SPAWNS = "spawns"; 
 	
@@ -112,6 +113,7 @@ public class SpawnConfigurationStructure {
 		this.configAccessor.saveConfig();
 	}
 
+	@Override
 	public void createFileStructure() {
 		if(this.config.get(this.locationYML) == null) new YMLLocation().setBlankLocation(this.config, this.locationYML);;
 		if(this.config.get(this.mobYML) == null) setMob(defaultMob);

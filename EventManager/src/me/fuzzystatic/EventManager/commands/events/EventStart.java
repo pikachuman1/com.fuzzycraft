@@ -2,20 +2,19 @@ package me.fuzzystatic.EventManager.commands.events;
 
 import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventManager.schedules.EventSchedulerMultimap;
 import me.fuzzystatic.EventManager.schedules.PlayerItems;
 import me.fuzzystatic.EventManager.schedules.Reminder;
 import me.fuzzystatic.EventManager.schedules.Spawning;
+import me.fuzzystatic.EventManager.schedules.StopEvent;
 import me.fuzzystatic.EventManager.schedules.WorldConditions;
-import me.fuzzystatic.EventManager.utilities.WorldEditSession;
+import me.fuzzystatic.EventManager.utilities.Regeneration;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import com.sk89q.worldedit.CuboidClipboard;
-import com.sk89q.worldedit.MaxChangedBlocksException;
-import com.sk89q.worldedit.bukkit.BukkitUtil;
 
 public class EventStart implements CommandExecutor {
 
@@ -23,47 +22,33 @@ public class EventStart implements CommandExecutor {
 	
 	public EventStart(EventManager plugin) {
 		this.plugin = plugin;
-	}
-				
-	public boolean start() {
-		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
-		if(ecs.existsPasteLocation()) {
-			Bukkit.getServer().broadcastMessage(ecs.getStartMessage());
-			try {
-				WorldEditSession worldEditSession = new WorldEditSession(plugin, ecs.getPasteLocation().getWorld());
-			   	CuboidClipboard clipboard = worldEditSession.loadSchematic(EventName.getName());
-				clipboard.paste(worldEditSession.getEditSession(), BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir());
-			} catch (MaxChangedBlocksException e) {
-				e.printStackTrace();
-			}
-			return true;
-		}
-		return false;
-	}
+	}	
 	
 	public boolean onCommand(final CommandSender sender, Command cmd, String commandLabel, String[] args) {	
 		if (cmd.getName().equalsIgnoreCase("emStart")) {
-			EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
+			final String eventName = EventName.getName();
+			EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, eventName);
 			ecs.createFileStructure();
-			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
+			int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 				public void run() {
-					EventStop eventStop = new EventStop(plugin);
-					PlayerItems playerItems = new PlayerItems(plugin);
-					Reminder reminder = new Reminder(plugin);
-					Spawning spawning = new Spawning(plugin, EventName.getName());
-					WorldConditions worldConditions = new WorldConditions(plugin);
+					StopEvent stopEvent = new StopEvent(plugin, eventName);
+					Regeneration regeneration = new Regeneration(plugin, eventName);
+					Spawning spawning = new Spawning(plugin, eventName);
+					WorldConditions worldConditions = new WorldConditions(plugin, eventName);
+					Reminder reminder = new Reminder(plugin, eventName);
+					PlayerItems playerItems = new PlayerItems(plugin, eventName);
 					
-					if(eventStop.stop()) {
+					if(stopEvent.stop()) {
 						sender.sendMessage(ChatColor.LIGHT_PURPLE + "All events stopped.");
 					} else {
 						sender.sendMessage(ChatColor.DARK_RED + "Error stopping event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + ".");	
 					}
-					if(eventStop.clearEntities()) {
+					if(stopEvent.clearEntities()) {
 						sender.sendMessage(ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + " cleared.");
 					} else {
 						sender.sendMessage(ChatColor.DARK_RED + "Paste location does not exist. Event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + " not cleared.");	
 					}
-					if(start()) {
+					if(regeneration.regen()) {
 						spawning.start();
 						worldConditions.start();
 						reminder.start();
@@ -74,6 +59,9 @@ public class EventStart implements CommandExecutor {
 					}
 				}
 			}, 0, ecs.getCycleTime() * 20);
+			EventSchedulerMultimap esm = new EventSchedulerMultimap();
+			esm.set(eventName, id);
+			
 			return true;
 		}
 		return false;
