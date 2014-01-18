@@ -23,7 +23,8 @@ public class SpawnIsBoss implements CommandExecutor {
 				if (!(sender instanceof Player)) {
 					sender.sendMessage("This command can only be run by a player.");
 				} else {
-		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());			
+		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());	
+					scs.createFileStructure();
 		    		scs.setIsBoss(Boolean.valueOf(args[0]));
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn is boss set.");
 				    return true;

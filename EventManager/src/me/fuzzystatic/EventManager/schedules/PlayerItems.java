@@ -3,7 +3,7 @@ package me.fuzzystatic.EventManager.schedules;
 import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventManager.entities.EventEntities;
+import me.fuzzystatic.EventManager.entities.Entities;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -27,7 +27,7 @@ public class PlayerItems {
 	public void start() {
 		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run() {
-				EventEntities eventEntities = new EventEntities(ecs.getPasteLocation().getWorld());
+				Entities eventEntities = new Entities(ecs.getPasteLocation().getWorld());
 				for (Player player : eventEntities.getPlayers()) {
 					PlayerInventory inventory = player.getInventory();
 				    inventory.addItem(bow);

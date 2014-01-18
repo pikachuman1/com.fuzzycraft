@@ -24,6 +24,7 @@ public class SpawnStartTime implements CommandExecutor {
 					sender.sendMessage("This command can only be run by a player.");
 				} else {
 		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());
+					scs.createFileStructure();
 		    		scs.setStartTime(Long.valueOf(args[0]));
 				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn start time set.");
 				    return true;

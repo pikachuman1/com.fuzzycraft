@@ -13,8 +13,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.bukkit.BukkitUtil;
@@ -29,10 +27,8 @@ public class EventStart implements CommandExecutor {
 				
 	public boolean start() {
 		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
-		ecs.createFileStructure();
 		if(ecs.existsPasteLocation()) {
-			Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Dragon event is starting! Type /warp de or take the portal at spawn to join!");
-			ecs.getPasteLocation().getWorld().spawnEntity(ecs.getPasteLocation(), EntityType.ENDER_DRAGON);
+			Bukkit.getServer().broadcastMessage(ecs.getStartMessage());
 			try {
 				WorldEditSession worldEditSession = new WorldEditSession(plugin, ecs.getPasteLocation().getWorld());
 			   	CuboidClipboard clipboard = worldEditSession.loadSchematic(EventName.getName());
@@ -48,12 +44,13 @@ public class EventStart implements CommandExecutor {
 	public boolean onCommand(final CommandSender sender, Command cmd, String commandLabel, String[] args) {	
 		if (cmd.getName().equalsIgnoreCase("emStart")) {
 			EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
+			ecs.createFileStructure();
 			Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 				public void run() {
 					EventStop eventStop = new EventStop(plugin);
 					PlayerItems playerItems = new PlayerItems(plugin);
 					Reminder reminder = new Reminder(plugin);
-					Spawning spawning = new Spawning(plugin);
+					Spawning spawning = new Spawning(plugin, EventName.getName());
 					WorldConditions worldConditions = new WorldConditions(plugin);
 					
 					if(eventStop.stop()) {

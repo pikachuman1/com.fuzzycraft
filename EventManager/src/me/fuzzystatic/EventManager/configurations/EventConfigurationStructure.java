@@ -22,6 +22,7 @@ public class EventConfigurationStructure {
 	public static final String WORLD_CONDITIONS = "worldConditions";
 	public static final String WORLD_CONDITIONS_TIME = WORLD_CONDITIONS + "." + "time";
 	public static final String WORLD_CONDITIONS_TIME_CYCLE_TIME = WORLD_CONDITIONS + "." + "timeCycleTime";
+	public static final String START_MESSAGE = "startMessage";
 	public static final String REMINDER = "reminder";
 	public static final String REMINDER_MESSAGE = REMINDER + "." + "message";
 	public static final String REMINDER_CYCLE_TIME = REMINDER + '.' + "cycleTime";
@@ -31,6 +32,7 @@ public class EventConfigurationStructure {
 	private static final boolean defaultNoAir = false;
 	private static final long defaultWorldConditionsTime = 18000;
 	private static final long defaultWorldConditionsTimeCycleTime = 60;
+	private static final String defaultStartMessage = "";
 	private static final String defaultReminderMessage = "";
 	private static final long defaultReminderCycleTime = -1;
 	
@@ -82,6 +84,11 @@ public class EventConfigurationStructure {
 		this.configAccessor.saveConfig();
 	}
 	
+	public void setStartMessage(String message) {
+		this.config.set(START_MESSAGE, message);
+		this.configAccessor.saveConfig();
+	}
+	
 	public void setReminderMessage(String message) {
 		this.config.set(REMINDER_MESSAGE, message);
 		this.configAccessor.saveConfig();
@@ -98,11 +105,9 @@ public class EventConfigurationStructure {
 		if(this.config.get(NO_AIR) == null) setNoAir(defaultNoAir);
 		if(this.config.get(WORLD_CONDITIONS_TIME) == null) setWorldConditionsTime(defaultWorldConditionsTime);
 		if(this.config.get(WORLD_CONDITIONS_TIME_CYCLE_TIME) == null) setWorldConditionsTimeCycleTime(defaultWorldConditionsTimeCycleTime);
+		if(this.config.get(START_MESSAGE) == null) setStartMessage(defaultStartMessage);
 		if(this.config.get(REMINDER_MESSAGE) == null) setReminderMessage(defaultReminderMessage);
 		if(this.config.get(REMINDER_CYCLE_TIME) == null) setReminderCycleTime(defaultReminderCycleTime);
-		//if(new YMLLocation().getLocation(config, PASTE_LOCATION).containsValue(null)) new YMLLocation().setBlankLocation(this.config, PASTE_LOCATION);
-		//if(new YMLLocation().getLocation(config, ENTRANCE).containsValue(null)) new YMLLocation().setBlankLocation(this.config, ENTRANCE);
-		//if(new YMLLocation().getLocation(config, EXIT).containsValue(null)) new YMLLocation().setBlankLocation(this.config, EXIT);
 		this.configAccessor.saveConfig();
 	}
 	
@@ -163,6 +168,10 @@ public class EventConfigurationStructure {
 	
 	public long getWorldConditionsTimeCycleTime() {
 		return config.getLong(WORLD_CONDITIONS_TIME_CYCLE_TIME);
+	}
+	
+	public String getStartMessage() {
+		return config.getString(START_MESSAGE);
 	}
 	
 	public String getReminderMessage() {

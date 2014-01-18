@@ -3,6 +3,7 @@ package me.fuzzystatic.EventManager;
 import me.fuzzystatic.EventManager.commands.events.*;
 import me.fuzzystatic.EventManager.commands.events.spawns.*;
 import me.fuzzystatic.EventManager.configurations.DirectoryStructure;
+import me.fuzzystatic.EventManager.listeners.BossDeathListener;
 import me.fuzzystatic.EventManager.utilities.ConsoleLogs;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class EventManager extends JavaPlugin {
 		
-	//private EventListener el = new EventListener(this);
+	private BossDeathListener bdl = new BossDeathListener(this);
 	
 	public FileConfiguration config;
 	
@@ -22,7 +23,7 @@ public class EventManager extends JavaPlugin {
 		if(!pm.isPluginEnabled("WorldEdit")) {
 			ConsoleLogs.message("EventManager requires the WorldEdit plugin");
 		}
-		//pm.registerEvents(this.el, this);
+		pm.registerEvents(this.bdl, this);
 		
 		// Create directory structure
 		getDataFolder().mkdir();

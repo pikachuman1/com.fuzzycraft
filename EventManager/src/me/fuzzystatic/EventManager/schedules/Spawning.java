@@ -1,46 +1,38 @@
 package me.fuzzystatic.EventManager.schedules;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.fuzzystatic.EventManager.EventManager;
-import me.fuzzystatic.EventManager.commands.events.EventName;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventManager.configurations.SpawnConfigurationStructure;
-import me.fuzzystatic.EventManager.entities.EventEntities;
-import me.fuzzystatic.EventManager.utilities.ConsoleLogs;
+import me.fuzzystatic.EventManager.entities.EventBossMultimap;
+import me.fuzzystatic.EventManager.entities.Entities;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 
 public class Spawning {
 	
 	private EventManager plugin;
 	private final EventConfigurationStructure ecs;
+	private final String eventName;
 	
-	public Spawning(EventManager plugin) {
+	public Spawning(EventManager plugin, String eventName) {
 		this.plugin = plugin;
-		this.ecs = new EventConfigurationStructure(plugin, EventName.getName());
+		this.eventName = eventName;
+		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}
-	
-	private List<Integer> bossIDs = new ArrayList<Integer>();
-	
+		
 	private int spawnLimit;
 	
 	public void start() {
 		if (ecs.getSpawns() != null) {
 			for (String spawnName : ecs.getSpawns()) {
 				final SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
-				this.bossIDs = new ArrayList<Integer>();
 				Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 					public void run() {
 						World world = scs.getLocation().getWorld();
-						EventEntities eventEntities = new EventEntities(world);
-						if(eventEntities.bossAlive()) {
-							spawn(scs, ecs.getCreatureLimit() - eventEntities.getMobs().size());
-							for(Integer integer : getBossIDs()) bossIDs.add(integer);
-						}			
-						ConsoleLogs.message(bossIDs.toString());
+						Entities eventEntities = new Entities(world);
+						spawn(scs, ecs.getCreatureLimit() - eventEntities.getMobs().size());	
 					}	
 				}, scs.getStartTime() * 20, scs.getCycleTime() * 20);
 			}
@@ -49,16 +41,15 @@ public class Spawning {
 	
 	public void spawn(SpawnConfigurationStructure scs, int creatureLimit) {
 		if(ecs.getCreatureLimit() < scs.getAmount()) {
-			this.spawnLimit = ecs.getCreatureLimit() - scs.getAmount();
+			this.spawnLimit = creatureLimit - scs.getAmount();
 		} else {
 			this.spawnLimit = scs.getAmount();
 		}
-		for(int i = 0; i < spawnLimit; i++) {
-			if(scs.getIsBoss() == true) bossIDs.add(scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob()).getEntityId());
+		for(int i = 0; i < this.spawnLimit; i++) {
+			Entity entity = scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob());
+			if(scs.getIsBoss()) {
+				EventBossMultimap.setBosses(this.eventName, entity);
+			} 
 		}
 	}	
-	
-	public List<Integer> getBossIDs() {
-		return this.bossIDs;
-	}
 }

@@ -2,7 +2,7 @@ package me.fuzzystatic.EventManager.commands.events;
 
 import me.fuzzystatic.EventManager.EventManager;
 import me.fuzzystatic.EventManager.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventManager.entities.EventEntities;
+import me.fuzzystatic.EventManager.entities.Entities;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 public class EventStop implements CommandExecutor {
 
 	private EventManager plugin;
+	
 	public EventStop(EventManager plugin) {
 		this.plugin = plugin;
 	}
@@ -26,7 +27,7 @@ public class EventStop implements CommandExecutor {
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, EventName.getName());
 		ecs.createFileStructure();
 		if(ecs.existsPasteLocation()) {
-			EventEntities eventEntities = new EventEntities(ecs.getPasteLocation().getWorld());
+			Entities eventEntities = new Entities(ecs.getPasteLocation().getWorld());
 			if (ecs.existsExit()) {
 				eventEntities.teleportAllPlayers(ecs.getExit());
 			}

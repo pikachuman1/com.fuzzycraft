@@ -23,7 +23,8 @@ public class SpawnLocation implements CommandExecutor {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {
 				Player player = (Player) sender;
-		   		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());			
+		   		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());
+				scs.createFileStructure();
 		   		scs.setLocation(player.getLocation());
 			    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn location set.");
 			    return true;

@@ -31,7 +31,6 @@ public class WorldEditSession {
 	private final CuboidClipboard clipboard;
 	private final LocalWorld localWorld;
 	private final EditSession editSession;
-
 	
 	public WorldEditSession(Plugin plugin, Player player) throws EmptyClipboardException {
 		this.plugin = plugin;
