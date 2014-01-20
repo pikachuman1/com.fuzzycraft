@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.Entities;
@@ -12,11 +12,11 @@ import org.bukkit.entity.Entity;
 
 public class Spawning {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
 	
-	public Spawning(EventManager plugin, String eventName) {
+	public Spawning(EventAdministrator plugin, String eventName) {
 		this.plugin = plugin;
 		this.eventName = eventName;
 		this.ecs = new EventConfigurationStructure(plugin, eventName);

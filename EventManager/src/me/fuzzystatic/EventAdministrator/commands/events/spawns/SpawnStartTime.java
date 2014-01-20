@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.events.spawns;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 
 import org.bukkit.ChatColor;
@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
 
 public class SpawnStartTime implements CommandExecutor {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	
-	public SpawnStartTime(EventManager plugin) {
+	public SpawnStartTime(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 		

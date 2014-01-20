@@ -2,7 +2,7 @@ package me.fuzzystatic.EventAdministrator.commands.events;
 
 import java.io.File;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 
@@ -14,9 +14,9 @@ import org.bukkit.entity.Player;
 
 public class EventName implements CommandExecutor {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	
-	public EventName(EventManager plugin) {
+	public EventName(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 	

@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.events;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.utilities.WorldEditSession;
 
@@ -17,9 +17,9 @@ import com.sk89q.worldguard.bukkit.BukkitUtil;
 
 public class EventLoad implements CommandExecutor {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 		
-	public EventLoad(EventManager plugin) {
+	public EventLoad(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 			

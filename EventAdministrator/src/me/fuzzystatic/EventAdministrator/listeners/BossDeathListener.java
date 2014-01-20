@@ -17,7 +17,7 @@ public final class BossDeathListener implements Listener {
 	}
 		
 	@EventHandler
-	public void onEntityDeath(EntityDeathEvent event) {	// Sets up the delay for the player teleport
+	public void onEntityDeath(EntityDeathEvent event) {
 		EventBossMap ebm = new EventBossMap();
 		Integer entityId = event.getEntity().getEntityId();
 		if(ebm.get().containsKey(entityId)) {

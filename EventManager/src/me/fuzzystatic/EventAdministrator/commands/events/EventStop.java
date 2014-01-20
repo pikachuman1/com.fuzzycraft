@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.events;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.schedules.StopEvent;
 
 import org.bukkit.ChatColor;
@@ -10,9 +10,9 @@ import org.bukkit.command.CommandSender;
 
 public class EventStop implements CommandExecutor {
 
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	
-	public EventStop(EventManager plugin) {
+	public EventStop(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 			

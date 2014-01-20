@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.events;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.schedules.StartEvent;
 
 import org.bukkit.command.Command;
@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender;
 
 public class EventStart implements CommandExecutor {
 
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	
-	public EventStart(EventManager plugin) {
+	public EventStart(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}	
 	

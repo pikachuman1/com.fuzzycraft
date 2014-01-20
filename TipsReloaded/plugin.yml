@@ -3,14 +3,14 @@ main: com.fuzzycraft.TipsReloaded
 version: 0.01
 
 commands:
-  tips:
-    description: reload tips
-    usage: 'Usage: /tips reload'
-    permission: tips.reload
-permissions:
-  tips.reload:
-    description: Allows to reload tips
-    default: op
-  tips.receive.*:
-    description: Receive all the tips
-    default: false
+   tips:
+      description: reload tips
+      usage: 'Usage: /tips reload'
+      permission: tips.reload
+   permissions:
+      tips.reload:
+      description: Allows to reload tips
+      default: op
+   tips.receive.*:
+      description: Receive all the tips
+      default: false

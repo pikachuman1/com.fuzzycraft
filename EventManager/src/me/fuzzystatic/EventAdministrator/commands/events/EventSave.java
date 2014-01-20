@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.events;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
 import me.fuzzystatic.EventAdministrator.utilities.WorldEditSession;
@@ -15,9 +15,9 @@ import com.sk89q.worldedit.EmptyClipboardException;
 
 public class EventSave implements CommandExecutor {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 		
-	public EventSave(EventManager plugin) {
+	public EventSave(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 			

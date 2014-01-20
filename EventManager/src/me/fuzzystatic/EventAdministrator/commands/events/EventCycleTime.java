@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.events;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
@@ -11,9 +11,9 @@ import org.bukkit.command.CommandSender;
 
 public class EventCycleTime implements CommandExecutor {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	
-	public EventCycleTime(EventManager plugin) {
+	public EventCycleTime(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 			

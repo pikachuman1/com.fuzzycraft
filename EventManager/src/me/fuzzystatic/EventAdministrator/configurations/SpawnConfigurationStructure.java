@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.commands.events.EventName;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
@@ -70,7 +70,7 @@ public class SpawnConfigurationStructure implements FileStructure{
 		return mobEntityType;
 	}
 	
-	public SpawnConfigurationStructure(EventManager plugin, String spawnName) {
+	public SpawnConfigurationStructure(EventAdministrator plugin, String spawnName) {
 		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + EventName.getName() + ".yml");
 		this.config = configAccessor.getConfig();
 		this.spawnPrefix = SPAWNS + "." + spawnName + ".";

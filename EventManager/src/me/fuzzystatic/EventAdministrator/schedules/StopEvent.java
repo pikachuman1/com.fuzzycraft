@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.Entities;
 
@@ -11,7 +11,7 @@ public class StopEvent {
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
 	
-	public StopEvent(EventManager plugin, String eventName) {
+	public StopEvent(EventAdministrator plugin, String eventName) {
 		this.eventName = eventName;
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}

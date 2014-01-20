@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.events;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
@@ -13,9 +13,9 @@ import org.bukkit.entity.Player;
 
 public class EventLocations implements CommandExecutor {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	
-	public EventLocations(EventManager plugin) {
+	public EventLocations(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 			

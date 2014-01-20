@@ -5,9 +5,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class TipsCommand implements CommandExecutor {
-    protected TipsReloaded plugin;
+    protected Tips plugin;
     
-    protected TipsCommand(TipsReloaded plugin) {
+    protected TipsCommand(Tips plugin) {
         this.plugin = plugin;
     }
 

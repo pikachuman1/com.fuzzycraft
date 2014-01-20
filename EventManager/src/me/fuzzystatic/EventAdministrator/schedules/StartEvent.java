@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
-import me.fuzzystatic.EventAdministrator.EventManager;
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.commands.events.EventName;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.utilities.Regeneration;
@@ -9,10 +9,10 @@ import org.bukkit.Bukkit;
 
 public class StartEvent {
 	
-	private EventManager plugin;
+	private EventAdministrator plugin;
 	private int id;
 	
-	public StartEvent(EventManager plugin) {
+	public StartEvent(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 
