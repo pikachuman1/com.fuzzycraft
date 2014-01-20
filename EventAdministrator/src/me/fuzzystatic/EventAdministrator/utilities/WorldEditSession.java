@@ -59,10 +59,7 @@ public class WorldEditSession {
 		try {
 		    SchematicFormat.MCEDIT.save(clipboard, file);	
 		    this.player.sendMessage(ChatColor.GREEN + "Schematic saved.");
-		} catch (IOException e) {
-			this.player.sendMessage(ChatColor.DARK_RED + "Schematic failed to save.");
-			e.printStackTrace();
-		} catch (DataException e) {
+		} catch (IOException | DataException e) {
 			this.player.sendMessage(ChatColor.DARK_RED + "Schematic failed to save.");
 			e.printStackTrace();
 		}
@@ -73,10 +70,7 @@ public class WorldEditSession {
 		File file = new File(this.plugin.getDataFolder() + File.separator + DirectoryStructure.SCHEMATICS_DIR + File.separator + eventName + ".schematic");
 		try {
 			clipboard = SchematicFormat.MCEDIT.load(file);	
-		} catch (IOException e) {
-			this.player.sendMessage(ChatColor.DARK_RED + "Schematic failed to load.");
-			e.printStackTrace();
-		} catch (DataException e) {
+		} catch (IOException | DataException e) {
 			this.player.sendMessage(ChatColor.DARK_RED + "Schematic failed to load.");
 			e.printStackTrace();
 		}
