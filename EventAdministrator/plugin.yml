@@ -1,5 +1,5 @@
 name:  EventManager
-main:  me.fuzzystatic.EventManager.EventManager
+main:  me.fuzzystatic.EventAdministrator.EventAdministrator
 version:  1.00a
 commands:
    em:
