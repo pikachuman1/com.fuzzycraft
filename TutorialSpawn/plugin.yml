@@ -1,0 +1,133 @@
+name:  TutorialSpawn
+author: FuzzyStatic
+main:  me.fuzzystatic.TutorialSpawn.TutorialSpawn
+version:  1.34b
+commands:
+   ts:
+      description: Parent TutorialSpawn command.
+      usage: |
+        /tsphrase [passphrase] - Confirm phrase
+        /tssetphrase [passphrase] - Set passphrase
+        /tsgetphrase - Get passphrase
+        /tsspawn - Teleport to tutorial spawn
+        /tssetspawn - Set tutorial spawn location
+        /tsexit - Teleport to tutorial exit
+        /tssetexit - Set location to teleport to once passphrase is entered
+        /tssetmje [integer] - Set maximum join events (EX /tssetmje 5) 
+        /tsgetmje - Get maximum join events
+        /tssetrp [true|false] - Set reuse passphrase setting (EX /tssetrp true) 
+        /tsgetrp - Get reuse passphrase setting
+        /tssettd [double] - Set teleport delay (EX /tssettd 0.5)
+        /tsgettd - Get teleport delay
+      permission: tutorialspawn.*
+   tsphrase:
+      description: Confirm passphrase.
+      permission: tutorialspawn.phrase
+      usage: Syntax error! Type /tsphrase <passphrase>.
+   tsgetphrase:
+      description: Get current passphrase.
+      permission: tutorialspawn.phrase.get
+   tssetphrase:
+      description: Set current passphrase.
+      permission: tutorialspawn.phrase.set
+   tsspawn:
+      description: Teleport to tutorial spawn.
+      permission: tutorialspawn.spawn
+   tssetspawn:
+      description: Set tutorial spawn.
+      permission: tutorialspawn.spawn.set
+   tsexit:
+      description: Teleport to tutorial exit.
+      permission: tutorialspawn.exit
+   tssetexit:
+      description: Set tutorial exit.
+      permission: tutorialspawn.exit.set
+   tsgetmje:
+      description: Get current maximum join events.
+      permission: tutorialspawn.mje.get
+   tssetmje:
+      description: Set current maximum join events.
+      permission: tutorialspawn.mje.set
+      usage: Syntax error! Type /tssetmje [integer]. (EX /tssetmje 5)
+   tsgetrp:
+      description: Get reuse passphrase setting.
+      permission: tutorialspawn.rp.get
+   tssetrp:
+      description: Set reuse passphrase setting.
+      permission: tutorialspawn.rp.set
+      usage: Syntax error! Type /tssetrp [true|false]. (EX /tssetrp true)
+   tsgettd:
+      description: Get current teleport delay.
+      permission: tutorialspawn.td.get
+   tssettd:
+      description: Set current teleport delay.
+      permission: tutorialspawn.td.set
+      usage: Syntax error! Type /tssettd [double]. (EX /tssettd 0.5) 
+permissions:
+  tutorialspawn.*:
+    description: Gives access to all TutorialSpawn commands.
+    children:
+      tutorialspawn.phrase.*: true
+      tutorialspawn.spawn.*: true
+      tutorialspawn.exit.*: true
+      tutorialspawn.mje.*: true
+      tutorialspawn.rp.*: true
+      tutorialspawn.td.*: true
+  tutorialspawn.phrase.*:
+    description: Gives access to all TutorialSpawn phrase commands.
+    children:
+      tutorialspawn.phrase: true
+      tutorialspawn.phrase.get: true
+      tutorialspawn.phrase.set: true
+  tutorialspawn.spawn.*:
+    description: Gives access to all TutorialSpawn spawn commands.
+    children:
+      tutorialspawn.spawn: true
+      tutorialspawn.spawn.set: true
+  tutorialspawn.exit.*:
+    description: Gives access to all TutorialSpawn exit commands.
+    children:
+      tutorialspawn.exit: true
+      tutorialspawn.exit.set: true
+  tutorialspawn.mje.*:
+    description: Gives access to all TutorialSpawn maximum join event commands.
+    children:
+      tutorialspawn.mje.get: true
+      tutorialspawn.mje.set: true
+  tutorialspawn.rp.*:
+    description: Gives access to all TutorialSpawn reuse passphrase commands.
+    children:
+      tutorialspawn.rp.get: true
+      tutorialspawn.rp.set: true
+  tutorialspawn.td.*:
+    description: Gives access to all TutorialSpawn teleport delay commands.
+    children:
+      tutorialspawn.td.get: true
+      tutorialspawn.td.set: true
+  tutorialspawn.phrase:
+    description: Allows user to input passphrase needed to leave tutorial.
+    default: true  
+  tutorialspawn.phrase.get:
+    description: Allows user to get current passphrase.
+  tutorialspawn.phrase.set:
+    description: Allows user to set current passphrase.
+  tutorialspawn.spawn:
+    description: Allows user to teleport to tutorial spawn.
+  tutorialspawn.spawn.set:
+    description: Allows user to set tutorial spawn.
+  tutorialspawn.exit:
+    description: Allows user to teleport to tutorial exit.
+  tutorialspawn.exit.set:
+    description: Allows user to set tutorial exit.
+  tutorialspawn.mje.get:
+    description: Allows user to get current maximum join events.
+  tutorialspawn.mje.set:
+    description: Allows user to set current maximum join events.
+  tutorialspawn.rp.get:
+    description: Allows user to get reuse passphrase events.
+  tutorialspawn.rp.set:
+    description: Allows user to set reuse passphrase events.
+  tutorialspawn.td.get:
+    description: Allows user to get current teleport delay.
+  tutorialspawn.td.set:
+    description: Allows user to set current teleport delay.

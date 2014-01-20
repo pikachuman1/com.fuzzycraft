@@ -1,0 +1,67 @@
+name:  FCKitPvP
+main:  me.fuzzystatic.KitPvP.KitPvP
+version:  1.2
+commands:
+   kit:
+      description: Display available kits
+      permission: KitPvP.kits
+   kits:
+      description: Display available kits
+      permission: KitPvP.kits
+   squire:
+      description: Equip Squire kit
+      permission: KitPvP.squire
+   pvp:
+      description: Equip Squire kit
+      permission: KitPvP.squire
+   archer:
+      description: Equip Archer kit
+      permission: KitPvP.archer
+   streaker:
+      description: Equip Streaker kit
+      permission: KitPvP.streaker
+   knight:
+      description: Equip Knight kit
+      permission: KitPvP.knight
+   tank:
+      description: Equip Knight kit
+      permission: KitPvP.knight
+   chemist:
+      description: Equip Chemist kit
+      permission: KitPvP.chemist
+   lumberjack:
+      description: Equip Lumberjack kit
+      permission: KitPvP.lumberjack
+   lj:
+      description: Equip Lumberjack kit
+      permission: KitPvP.lumberjack
+   ninja:
+      description: Equip Ninja kit
+      permission: KitPvP.ninja
+   mystic:
+      description: Equip Mystic kit
+      permission: KitPvP.mystic
+   king:
+      description: Equip King kit
+      permission: KitPvP.king
+   firemage:
+      description: Equip Fire Mage kit
+      permission: KitPvP.firemage
+   fm:
+      description: Equip Fire Mage kit
+      permission: KitPvP.firemage
+   reaper:
+      description: Equip Reaper kit
+      permission: KitPvP.reaper
+   fireomen:
+      description: Equip Fire Omen kit
+      permission: KitPvP.fireomen
+   fo:
+      description: Equip Fire Omen kit
+      permission: KitPvP.fireomen
+   monk:
+      description: Equip Monk kit
+      permission: KitPvP.monk
+
+
+
