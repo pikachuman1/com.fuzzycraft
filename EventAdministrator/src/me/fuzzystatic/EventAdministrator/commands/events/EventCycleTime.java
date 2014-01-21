@@ -32,6 +32,7 @@ public class EventCycleTime implements CommandExecutor {
 			}
 		}
 		if (cmd.getName().equalsIgnoreCase("emGetCycle")) {
+			sender.sendMessage(commandLabel);
     		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());			
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Cycle (in seconds): " + ChatColor.DARK_AQUA + ecs.getCycleTime());
 			return true;

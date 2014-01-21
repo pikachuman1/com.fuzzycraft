@@ -25,16 +25,12 @@ public class EventList extends JavaPlugin{
 			if (!(sender instanceof Player)) {
 				sender.sendMessage("This command can only be run by a player.");
 			} else {
-
-				File folder = new File(plugin.getDataFolder() + File.separator + DirectoryStructure.EVENT_DIR);
-				File[] listOfFiles = folder.listFiles();
-
+				DirectoryStructure ds = new DirectoryStructure(plugin);
+				
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Events On This Server:");
 				
-				for (File file : listOfFiles) {
-					if (file.isFile()) {
-						sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(file.getName()));
-					}
+				for (File file : ds.eventFiles()) {
+					if (file.isFile()) sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(file.getName()));
 				}
 				return true;
 			}

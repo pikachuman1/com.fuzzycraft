@@ -48,19 +48,5 @@ public class EventAdministrator extends JavaPlugin {
 		getCommand("emspawnmob").setExecutor(new SpawnMob(plugin));
 		getCommand("emspawnname").setExecutor(new SpawnName(plugin));
 		getCommand("emspawnstart").setExecutor(new SpawnStartTime(plugin));
-		
-		/*long ticks = plugin.config.getLong(Strings.DC_EVENT_CYCLE.toString()) * 20;	
-		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-			public void run() {
-				EventStop eventStop = new EventStop(plugin);
-				eventStop.stopEvent();
-				EventStart eventStart = new EventStart(plugin);
-				eventStart.startEvent();
-				eventStart.startSpawns();
-				eventStart.items(120);
-				eventStart.eventTimeMidnight(60);
-				eventStart.reminder(300);
-			}
-		}, 0, ticks);*/
 	}
 }
