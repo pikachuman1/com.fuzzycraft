@@ -1,4 +1,4 @@
-name:  EventManager
+name:  EventAdministrator
 main:  me.fuzzystatic.EventAdministrator.EventAdministrator
 version:  1.00a
 commands:
@@ -6,6 +6,7 @@ commands:
       description: Parent EventManager command.
       usage: |
         /emname [name]
+        /emeventlist
         /emsave
         /emload
         /emsetcycle
@@ -26,6 +27,9 @@ commands:
       description: Select event. Will create event if event does not currently exist.
       permission: eventmanager.event.name
       usage: /emname [name]
+   emeventlist:
+      description: Lists all of the events for this server.
+      permission: eventadministrator.event.list
    emsave:
       description: Save event location to a config and clipboard data to a schematic.
       permission: eventmanager.event.save
