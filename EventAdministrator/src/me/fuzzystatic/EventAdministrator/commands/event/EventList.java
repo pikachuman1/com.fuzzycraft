@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.commands.events;
+package me.fuzzystatic.EventAdministrator.commands.event;
 
 import java.io.File;
 

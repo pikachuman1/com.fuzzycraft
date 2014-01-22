@@ -45,7 +45,7 @@ public class PlayerItems {
 				}	
 			}
 		}, 60* 20, 90 * 20);
-		EventSchedulerMap esm = new EventSchedulerMap();
+		SchedulerEventMap esm = new SchedulerEventMap();
 		esm.set(id, eventName);
 	}
 }

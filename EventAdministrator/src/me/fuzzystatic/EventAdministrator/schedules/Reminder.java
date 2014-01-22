@@ -25,7 +25,7 @@ public class Reminder {
 					Bukkit.getServer().broadcastMessage(ChatColor.GREEN + ecs.getReminderMessage());
 				}
 			}, ecs.getReminderCycleTime() * 20, ecs.getReminderCycleTime() * 20);
-			EventSchedulerMap esm = new EventSchedulerMap();
+			SchedulerEventMap esm = new SchedulerEventMap();
 			esm.set(id, eventName);
 		}
 	}

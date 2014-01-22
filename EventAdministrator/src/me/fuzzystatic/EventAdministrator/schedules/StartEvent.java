@@ -20,15 +20,15 @@ public class StartEvent {
 		ecs.createFileStructure();
 		id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 			public void run() {
-				EventSchedulerMap esm = new EventSchedulerMap();
-				esm.set(id, eventName);
+				SchedulerEventMap sem = new SchedulerEventMap();
+				sem.set(id, eventName);
 								
-				StopEvent stopEvent = new StopEvent(plugin, esm.get().get(id));
-				Regeneration regeneration = new Regeneration(plugin, esm.get().get(id));
+				StopEvent stopEvent = new StopEvent(plugin, sem.get().get(id));
+				Regeneration regeneration = new Regeneration(plugin, sem.get().get(id));
 				Spawning spawning = new Spawning(plugin, id);
-				WorldConditions worldConditions = new WorldConditions(plugin, esm.get().get(id));
-				Reminder reminder = new Reminder(plugin, esm.get().get(id));
-				PlayerItems playerItems = new PlayerItems(plugin, esm.get().get(id));
+				WorldConditions worldConditions = new WorldConditions(plugin, sem.get().get(id));
+				Reminder reminder = new Reminder(plugin, sem.get().get(id));
+				PlayerItems playerItems = new PlayerItems(plugin, sem.get().get(id));
 				
 				stopEvent.stopSubschedules(id);
 				stopEvent.clearEntities();

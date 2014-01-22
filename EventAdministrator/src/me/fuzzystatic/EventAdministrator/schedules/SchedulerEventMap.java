@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimaps;
 
-public class EventSchedulerMap {
+public class SchedulerEventMap {
 
 	private static final Map<Integer, String> map = new HashMap<Integer, String>();
 

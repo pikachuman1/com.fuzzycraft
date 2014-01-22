@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.commands.events.spawns;
+package me.fuzzystatic.EventAdministrator.commands.event.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
@@ -9,24 +9,24 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SpawnIsBoss implements CommandExecutor {
+public class SpawnStartTime implements CommandExecutor {
 	
 	private EventAdministrator plugin;
 	
-	public SpawnIsBoss(EventAdministrator plugin) {
+	public SpawnStartTime(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
 		
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("emSpawnIsBoss")) {
+		if (cmd.getName().equalsIgnoreCase("emSpawnStart")) {
 			if(args.length > 0) {
 				if (!(sender instanceof Player)) {
 					sender.sendMessage("This command can only be run by a player.");
 				} else {
-		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());	
+		    		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, SpawnName.getName());
 					scs.createFileStructure();
-		    		scs.setIsBoss(Boolean.valueOf(args[0]));
-				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn is boss set.");
+		    		scs.setStartTime(Long.valueOf(args[0]));
+				    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn start time set.");
 				    return true;
 				}
 			}

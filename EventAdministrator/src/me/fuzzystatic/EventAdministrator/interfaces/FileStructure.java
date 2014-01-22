@@ -2,6 +2,6 @@ package me.fuzzystatic.EventAdministrator.interfaces;
 
 public interface FileStructure {
 
-	public void createFileStructure();
+	public boolean createFileStructure();
 	
 }

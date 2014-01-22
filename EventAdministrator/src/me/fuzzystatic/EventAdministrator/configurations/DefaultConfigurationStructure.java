@@ -26,7 +26,15 @@ public class DefaultConfigurationStructure implements FileStructure {
 	}
 	
 	@Override
-	public void createFileStructure() {
-		if(this.config.get(WORLD_EDIT_BOOLEAN) == null) setUseWESchematicDir(defaultUseWESchematicDir);
+	public boolean createFileStructure() {
+		boolean configAltered = false;
+		if(this.config.get(WORLD_EDIT_BOOLEAN) == null) {
+			setUseWESchematicDir(defaultUseWESchematicDir);
+			configAltered = true;
+		}
+		if (configAltered) {
+			this.configAccessor.saveConfig();
+		}
+		return configAltered;
 	}
 }

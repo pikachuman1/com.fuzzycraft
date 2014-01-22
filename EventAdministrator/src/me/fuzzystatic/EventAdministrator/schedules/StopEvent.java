@@ -17,20 +17,20 @@ public class StopEvent {
 	}
 	
 	public boolean stop() {
-		EventSchedulerMap esm = new EventSchedulerMap();
-		for (Integer integer : esm.getInvert().get(eventName)) {
+		SchedulerEventMap sem = new SchedulerEventMap();
+		for (Integer integer : sem.getInvert().get(eventName)) {
 			Bukkit.getScheduler().cancelTask(integer); 
-			esm.get().remove(integer);
+			sem.get().remove(integer);
 		}
 		return true;
 	}
 	
 	public boolean stopSubschedules(int id) {
-		EventSchedulerMap esm = new EventSchedulerMap();
-		for (Integer integer : esm.getInvert().get(eventName)) {
+		SchedulerEventMap sem = new SchedulerEventMap();
+		for (Integer integer : sem.getInvert().get(eventName)) {
 			if (integer != id) {
 				Bukkit.getScheduler().cancelTask(integer);
-				esm.get().remove(integer);
+				sem.get().remove(integer);
 			}
 		}
 		return true;

@@ -1,8 +1,8 @@
 package me.fuzzystatic.EventAdministrator;
 
 import me.fuzzystatic.EventAdministrator.command.CommandParser;
-import me.fuzzystatic.EventAdministrator.commands.events.*;
-import me.fuzzystatic.EventAdministrator.commands.events.spawns.*;
+import me.fuzzystatic.EventAdministrator.commands.event.*;
+import me.fuzzystatic.EventAdministrator.commands.event.spawn.*;
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.listeners.BossDeathListener;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;

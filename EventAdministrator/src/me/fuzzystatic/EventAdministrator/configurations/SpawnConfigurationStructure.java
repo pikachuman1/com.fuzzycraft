@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.events.EventName;
+import me.fuzzystatic.EventAdministrator.commands.event.EventName;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
@@ -114,7 +114,7 @@ public class SpawnConfigurationStructure implements FileStructure{
 	}
 
 	@Override
-	public void createFileStructure() {
+	public boolean createFileStructure() {
 		if(this.config.get(this.locationYML) == null) new YMLLocation().setBlankLocation(this.config, this.locationYML);;
 		if(this.config.get(this.mobYML) == null) setMob(defaultMob);
 		if(this.config.get(this.amountYML) == null) setAmount(defaultAmount);
@@ -122,6 +122,7 @@ public class SpawnConfigurationStructure implements FileStructure{
 		if(this.config.get(this.cycleTimeYML) == null) setCycleTime(defaultCycle);
 		if(this.config.get(this.isBossYML) == null) setIsBoss(defaultIsBoss);
 		this.configAccessor.saveConfig();
+		return true;
 	}
 	
 	public Location getLocation() {

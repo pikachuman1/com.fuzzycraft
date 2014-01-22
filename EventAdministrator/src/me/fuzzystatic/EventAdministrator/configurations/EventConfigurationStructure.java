@@ -101,16 +101,44 @@ public class EventConfigurationStructure implements FileStructure {
 	}
 	
 	@Override
-	public void createFileStructure() {
-		if(this.config.get(CREATURE_LIMIT) == null) setCreatureLimit(defaultCreatureLimit);
-		if(this.config.get(CYCLE_TIME) == null) setCycleTime(defaultCycle);
-		if(this.config.get(NO_AIR) == null) setNoAir(defaultNoAir);
-		if(this.config.get(WORLD_CONDITIONS_TIME) == null) setWorldConditionsTime(defaultWorldConditionsTime);
-		if(this.config.get(WORLD_CONDITIONS_TIME_CYCLE_TIME) == null) setWorldConditionsTimeCycleTime(defaultWorldConditionsTimeCycleTime);
-		if(this.config.get(START_MESSAGE) == null) setStartMessage(defaultStartMessage);
-		if(this.config.get(REMINDER_MESSAGE) == null) setReminderMessage(defaultReminderMessage);
-		if(this.config.get(REMINDER_CYCLE_TIME) == null) setReminderCycleTime(defaultReminderCycleTime);
-		this.configAccessor.saveConfig();
+	public boolean createFileStructure() {
+		boolean configAltered = false;
+		if(this.config.get(CREATURE_LIMIT) == null) {
+			setCreatureLimit(defaultCreatureLimit);
+			configAltered = true;
+		}
+		if(this.config.get(CYCLE_TIME) == null) {
+			setCycleTime(defaultCycle);
+			configAltered = true;
+		}
+		if(this.config.get(NO_AIR) == null) {
+			setNoAir(defaultNoAir);
+			configAltered = true;
+		}
+		if(this.config.get(WORLD_CONDITIONS_TIME) == null) {
+			setWorldConditionsTime(defaultWorldConditionsTime);
+			configAltered = true;
+		}
+		if(this.config.get(WORLD_CONDITIONS_TIME_CYCLE_TIME) == null) {
+			setWorldConditionsTimeCycleTime(defaultWorldConditionsTimeCycleTime);
+			configAltered = true;
+		}
+		if(this.config.get(START_MESSAGE) == null) {
+			setStartMessage(defaultStartMessage);
+			configAltered = true;
+		}
+		if(this.config.get(REMINDER_MESSAGE) == null) {
+			setReminderMessage(defaultReminderMessage);
+			configAltered = true;
+		} 
+		if(this.config.get(REMINDER_CYCLE_TIME) == null) {
+			setReminderCycleTime(defaultReminderCycleTime);
+			configAltered = true;
+		}
+		if (configAltered) {
+			this.configAccessor.saveConfig();
+		}
+		return configAltered;
 	}
 	
 	public Location getPasteLocation() {

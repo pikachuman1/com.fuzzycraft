@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimaps;
 
-public class EventBossMap {
+public class BossEventMap {
 	
 	private static final Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 

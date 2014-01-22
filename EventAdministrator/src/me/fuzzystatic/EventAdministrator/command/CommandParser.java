@@ -1,10 +1,11 @@
 package me.fuzzystatic.EventAdministrator.command;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.events.CycleTime;
-import me.fuzzystatic.EventAdministrator.commands.events.Load;
-import me.fuzzystatic.EventAdministrator.commands.events.Locations;
-import me.fuzzystatic.EventAdministrator.commands.events.Start;
+import me.fuzzystatic.EventAdministrator.commands.event.CycleTime;
+import me.fuzzystatic.EventAdministrator.commands.event.Load;
+import me.fuzzystatic.EventAdministrator.commands.event.Locations;
+import me.fuzzystatic.EventAdministrator.commands.event.Name;
+import me.fuzzystatic.EventAdministrator.commands.event.Start;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,6 +27,7 @@ public class CommandParser implements CommandExecutor {
 					case "load" 		: new Load().runCommand(plugin, sender, args); break;
 					case "loc" 			: new Locations().runCommand(plugin, sender, args); break;
 					case "locations" 	: new Locations().runCommand(plugin, sender, args); break;
+					case "name" 		: new Name().runCommand(plugin, sender, args); break;
 					case "start" 		: new Start().runCommand(plugin, sender, args); break;
 				}
 				return true;

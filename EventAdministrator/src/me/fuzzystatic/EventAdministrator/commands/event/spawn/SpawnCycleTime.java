@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.commands.events.spawns;
+package me.fuzzystatic.EventAdministrator.commands.event.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;

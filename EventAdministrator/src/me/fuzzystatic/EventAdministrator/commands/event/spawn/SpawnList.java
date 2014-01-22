@@ -1,8 +1,9 @@
-package me.fuzzystatic.EventAdministrator.commands.events.spawns;
+package me.fuzzystatic.EventAdministrator.commands.event.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.events.EventName;
+import me.fuzzystatic.EventAdministrator.commands.event.EventName;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
