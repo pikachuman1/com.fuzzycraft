@@ -185,6 +185,9 @@ public class EventConfigurationStructure implements FileStructure {
 	}
 	
 	public Set<String> getSpawns() {
-		return config.getConfigurationSection(SpawnConfigurationStructure.SPAWNS).getKeys(false);
+		if(this.config.contains((SpawnConfigurationStructure.SPAWNS))) {
+			return config.getConfigurationSection(SpawnConfigurationStructure.SPAWNS).getKeys(false);
+		} 
+		return null;
 	}
 }

@@ -14,12 +14,11 @@ public class CycleTime extends Command {
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, EventName.getName());	
 		ecs.createFileStructure();
 		if(hasPermissionNode(sender)) {
-			if (args.length > 0) {		
-				ecs.setCycleTime(Long.valueOf(args[0]));
-				sendMessage(sender, message(args[0]));
+			if (args.length > 1) {		
+				ecs.setCycleTime(Long.valueOf(args[1]));
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "New event cycle set to " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " seconds for event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + ".");
 			} else {
-				ecs.getCycleTime();
-				sendMessage(sender, message(args[0]));
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current cycle for event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + ecs.getCycleTime() + ChatColor.LIGHT_PURPLE + " seconds. " + usage());
 			}
 		}
 	}
@@ -29,7 +28,8 @@ public class CycleTime extends Command {
 		return "eventadministrator.cycle";
 	}
 	
-	public String message(String string) {	
-		return ChatColor.LIGHT_PURPLE + "New event cycle set to " + ChatColor.DARK_AQUA + string + ".";
+	@Override
+	public String usage() {
+		return ChatColor.LIGHT_PURPLE + "TO SET: /ea cycle [time (in seconds)].";
 	}
 }

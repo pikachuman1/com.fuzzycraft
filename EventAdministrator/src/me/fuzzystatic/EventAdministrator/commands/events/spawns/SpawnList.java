@@ -25,14 +25,14 @@ public class SpawnList implements CommandExecutor {
 				
 				EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
 				
-				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spawns in Event:");
+				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spawns in event " + ChatColor.DARK_AQUA + EventName.getName() + ChatColor.LIGHT_PURPLE + ": ");
 				
-				if (!ecs.getSpawns().isEmpty()) {
+				if (ecs.getSpawns() != null) {
 					for (String spawnName : ecs.getSpawns()) {
 						sender.sendMessage(ChatColor.DARK_AQUA + spawnName);
 					}
-				}else {
-					sender.sendMessage(ChatColor.LIGHT_PURPLE + "The " + ChatColor.DARK_AQUA + "event" + ChatColor.LIGHT_PURPLE + "you have selected has no " + ChatColor.DARK_AQUA + "spawns" + ChatColor.LIGHT_PURPLE + ".");
+				} else {
+					sender.sendMessage(ChatColor.LIGHT_PURPLE + "The event has no " + ChatColor.DARK_AQUA + "spawns" + ChatColor.LIGHT_PURPLE + ".");
 				}
 				return true;
 			}

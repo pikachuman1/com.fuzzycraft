@@ -27,7 +27,7 @@ public class EventList implements CommandExecutor {
 			} else {
 				DirectoryStructure ds = new DirectoryStructure(plugin);
 				
-				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Events On This Server:");
+				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Events on this server:");
 				
 				for (File file : ds.eventFiles()) {
 					if (file.isFile()) sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(file.getName()));

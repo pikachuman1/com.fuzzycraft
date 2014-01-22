@@ -2,6 +2,9 @@ name:  EventAdministrator
 main:  me.fuzzystatic.EventAdministrator.EventAdministrator
 version:  1.00a
 commands:
+   ea:
+      description: Parent EventAdministrator command.
+      permission: eventadministrator.*
    em:
       description: Parent EventAdministrator command.
       permission: eventmanager.*

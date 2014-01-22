@@ -45,4 +45,8 @@ public class Command {
 			ConsoleLogs.sendMessage(message);
 		}
 	}
+
+	public String usage() {
+		return null;
+	}
 }

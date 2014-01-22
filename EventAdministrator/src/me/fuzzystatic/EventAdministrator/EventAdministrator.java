@@ -1,5 +1,6 @@
 package me.fuzzystatic.EventAdministrator;
 
+import me.fuzzystatic.EventAdministrator.command.CommandParser;
 import me.fuzzystatic.EventAdministrator.commands.events.*;
 import me.fuzzystatic.EventAdministrator.commands.events.spawns.*;
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
@@ -29,6 +30,8 @@ public class EventAdministrator extends JavaPlugin {
 		getDataFolder().mkdir();
 		DirectoryStructure.createEventDirectory(getDataFolder());
 		DirectoryStructure.createSchematicDirectory(getDataFolder());
+		
+		getCommand("ea").setExecutor(new CommandParser(plugin));
 		
 		getCommand("emsetcycle").setExecutor(new EventCycleTime(plugin));
 		getCommand("emgetcycle").setExecutor(new EventCycleTime(plugin));

@@ -27,7 +27,7 @@ public class Spawning {
 	private int spawnLimit;
 	
 	public void start() {
-		if (!ecs.getSpawns().isEmpty()) {
+		if (ecs.getSpawns() != null) {
 			for (String spawnName : ecs.getSpawns()) {
 				final SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
 				int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
