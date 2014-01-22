@@ -63,3 +63,6 @@ commands:
       description: Set currently selected spawn start time.
       permission: eventadministrator.spawn.start
       usage: /emspawnstart [long]
+   emspawnlist:
+      description: List the spawns in a specific event
+      permission: eventadministrator.spawn.list

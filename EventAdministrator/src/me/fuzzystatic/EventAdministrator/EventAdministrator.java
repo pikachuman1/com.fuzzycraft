@@ -48,5 +48,6 @@ public class EventAdministrator extends JavaPlugin {
 		getCommand("emspawnmob").setExecutor(new SpawnMob(plugin));
 		getCommand("emspawnname").setExecutor(new SpawnName(plugin));
 		getCommand("emspawnstart").setExecutor(new SpawnStartTime(plugin));
+		getCommand("emspawnlist").setExecutor(new SpawnList(plugin));
 	}
 }
