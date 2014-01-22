@@ -47,6 +47,10 @@ public class Command {
 	}
 
 	public String usage() {
-		return null;
+		return "/ea";
+	}
+	
+	public void playerOnly(CommandSender sender) {
+		ConsoleLogs.sendMessage("This command can only be run by a player.");
 	}
 }

@@ -18,7 +18,7 @@ public class EventStart implements CommandExecutor {
 	public boolean onCommand(final CommandSender sender, Command cmd, String commandLabel, String[] args) {	
 		if (cmd.getName().equalsIgnoreCase("emStart")) {
 			StartEvent startEvent = new StartEvent(plugin);
-			startEvent.start();
+			startEvent.start(EventName.getName());
 			return true;
 		}
 		return false;

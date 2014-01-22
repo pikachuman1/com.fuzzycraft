@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.events.EventName;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.utilities.Regeneration;
 
@@ -15,9 +14,8 @@ public class StartEvent {
 	public StartEvent(EventAdministrator plugin) {
 		this.plugin = plugin;
 	}
-
-	public void start() {
-		final String eventName = EventName.getName();
+	
+	public void start(final String eventName) {
 		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, eventName);
 		ecs.createFileStructure();
 		id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
