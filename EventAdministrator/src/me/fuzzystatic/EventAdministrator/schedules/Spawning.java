@@ -15,11 +15,13 @@ public class Spawning {
 	private EventAdministrator plugin;
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
+	private final int parentId;
 	
-	public Spawning(EventAdministrator plugin, String eventName) {
+	public Spawning(EventAdministrator plugin, int parentId) {
 		this.plugin = plugin;
-		this.eventName = eventName;
+		this.eventName = new EventSchedulerMap().get().get(parentId);
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
+		this.parentId = parentId;
 	}
 		
 	private int spawnLimit;
@@ -51,7 +53,7 @@ public class Spawning {
 			Entity entity = scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob());
 			if(scs.getIsBoss()) {
 				EventBossMap esm = new EventBossMap();
-				esm.set(entity.getEntityId(), eventName);
+				esm.set(entity.getEntityId(), parentId);
 			} 
 		}
 	}	

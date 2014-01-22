@@ -27,7 +27,7 @@ public class StartEvent {
 								
 				StopEvent stopEvent = new StopEvent(plugin, esm.get().get(id));
 				Regeneration regeneration = new Regeneration(plugin, esm.get().get(id));
-				Spawning spawning = new Spawning(plugin, esm.get().get(id));
+				Spawning spawning = new Spawning(plugin, id);
 				WorldConditions worldConditions = new WorldConditions(plugin, esm.get().get(id));
 				Reminder reminder = new Reminder(plugin, esm.get().get(id));
 				PlayerItems playerItems = new PlayerItems(plugin, esm.get().get(id));

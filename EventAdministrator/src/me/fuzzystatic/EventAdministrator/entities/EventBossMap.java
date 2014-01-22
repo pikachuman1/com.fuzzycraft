@@ -6,24 +6,19 @@ import java.util.Map;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimaps;
 
-import me.fuzzystatic.EventAdministrator.interfaces.EventMap;
-
-public class EventBossMap implements EventMap {
+public class EventBossMap {
 	
-	private static final Map<Integer, String> map = new HashMap<Integer, String>();
+	private static final Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
-	@Override
-	public void set(Integer id, String eventName) {
-		map.put(id, eventName);
+	public void set(Integer id, Integer eventParentId) {
+		map.put(id, eventParentId);
 	}
 
-	@Override
-	public Map<Integer, String> get() {
+	public Map<Integer, Integer> get() {
 		return map;
 	}
 	
-	@Override
-	public ArrayListMultimap<String, Integer> getInvert() {
-		return Multimaps.invertFrom(Multimaps.forMap(map), ArrayListMultimap.<String, Integer>create());
+	public ArrayListMultimap<Integer, Integer> getInvert() {
+		return Multimaps.invertFrom(Multimaps.forMap(map), ArrayListMultimap.<Integer, Integer>create());
 	}
 }
