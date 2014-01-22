@@ -21,7 +21,7 @@ public class EventAdministrator extends JavaPlugin {
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
 		if(!pm.isPluginEnabled("WorldEdit")) {
-			ConsoleLogs.message("EventManager requires the WorldEdit plugin");
+			ConsoleLogs.sendMessage("EventManager requires the WorldEdit plugin");
 		}
 		pm.registerEvents(this.bdl, this);
 		

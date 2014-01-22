@@ -28,7 +28,7 @@ public class EventLocations implements CommandExecutor {
 	    		SerializableLocation sl = new SerializableLocation(player.getLocation());
 	    		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
 	    		ecs.setEntrance(sl.serialize());
-			    ConsoleLogs.message("New event entrance set.");
+			    ConsoleLogs.sendMessage("New event entrance set.");
 			    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event entrance set.");
 			    return true;
 			}
@@ -41,7 +41,7 @@ public class EventLocations implements CommandExecutor {
 	    		SerializableLocation sl = new SerializableLocation(player.getLocation());
 	    		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());
 	    		ecs.setExit(sl.serialize());
-				ConsoleLogs.message("New event exit set.");
+				ConsoleLogs.sendMessage("New event exit set.");
 			    sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event exit set.");
 			    return true;
 			}

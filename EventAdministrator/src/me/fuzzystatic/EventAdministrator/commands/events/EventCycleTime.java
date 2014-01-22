@@ -23,7 +23,7 @@ public class EventCycleTime implements CommandExecutor {
 	    		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());	
 				ecs.createFileStructure();
 	    		ecs.setCycleTime(Long.valueOf(args[0]));
-				ConsoleLogs.message("New event cycle set.");
+				ConsoleLogs.sendMessage("New event cycle set.");
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event cycle set to " + ChatColor.DARK_AQUA + args[0] + ".");
 				return true;
 			} else {
