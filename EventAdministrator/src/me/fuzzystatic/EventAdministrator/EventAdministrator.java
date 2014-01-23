@@ -32,25 +32,7 @@ public class EventAdministrator extends JavaPlugin {
 		DirectoryStructure.createSchematicDirectory(getDataFolder());
 		
 		getCommand("ea").setExecutor(new CommandParser(plugin));
-		
-		getCommand("emsetcycle").setExecutor(new EventCycleTime(plugin));
-		getCommand("emgetcycle").setExecutor(new EventCycleTime(plugin));
-		getCommand("emload").setExecutor(new EventLoad(plugin));
-		getCommand("emname").setExecutor(new EventName(plugin));
-		getCommand("emsetentrance").setExecutor(new EventLocations(plugin));
-		getCommand("emsetexit").setExecutor(new EventLocations(plugin));
-		getCommand("emsave").setExecutor(new EventSave(plugin));
-		getCommand("emstart").setExecutor(new EventStart(plugin));
-		getCommand("emstop").setExecutor(new EventStop(plugin));
 		getCommand("emeventlist").setExecutor(new EventList(plugin));
-		
-		getCommand("emspawnamount").setExecutor(new SpawnAmount(plugin));
-		getCommand("emspawncycle").setExecutor(new SpawnCycleTime(plugin));
-		getCommand("emspawnisboss").setExecutor(new SpawnIsBoss(plugin));
-		getCommand("emspawnlocation").setExecutor(new SpawnLocation(plugin));
-		getCommand("emspawnmob").setExecutor(new SpawnMob(plugin));
-		getCommand("emspawnname").setExecutor(new SpawnName(plugin));
-		getCommand("emspawnstart").setExecutor(new SpawnStartTime(plugin));
 		getCommand("emspawnlist").setExecutor(new SpawnList(plugin));
 	}
 }

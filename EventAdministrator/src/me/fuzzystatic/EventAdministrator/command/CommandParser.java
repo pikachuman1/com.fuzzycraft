@@ -1,11 +1,11 @@
 package me.fuzzystatic.EventAdministrator.command;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.event.CycleTime;
-import me.fuzzystatic.EventAdministrator.commands.event.Load;
-import me.fuzzystatic.EventAdministrator.commands.event.Locations;
-import me.fuzzystatic.EventAdministrator.commands.event.Name;
-import me.fuzzystatic.EventAdministrator.commands.event.Start;
+import me.fuzzystatic.EventAdministrator.commands.event.EventCycleTime;
+import me.fuzzystatic.EventAdministrator.commands.event.EventLoad;
+import me.fuzzystatic.EventAdministrator.commands.event.EventLocations;
+import me.fuzzystatic.EventAdministrator.commands.event.EventName;
+import me.fuzzystatic.EventAdministrator.commands.event.EventStart;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,12 +23,16 @@ public class CommandParser implements CommandExecutor {
 		if(commandLabel.equalsIgnoreCase("ea")) {
 			if(args.length > 0) {
 				switch(args[0]) {
-					case "cycle" 		: new CycleTime().runCommand(plugin, sender, args); break;
-					case "load" 		: new Load().runCommand(plugin, sender, args); break;
-					case "loc" 			: new Locations().runCommand(plugin, sender, args); break;
-					case "locations" 	: new Locations().runCommand(plugin, sender, args); break;
-					case "name" 		: new Name().runCommand(plugin, sender, args); break;
-					case "start" 		: new Start().runCommand(plugin, sender, args); break;
+					case "cycle" 		: new EventCycleTime().runCommand(plugin, sender, args); break;
+					case "load" 		: new EventLoad().runCommand(plugin, sender, args); break;
+					case "loc" 			: new EventLocations().runCommand(plugin, sender, args); break;
+					case "location" 	: new EventLocations().runCommand(plugin, sender, args); break;
+					case "name" 		: new EventName().runCommand(plugin, sender, args); break;
+					case "start" 		: new EventStart().runCommand(plugin, sender, args); break;
+					
+					case "s" 			: new SpawnCommandParser().runCommand(plugin, sender, args); break;
+					case "spawn" 		: new SpawnCommandParser().runCommand(plugin, sender, args); break;
+					case "spawns" 		: new SpawnCommandParser().runCommand(plugin, sender, args); break;
 				}
 				return true;
 			}

@@ -29,7 +29,7 @@ public class Spawning {
 	public void start() {
 		if (ecs.getSpawns() != null) {
 			for (String spawnName : ecs.getSpawns()) {
-				final SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, spawnName);
+				final SpawnConfigurationStructure scs = new SpawnConfigurationStructure(this.plugin, this.eventName, spawnName);
 				int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 					public void run() {
 						World world = scs.getLocation().getWorld();
@@ -38,7 +38,7 @@ public class Spawning {
 					}	
 				}, scs.getStartTime() * 20, scs.getCycleTime() * 20);
 				SchedulerEventMap esm = new SchedulerEventMap();
-				esm.set(id, eventName);
+				esm.set(id, this.eventName);
 			}
 		}
 	}
@@ -53,7 +53,7 @@ public class Spawning {
 			Entity entity = scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob());
 			if(scs.getIsBoss()) {
 				BossEventMap esm = new BossEventMap();
-				esm.set(entity.getEntityId(), parentId);
+				esm.set(entity.getEntityId(), this.parentId);
 			} 
 		}
 	}	

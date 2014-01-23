@@ -9,8 +9,8 @@ import org.bukkit.entity.Player;
 
 public class Command {
 		
-	public void runCommand(EventAdministrator plugin, CommandSender sender, String args[]) {
-		
+	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) {
+		return true;
 	}
 	
 	public boolean isPlayer(CommandSender sender) {

@@ -1,42 +1,39 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
+import me.fuzzystatic.EventAdministrator.command.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
+import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class EventCycleTime implements CommandExecutor {
+public class EventCycleTime extends Command {
 	
-	private EventAdministrator plugin;
-	
-	public EventCycleTime(EventAdministrator plugin) {
-		this.plugin = plugin;
-	}
-			
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("emSetCycle")) {
-			if (args.length > 0) {
-	    		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());	
-				ecs.createFileStructure();
-	    		ecs.setCycleTime(Long.valueOf(args[0]));
-				ConsoleLogs.sendMessage("New event cycle set.");
-				sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event cycle set to " + ChatColor.DARK_AQUA + args[0] + ".");
-				return true;
+	@Override
+	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
+		String eventName = new CommandSenderEventMap().get().get(sender);
+		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
+		ecs.createFileStructure();
+		if (hasPermissionNode(sender)) {
+			if (args.length > 1) {		
+				ecs.setCycleTime(Long.valueOf(args[1]));
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "New event cycle set to " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " seconds for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + ".");
 			} else {
-				sender.sendMessage(ChatColor.DARK_RED + "Please enter a value (in seconds). EX: /emsetcycle 14400.");
-				return true;
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current cycle for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + ecs.getCycleTime() + ChatColor.LIGHT_PURPLE + " seconds. TO SET: " + usage());
 			}
-		}
-		if (cmd.getName().equalsIgnoreCase("emGetCycle")) {
-			sender.sendMessage(commandLabel);
-    		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, EventName.getName());			
-			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Cycle (in seconds): " + ChatColor.DARK_AQUA + ecs.getCycleTime());
 			return true;
-		}	
+		}
 		return false;
+	}
+	
+	@Override
+	public String permissionNode() {
+		return "eventadministrator.cycle";
+	}
+	
+	@Override
+	public String usage() {
+		return ChatColor.LIGHT_PURPLE + "/ea cycle <time (in seconds)>";
 	}
 }

@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.event.EventName;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
@@ -70,8 +69,8 @@ public class SpawnConfigurationStructure implements FileStructure{
 		return mobEntityType;
 	}
 	
-	public SpawnConfigurationStructure(EventAdministrator plugin, String spawnName) {
-		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + EventName.getName() + ".yml");
+	public SpawnConfigurationStructure(EventAdministrator plugin, String eventName, String spawnName) {
+		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + eventName + ".yml");
 		this.config = configAccessor.getConfig();
 		this.spawnPrefix = SPAWNS + "." + spawnName + ".";
 		this.locationYML = spawnPrefix + "location";
@@ -115,14 +114,31 @@ public class SpawnConfigurationStructure implements FileStructure{
 
 	@Override
 	public boolean createFileStructure() {
-		if(this.config.get(this.locationYML) == null) new YMLLocation().setBlankLocation(this.config, this.locationYML);;
-		if(this.config.get(this.mobYML) == null) setMob(defaultMob);
-		if(this.config.get(this.amountYML) == null) setAmount(defaultAmount);
-		if(this.config.get(this.startTimeYML) == null) setStartTime(defaultStart);
-		if(this.config.get(this.cycleTimeYML) == null) setCycleTime(defaultCycle);
-		if(this.config.get(this.isBossYML) == null) setIsBoss(defaultIsBoss);
-		this.configAccessor.saveConfig();
-		return true;
+		boolean configAltered = false;
+		if(this.config.get(this.mobYML) == null) {
+			setMob(defaultMob);
+			configAltered = true;
+		}
+		if(this.config.get(this.amountYML) == null) {
+			setAmount(defaultAmount);
+			configAltered = true;
+		}
+		if(this.config.get(this.startTimeYML) == null) {
+			setStartTime(defaultStart);
+			configAltered = true;
+		}
+		if(this.config.get(this.cycleTimeYML) == null) {
+			setCycleTime(defaultCycle);
+			configAltered = true;
+		}
+		if(this.config.get(this.isBossYML) == null) {
+			setIsBoss(defaultIsBoss);
+			configAltered = true;
+		}
+		if (configAltered) {
+			this.configAccessor.saveConfig();
+		}
+		return configAltered;
 	}
 	
 	public Location getLocation() {

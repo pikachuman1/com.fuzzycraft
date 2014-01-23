@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimaps;
 
-public class PlayerEventMap {
+public class CommandSenderEventMap {
 
 	private static final Map<CommandSender, String> map = new HashMap<CommandSender, String>();
 
