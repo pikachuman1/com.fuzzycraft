@@ -10,6 +10,7 @@ import me.fuzzystatic.EventAdministrator.utilities.WorldEditSession;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 import com.sk89q.worldedit.EmptyClipboardException;
 
@@ -38,12 +39,14 @@ public class EventSave extends Command {
 	}
 
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.save";
+	public Permission permission() {
+		Permission permission = new Permission("save");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea save";
+		return super.usage() + " save";
 	}
 }

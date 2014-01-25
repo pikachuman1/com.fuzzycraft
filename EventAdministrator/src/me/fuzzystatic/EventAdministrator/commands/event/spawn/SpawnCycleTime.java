@@ -8,6 +8,7 @@ import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 public class SpawnCycleTime extends Command {
 	
@@ -32,12 +33,14 @@ public class SpawnCycleTime extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.spawns.cycle";
+	public Permission permission() {
+		Permission permission = new Permission("cycle");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea s cycle <time (seconds)>";
+		return super.usage() + " cycle <time (seconds)>";
 	}
 }

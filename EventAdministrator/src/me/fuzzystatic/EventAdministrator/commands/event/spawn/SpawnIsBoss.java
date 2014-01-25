@@ -8,6 +8,7 @@ import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 public class SpawnIsBoss extends Command {
 	
@@ -32,12 +33,14 @@ public class SpawnIsBoss extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.spawns.isboss";
+	public Permission permission() {
+		Permission permission = new Permission("isboss");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea s isboss [true|false]";
+		return usage() + " isboss [true|false]";
 	}
 }

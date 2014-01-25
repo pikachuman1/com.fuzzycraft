@@ -9,6 +9,7 @@ import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 public class EventLocations extends Command {
 
@@ -41,12 +42,14 @@ public class EventLocations extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.locations";
+	public Permission permission() {
+		Permission permission = new Permission("locations");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea loc [en{trance}|ex{it}]";
+		return super.usage() + " loc [en{trance}|ex{it}]";
 	}
 }

@@ -1,71 +1,7 @@
 name:  EventAdministrator
 main:  me.fuzzystatic.EventAdministrator.EventAdministrator
-version:  1.00a
+version:  1.80a
 commands:
    ea:
       description: Parent EventAdministrator command.
-      permission: eventadministrator.*
-   em:
-      description: Parent EventAdministrator command.
-      permission: eventmanager.*
-   emname:
-      description: Select event. Will create event if event does not currently exist.
-      permission: eventadministrator.event.name
-      usage: /emname [name]
-   emeventlist:
-      description: Lists all of the events for this server.
-      permission: eventadministrator.event.list
-   emsave:
-      description: Save event location to a config and clipboard data to a schematic.
-      permission: eventadministrator.event.save
-   emload:
-      description: Load event from the schematic to the location specified in the config.
-      permission: eventadministrator.event.load
-   emsetcycle:
-      description: Set currently selected event cycle.
-      permission: eventadministrator.spawn.time
-   emgetcycle:
-      description: Get currently selected event cycle.
-      permission: eventadministrator.spawn.time
-   emsetentrance:
-      description: Set entrance of currently selected event.
-      permission: eventadministrator.event.entrance
-   emsetexit:
-      description: Set exit of currently selected event.
-      permission: eventadministrator.event.exit
-   emstart:
-      description: Start currently selected event.
-      permission: eventadministrator.event.start
-   emstop:
-      description: Stop all events.
-      permission: eventadministrator.event.stop
-   emspawnamount:
-      description: Set currently selected spawn amount.
-      permission: eventadministrator.spawn.amount
-      usage: /emspawnamount [integer]
-   emspawncycle:
-      description: Set currently selected spawn cycle time.
-      permission: eventadministrator.spawn.cycle
-      usage: /emspawncycle [long]
-   emspawnisboss:
-      description: Set currently selected spawn is boss feature.
-      permission: eventadministrator.spawn.isboss
-      usage: /emspawnisboss [true|false]
-   emspawnlocation:
-      description: Set currently selected spawn location.
-      permission: eventadministrator.spawn.location
-   emspawnmob:
-      description: Set currently selected spawn mob.
-      permission: eventadministrator.spawn.mob
-      usage: /emspawnmob [mob name]
-   emspawnname:
-      description: Select spawn. Will create spawn if spawn does not currently exist.
-      permission: eventadministrator.spawn.name
-      usage: /emspawnmob [name]
-   emspawnstart:
-      description: Set currently selected spawn start time.
-      permission: eventadministrator.spawn.start
-      usage: /emspawnstart [long]
-   emspawnlist:
-      description: List the spawns in a specific event
-      permission: eventadministrator.spawn.list
+      permission: ea.*

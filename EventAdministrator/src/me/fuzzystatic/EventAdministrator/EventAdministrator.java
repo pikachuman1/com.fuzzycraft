@@ -32,7 +32,7 @@ public class EventAdministrator extends JavaPlugin {
 		DirectoryStructure.createSchematicDirectory(getDataFolder());
 		
 		getCommand("ea").setExecutor(new CommandParser(plugin));
-		getCommand("emeventlist").setExecutor(new EventList(plugin));
-		getCommand("emspawnlist").setExecutor(new SpawnList(plugin));
+		//getCommand("emeventlist").setExecutor(new EventList(plugin));
+		//getCommand("emspawnlist").setExecutor(new SpawnList(plugin));
 	}
 }

@@ -4,9 +4,11 @@ import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.command.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 public class EventCycleTime extends Command {
 	
@@ -15,6 +17,7 @@ public class EventCycleTime extends Command {
 		String eventName = new CommandSenderEventMap().get().get(sender);
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
 		ecs.createFileStructure();
+		ConsoleLogs.sendMessage(permission().getChildren().toString());
 		if (hasPermissionNode(sender)) {
 			if (args.length > 1) {		
 				ecs.setCycleTime(Long.valueOf(args[1]));
@@ -28,12 +31,14 @@ public class EventCycleTime extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.cycle";
+	public Permission permission() {
+		Permission permission = new Permission("cycle");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea cycle <time (in seconds)>";
+		return super.usage() + " cycle <time (in seconds)>";
 	}
 }

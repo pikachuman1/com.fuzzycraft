@@ -27,6 +27,7 @@ public class EventConfigurationStructure implements FileStructure {
 	public static final String REMINDER = "reminder";
 	public static final String REMINDER_MESSAGE = REMINDER + "." + "message";
 	public static final String REMINDER_CYCLE_TIME = REMINDER + '.' + "cycleTime";
+	public static final String AUTO_START =  "autoStart";
 	
 	private static final int defaultCreatureLimit = 201;
 	private static final long defaultCycle = 14400;
@@ -36,6 +37,7 @@ public class EventConfigurationStructure implements FileStructure {
 	private static final String defaultStartMessage = "";
 	private static final String defaultReminderMessage = "";
 	private static final long defaultReminderCycleTime = -1;
+	private static final boolean defaultAutoStart = false;
 	
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;
@@ -100,6 +102,11 @@ public class EventConfigurationStructure implements FileStructure {
 		this.configAccessor.saveConfig();
 	}
 	
+	public void setAutoStart(boolean autoStart) {
+		this.config.set(AUTO_START, autoStart);
+		this.configAccessor.saveConfig();
+	}
+	
 	@Override
 	public boolean createFileStructure() {
 		boolean configAltered = false;
@@ -133,6 +140,10 @@ public class EventConfigurationStructure implements FileStructure {
 		} 
 		if(this.config.get(REMINDER_CYCLE_TIME) == null) {
 			setReminderCycleTime(defaultReminderCycleTime);
+			configAltered = true;
+		}
+		if(this.config.get(AUTO_START) == null) {
+			setAutoStart(defaultAutoStart);
 			configAltered = true;
 		}
 		if (configAltered) {
@@ -210,6 +221,10 @@ public class EventConfigurationStructure implements FileStructure {
 	
 	public long getReminderCycleTime() {
 		return config.getLong(REMINDER_CYCLE_TIME);
+	}
+	
+	public long getAutoStart() {
+		return config.getLong(AUTO_START);
 	}
 	
 	public Set<String> getSpawns() {

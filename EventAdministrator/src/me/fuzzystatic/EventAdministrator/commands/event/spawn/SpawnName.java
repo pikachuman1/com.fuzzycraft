@@ -8,6 +8,7 @@ import me.fuzzystatic.EventAdministrator.entities.CommandSenderSpawnMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 public class SpawnName extends Command {
 	
@@ -31,12 +32,14 @@ public class SpawnName extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.spawns.amount";
+	public Permission permission() {
+		Permission permission = new Permission("name");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea s name <spawn name>";
+		return usage() + " name <spawn name>";
 	}
 }

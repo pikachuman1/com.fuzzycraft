@@ -7,6 +7,7 @@ import me.fuzzystatic.EventAdministrator.schedules.StartEvent;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 public class EventStart extends Command {
 
@@ -33,12 +34,14 @@ public class EventStart extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.start";
+	public Permission permission() {
+		Permission permission = new Permission("start");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea start [event name]";
+		return super.usage() + " start [event name]";
 	}
 }

@@ -1,15 +1,16 @@
 package me.fuzzystatic.EventAdministrator.commands.event.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.command.Command;
+import me.fuzzystatic.EventAdministrator.command.SpawnCommand;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
-public class SpawnAmount extends Command {
+public class SpawnAmount extends SpawnCommand {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
@@ -32,12 +33,14 @@ public class SpawnAmount extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.spawns.amount";
+	public Permission permission() {
+		Permission permission = new Permission("amount");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea s amount <amount>";
+		return super.usage() + " amount <amount>";
 	}
 }

@@ -1,8 +1,6 @@
 Change CurrentPlayers to find players within event and not just with the event world.
 
-Event name per player not global
-
-Scale mobs by number of players
+Scale mobs by number of players with possible algorithms
 
 schematics option for worldedit directory
 
@@ -15,3 +13,5 @@ player stats
 Create db
 
 inherited spawns
+
+random spawn times

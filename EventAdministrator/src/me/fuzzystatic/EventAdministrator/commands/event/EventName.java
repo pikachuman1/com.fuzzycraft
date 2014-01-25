@@ -2,11 +2,13 @@ package me.fuzzystatic.EventAdministrator.commands.event;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.permissions.Permission;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.command.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 public class EventName extends Command {
 		
@@ -14,11 +16,13 @@ public class EventName extends Command {
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
 		if (hasPermissionNode(sender)) {
 			if (args.length > 1) {	
-				new CommandSenderEventMap().set(sender, args[1]);
+				CommandSenderEventMap csm = new CommandSenderEventMap();
+				csm.set(sender, args[1]);
+				ConsoleLogs.sendMessage(csm.get().toString());
 				EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, args[1]);
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + " selected" + usage());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + " selected.");
 				if(ecs.createFileStructure()) {
-					sendMessage(sender, ChatColor.LIGHT_PURPLE + "Defaults created." + usage());
+					sendMessage(sender, ChatColor.LIGHT_PURPLE + "Defaults created.");
 				}
 			} else {
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "TO SET: " + usage());
@@ -29,12 +33,14 @@ public class EventName extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.name";
+	public Permission permission() {
+		Permission permission = new Permission("name");
+		permission.addParent(super.permission(), true);
+		return permission;	
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea name <event name>";
+		return super.usage() + " name <event name>";
 	}
 }

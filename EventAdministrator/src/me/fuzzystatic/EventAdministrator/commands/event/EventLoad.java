@@ -3,6 +3,7 @@ package me.fuzzystatic.EventAdministrator.commands.event;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.EmptyClipboardException;
@@ -42,12 +43,14 @@ public class EventLoad extends Command {
 	}
 	
 	@Override
-	public String permissionNode() {
-		return "eventadministrator.load";
+	public Permission permission() {
+		Permission permission = new Permission("load");
+		permission.addParent(super.permission(), true);
+		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return ChatColor.LIGHT_PURPLE + "/ea load";
+		return super.usage() + " load";
 	}
 }

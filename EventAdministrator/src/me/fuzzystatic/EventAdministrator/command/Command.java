@@ -3,9 +3,11 @@ package me.fuzzystatic.EventAdministrator.command;
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 
 public class Command {
 		
@@ -27,12 +29,13 @@ public class Command {
 		return false;	
 	}
 	
-	public String permissionNode() {
-		return "eventadministrator";
+	public Permission permission() {
+		Permission permission = new Permission("ea");
+		return permission;
 	}
 	
 	public boolean hasPermissionNode(CommandSender sender) {
-		if(isPlayer(sender) && sender.hasPermission(permissionNode()) || isConsoleCommandSender(sender)) {
+		if(isPlayer(sender) && sender.hasPermission(permission()) || isConsoleCommandSender(sender)) {
 			return true;
 		}
 		return false;
@@ -47,7 +50,7 @@ public class Command {
 	}
 
 	public String usage() {
-		return "/ea";
+		return ChatColor.LIGHT_PURPLE + "/ea";
 	}
 	
 	public void playerOnly(CommandSender sender) {
