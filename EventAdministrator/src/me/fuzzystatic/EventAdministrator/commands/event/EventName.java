@@ -17,7 +17,7 @@ public class EventName extends Command {
 			if (args.length > 1) {	
 				new CommandSenderEventMap().set(sender, args[1]);
 				EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, args[1]);
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + " selected.");
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " selected.");
 				if(ecs.createFileStructure()) {
 					sendMessage(sender, ChatColor.LIGHT_PURPLE + "Config defaults created.");
 				}

@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.commands.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.command.Command;
+import me.fuzzystatic.EventAdministrator.command.SpawnCommand;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
-public class SpawnLocation extends Command {
+public class SpawnLocation extends SpawnCommand {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
@@ -39,6 +39,6 @@ public class SpawnLocation extends Command {
 	
 	@Override
 	public String usage() {
-		return usage() + " loc";
+		return super.usage() + " loc";
 	}
 }

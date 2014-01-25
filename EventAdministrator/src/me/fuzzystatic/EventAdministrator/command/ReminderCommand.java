@@ -3,8 +3,6 @@ package me.fuzzystatic.EventAdministrator.command;
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.commands.event.EventReminderCycleTime;
 import me.fuzzystatic.EventAdministrator.commands.event.EventReminderMessage;
-import me.fuzzystatic.EventAdministrator.commands.list.EventList;
-import me.fuzzystatic.EventAdministrator.commands.list.SpawnList;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
@@ -23,8 +21,8 @@ public class ReminderCommand extends Command {
 			}
 			return true;
 		} else {
-			sender.sendMessage(new EventList().usage());
-			sender.sendMessage(new SpawnList().usage());
+			sender.sendMessage(new EventReminderCycleTime().usage());
+			sender.sendMessage(new EventReminderMessage().usage());
 			return true;
 		}
 	}

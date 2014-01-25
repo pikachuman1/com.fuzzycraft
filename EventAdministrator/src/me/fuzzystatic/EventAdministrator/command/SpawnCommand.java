@@ -7,6 +7,7 @@ import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnIsBoss;
 import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnLocation;
 import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnMob;
 import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnName;
+import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnStartTime;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
@@ -24,6 +25,7 @@ public class SpawnCommand extends Command {
 			case "location" 	: new SpawnLocation().runCommand(plugin, sender, args); break;
 			case "mob" 			: new SpawnMob().runCommand(plugin, sender, args); break;
 			case "name" 		: new SpawnName().runCommand(plugin, sender, args); break;
+			case "start" 		: new SpawnStartTime().runCommand(plugin, sender, args); break;
 			}
 			return true;
 		} else {
@@ -31,6 +33,7 @@ public class SpawnCommand extends Command {
 			sender.sendMessage(new SpawnMob().usage());
 			sender.sendMessage(new SpawnLocation().usage());
 			sender.sendMessage(new SpawnAmount().usage());
+			sender.sendMessage(new SpawnStartTime().usage());
 			sender.sendMessage(new SpawnCycleTime().usage());
 			sender.sendMessage(new SpawnIsBoss().usage());
 			return true;

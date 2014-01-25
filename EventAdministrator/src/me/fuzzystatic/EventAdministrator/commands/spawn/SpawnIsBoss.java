@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.commands.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.command.Command;
+import me.fuzzystatic.EventAdministrator.command.SpawnCommand;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-public class SpawnIsBoss extends Command {
+public class SpawnIsBoss extends SpawnCommand {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
@@ -41,6 +41,6 @@ public class SpawnIsBoss extends Command {
 	
 	@Override
 	public String usage() {
-		return usage() + " isboss [true|false]";
+		return super.usage() + " isboss [true|false]";
 	}
 }
