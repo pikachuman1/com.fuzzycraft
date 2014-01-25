@@ -50,6 +50,6 @@ public class EventLocations extends Command {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " loc [en{trance}|ex{it}]";
+		return super.usage() + " loc{ation} [en{trance}|ex{it}]";
 	}
 }

@@ -40,7 +40,7 @@ public class SpawnList extends ListCommand {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " list";
+		return super.usage() + " s{pawns}";
 	}
 	
 }

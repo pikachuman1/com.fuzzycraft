@@ -43,8 +43,8 @@ public class EventAdministrator extends JavaPlugin {
 			String eventName = FilenameUtils.removeExtension(file.getName());
 			EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
 			if(ecs.getAutoStart()) {
-				StartEvent startEvent = new StartEvent(plugin);
-				startEvent.start(eventName);
+				StartEvent startEvent = new StartEvent(plugin, eventName);
+				startEvent.start();
 			}
 		}
 	}

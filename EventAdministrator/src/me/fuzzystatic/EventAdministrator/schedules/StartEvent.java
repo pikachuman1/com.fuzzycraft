@@ -10,12 +10,14 @@ public class StartEvent {
 	
 	private EventAdministrator plugin;
 	private int id;
+	private final String eventName;
 	
-	public StartEvent(EventAdministrator plugin) {
+	public StartEvent(EventAdministrator plugin, String eventName) {
 		this.plugin = plugin;
+		this.eventName = eventName;
 	}
 	
-	public void start(final String eventName) {
+	public boolean start() {
 		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, eventName);
 		ecs.createFileStructure();
 		id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
@@ -40,5 +42,6 @@ public class StartEvent {
 				} 
 			}
 		}, 0, ecs.getCycleTime() * 20);
+		return true;
 	}
 }
