@@ -1,11 +1,14 @@
 package me.fuzzystatic.EventAdministrator;
 
+import java.io.File;
+
 import me.fuzzystatic.EventAdministrator.command.CommandParser;
-import me.fuzzystatic.EventAdministrator.commands.event.*;
-import me.fuzzystatic.EventAdministrator.commands.event.spawn.*;
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
+import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.listeners.BossDeathListener;
+import me.fuzzystatic.EventAdministrator.schedules.StartEvent;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
+import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -31,8 +34,18 @@ public class EventAdministrator extends JavaPlugin {
 		DirectoryStructure.createEventDirectory(getDataFolder());
 		DirectoryStructure.createSchematicDirectory(getDataFolder());
 		
+		// Initialize commands
 		getCommand("ea").setExecutor(new CommandParser(plugin));
-		//getCommand("emeventlist").setExecutor(new EventList(plugin));
-		//getCommand("emspawnlist").setExecutor(new SpawnList(plugin));
+		
+		// Auto-start any applicable events.
+		DirectoryStructure ds = new DirectoryStructure(plugin);
+		for (File file : ds.eventFiles()) {
+			String eventName = FilenameUtils.removeExtension(file.getName());
+			EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
+			if(ecs.getAutoStart()) {
+				StartEvent startEvent = new StartEvent(plugin);
+				startEvent.start(eventName);
+			}
+		}
 	}
 }

@@ -223,8 +223,8 @@ public class EventConfigurationStructure implements FileStructure {
 		return config.getLong(REMINDER_CYCLE_TIME);
 	}
 	
-	public long getAutoStart() {
-		return config.getLong(AUTO_START);
+	public boolean getAutoStart() {
+		return config.getBoolean(AUTO_START);
 	}
 	
 	public Set<String> getSpawns() {

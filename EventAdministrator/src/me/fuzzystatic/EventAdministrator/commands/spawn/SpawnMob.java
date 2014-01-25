@@ -1,7 +1,7 @@
-package me.fuzzystatic.EventAdministrator.commands.event.spawn;
+package me.fuzzystatic.EventAdministrator.commands.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.command.SpawnCommand;
+import me.fuzzystatic.EventAdministrator.command.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-public class SpawnAmount extends SpawnCommand {
+public class SpawnMob extends Command {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
@@ -21,11 +21,11 @@ public class SpawnAmount extends SpawnCommand {
 		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(plugin, eventName, spawnName);
 		scs.createFileStructure();
 		if (hasPermissionNode(sender)) {
-			if (args.length > 2) {		
-	    		scs.setAmount(Integer.valueOf(args[2]));
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Amount set to " + ChatColor.DARK_AQUA + args[2] + ChatColor.LIGHT_PURPLE + " for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + ".");
+			if (args.length > 2) {
+	    		scs.setMob(args[2]);
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Mob set to " + ChatColor.DARK_AQUA + args[2] + ChatColor.LIGHT_PURPLE + " for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + ".");
 			} else {
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current amount for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + scs.getAmount() + ChatColor.LIGHT_PURPLE + ". TO SET: " + usage());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current mob for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + scs.getIsBoss() + ChatColor.LIGHT_PURPLE + ". TO SET: " + usage());
 			}
 			return true;
 		}
@@ -34,13 +34,13 @@ public class SpawnAmount extends SpawnCommand {
 	
 	@Override
 	public Permission permission() {
-		Permission permission = new Permission("amount");
+		Permission permission = new Permission("mob");
 		permission.addParent(super.permission(), true);
 		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return super.usage() + " amount <amount>";
+		return usage() + " mob [mob name]";
 	}
 }

@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.commands.event.spawn;
+package me.fuzzystatic.EventAdministrator.commands.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.command.Command;
@@ -8,9 +8,10 @@ import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
-public class SpawnMob extends Command {
+public class SpawnLocation extends Command {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
@@ -20,13 +21,10 @@ public class SpawnMob extends Command {
 		ecs.createFileStructure();
 		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(plugin, eventName, spawnName);
 		scs.createFileStructure();
-		if (hasPermissionNode(sender)) {
-			if (args.length > 2) {
-	    		scs.setMob(args[2]);
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Mob set to " + ChatColor.DARK_AQUA + args[2] + ChatColor.LIGHT_PURPLE + " for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + ".");
-			} else {
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current mob for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + scs.getIsBoss() + ChatColor.LIGHT_PURPLE + ". TO SET: " + usage());
-			}
+		if (hasPermissionNode(sender) && isPlayer(sender)) {
+			Player player = (Player) sender;
+	   		scs.setLocation(player.getLocation());
+			sender.sendMessage(ChatColor.LIGHT_PURPLE + "New spawn location set.");
 			return true;
 		}
 		return false;
@@ -34,13 +32,13 @@ public class SpawnMob extends Command {
 	
 	@Override
 	public Permission permission() {
-		Permission permission = new Permission("mob");
+		Permission permission = new Permission("location");
 		permission.addParent(super.permission(), true);
 		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return usage() + " mob [mob name]";
+		return usage() + " loc";
 	}
 }

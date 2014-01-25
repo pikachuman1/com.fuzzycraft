@@ -8,7 +8,6 @@ import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.command.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
-import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 public class EventName extends Command {
 		
@@ -16,9 +15,7 @@ public class EventName extends Command {
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
 		if (hasPermissionNode(sender)) {
 			if (args.length > 1) {	
-				CommandSenderEventMap csm = new CommandSenderEventMap();
-				csm.set(sender, args[1]);
-				ConsoleLogs.sendMessage(csm.get().toString());
+				new CommandSenderEventMap().set(sender, args[1]);
 				EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, args[1]);
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + " selected.");
 				if(ecs.createFileStructure()) {
