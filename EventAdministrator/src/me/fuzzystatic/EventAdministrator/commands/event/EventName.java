@@ -22,7 +22,8 @@ public class EventName extends Command {
 					sendMessage(sender, ChatColor.LIGHT_PURPLE + "Config defaults created.");
 				}
 			} else {
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "TO SET: " + usage());
+				String eventName = new CommandSenderEventMap().get().get(sender);	
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current selected event is " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + ". TO SET: " + usage());
 			}
 			return true;
 		}

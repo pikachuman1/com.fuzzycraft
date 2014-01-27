@@ -19,9 +19,9 @@ public class EventReminderMessage extends ReminderCommand {
 		if (hasPermissionNode(sender)) {
 			if (args.length > 1) {		
 				ecs.setReminderMessage(args[1]);
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "New event reminder message set to " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " seconds for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + ".");
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "New event reminder message set to " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + ".");
 			} else {
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current reminder message for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + ecs.getReminderMessage() + ChatColor.LIGHT_PURPLE + " seconds. TO SET: " + usage());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current reminder message for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + ecs.getReminderMessage() + ChatColor.LIGHT_PURPLE + ". TO SET: " + usage());
 			}
 			return true;
 		}
