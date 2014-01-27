@@ -1,13 +1,12 @@
-package me.fuzzystatic.EventAdministrator.command;
+package me.fuzzystatic.EventAdministrator.commands.event;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.event.EventReminderCycleTime;
-import me.fuzzystatic.EventAdministrator.commands.event.EventReminderMessage;
+import me.fuzzystatic.EventAdministrator.command.Command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-public class ReminderCommand extends Command {
+public class EventReminder extends Command {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String[] args) {

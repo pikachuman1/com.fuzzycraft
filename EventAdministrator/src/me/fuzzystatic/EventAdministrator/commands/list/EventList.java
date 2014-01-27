@@ -3,7 +3,6 @@ package me.fuzzystatic.EventAdministrator.commands.list;
 import java.io.File;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.command.ListCommand;
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
@@ -13,7 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-public class EventList extends ListCommand {
+public class EventList extends List {
 
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
@@ -21,14 +20,22 @@ public class EventList extends ListCommand {
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
 		ecs.createFileStructure();
 		if (hasPermissionNode(sender)) {
-			DirectoryStructure ds = new DirectoryStructure(plugin);
-			
-			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Events on this server:");
-			
-			for (File file : ds.eventFiles()) {
-				if (file.isFile()) sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(file.getName()));
+			if(args.length > 2) {
+				switch(args[2]) {
+				case "a" 			: new ActiveEventList().runCommand(plugin, sender, args); break;
+				case "active" 		: new ActiveEventList().runCommand(plugin, sender, args); break;
+				}
+				return true;
+			} else {
+				DirectoryStructure ds = new DirectoryStructure(plugin);
+				
+				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Events on this server:");
+				
+				for (File file : ds.eventFiles()) {
+					if (file.isFile()) sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(file.getName()));
+				}
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}

@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.command.SpawnCommand;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
@@ -10,7 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-public class SpawnAmount extends SpawnCommand {
+public class SpawnAmount extends Spawn {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 

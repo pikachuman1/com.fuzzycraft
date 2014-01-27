@@ -15,8 +15,8 @@ public class DefaultConfigurationStructure implements FileStructure {
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;
 	
-	public DefaultConfigurationStructure(EventAdministrator plugin, String eventName) {
-		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + eventName + ".yml");
+	public DefaultConfigurationStructure(EventAdministrator plugin) {
+		this.configAccessor = new ConfigAccessor(plugin, "config.yml");
 		this.config = configAccessor.getConfig();
 	}
 	

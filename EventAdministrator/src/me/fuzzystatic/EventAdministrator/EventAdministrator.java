@@ -31,6 +31,8 @@ public class EventAdministrator extends JavaPlugin {
 		
 		// Create directory structure
 		getDataFolder().mkdir();
+		//DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
+		//dcs.createFileStructure();
 		DirectoryStructure.createEventDirectory(getDataFolder());
 		DirectoryStructure.createSchematicDirectory(getDataFolder());
 		

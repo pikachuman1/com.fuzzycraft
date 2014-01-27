@@ -1,18 +1,12 @@
-package me.fuzzystatic.EventAdministrator.command;
+package me.fuzzystatic.EventAdministrator.commands.spawn;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnAmount;
-import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnCycleTime;
-import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnIsBoss;
-import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnLocation;
-import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnMob;
-import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnName;
-import me.fuzzystatic.EventAdministrator.commands.spawn.SpawnStartTime;
+import me.fuzzystatic.EventAdministrator.command.Command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-public class SpawnCommand extends Command {
+public class Spawn extends Command {
 
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String[] args) {

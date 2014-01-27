@@ -1,13 +1,12 @@
-package me.fuzzystatic.EventAdministrator.command;
+package me.fuzzystatic.EventAdministrator.commands.list;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.commands.list.EventList;
-import me.fuzzystatic.EventAdministrator.commands.list.SpawnList;
+import me.fuzzystatic.EventAdministrator.command.Command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
-public class ListCommand extends Command {
+public class List extends Command {
 	
 	@Override
 	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String[] args) {
@@ -23,6 +22,7 @@ public class ListCommand extends Command {
 			return true;
 		} else {
 			sender.sendMessage(new EventList().usage());
+			sender.sendMessage(new ActiveEventList().usage());
 			sender.sendMessage(new SpawnList().usage());
 			return true;
 		}

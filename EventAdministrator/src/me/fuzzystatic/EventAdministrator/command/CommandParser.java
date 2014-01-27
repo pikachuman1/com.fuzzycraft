@@ -10,6 +10,9 @@ import me.fuzzystatic.EventAdministrator.commands.event.EventName;
 import me.fuzzystatic.EventAdministrator.commands.event.EventSave;
 import me.fuzzystatic.EventAdministrator.commands.event.EventStart;
 import me.fuzzystatic.EventAdministrator.commands.event.EventStop;
+import me.fuzzystatic.EventAdministrator.commands.event.EventReminder;
+import me.fuzzystatic.EventAdministrator.commands.list.List;
+import me.fuzzystatic.EventAdministrator.commands.spawn.Spawn;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,14 +42,14 @@ public class CommandParser implements CommandExecutor {
 				case "start" 		: new EventStart().runCommand(plugin, sender, args); break;
 				case "stop" 		: new EventStop().runCommand(plugin, sender, args); break;
 				
-				case "rem" 			: new ReminderCommand().runCommand(plugin, sender, args); break;
-				case "reminder" 	: new ReminderCommand().runCommand(plugin, sender, args); break;
+				case "rem" 			: new EventReminder().runCommand(plugin, sender, args); break;
+				case "reminder" 	: new EventReminder().runCommand(plugin, sender, args); break;
 
-				case "s" 			: new SpawnCommand().runCommand(plugin, sender, args); break;
-				case "spawn" 		: new SpawnCommand().runCommand(plugin, sender, args); break;
+				case "s" 			: new Spawn().runCommand(plugin, sender, args); break;
+				case "spawn" 		: new Spawn().runCommand(plugin, sender, args); break;
 
-				case "l" 			: new ListCommand().runCommand(plugin, sender, args); break;
-				case "list" 		: new ListCommand().runCommand(plugin, sender, args); break;
+				case "l" 			: new List().runCommand(plugin, sender, args); break;
+				case "list" 		: new List().runCommand(plugin, sender, args); break;
 				}
 				return true;
 			} else {
@@ -59,9 +62,9 @@ public class CommandParser implements CommandExecutor {
 				sender.sendMessage(new EventStop().usage());
 				sender.sendMessage(new EventClear().usage());
 				sender.sendMessage(new EventLoad().usage());
-				sender.sendMessage(new ReminderCommand().usage());
-				sender.sendMessage(new SpawnCommand().usage());
-				sender.sendMessage(new ListCommand().usage());
+				sender.sendMessage(new EventReminder().usage());
+				sender.sendMessage(new Spawn().usage());
+				sender.sendMessage(new List().usage());
 				return false;
 			}
 		}

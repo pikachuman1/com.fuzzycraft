@@ -4,7 +4,7 @@ Scale mobs by number of players with possible algorithms
 
 schematics option for worldedit directory
 
-max creatures?
+max creatures inconsistent?
 
 schedule time?
 
@@ -15,6 +15,5 @@ Create db
 inherited spawns
 
 random spawn times
-
 
 add event argument to spawns list
