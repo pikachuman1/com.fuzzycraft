@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.command;
+package me.fuzzystatic.EventAdministrator.commands;
 
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 

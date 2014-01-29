@@ -170,25 +170,9 @@ public class EventConfigurationStructure implements FileStructure {
 		return new SerializableLocation(map).getLocation();
 	}
 	
-	public boolean existsEntrance() {
-		if(this.config.get(ENTRANCE) != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 	public Location getExit() {
 		Map<String, Object> map = new YMLLocation().getLocation(config, EXIT);
 		return new SerializableLocation(map).getLocation();
-	}
-	
-	public boolean existsExit() {
-		if(this.config.get(EXIT) != null) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 	
 	public int getCreatureLimit() {
@@ -225,6 +209,22 @@ public class EventConfigurationStructure implements FileStructure {
 	
 	public boolean getAutoStart() {
 		return config.getBoolean(AUTO_START);
+	}
+	
+	public boolean hasEntrance() {
+		if(this.config.get(ENTRANCE) != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean hasExit() {
+		if(this.config.get(EXIT) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public Set<String> getSpawns() {

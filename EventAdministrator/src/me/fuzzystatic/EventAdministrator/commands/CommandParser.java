@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.command;
+package me.fuzzystatic.EventAdministrator.commands;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.commands.event.EventAutoStart;
@@ -13,6 +13,7 @@ import me.fuzzystatic.EventAdministrator.commands.event.EventStop;
 import me.fuzzystatic.EventAdministrator.commands.event.EventReminder;
 import me.fuzzystatic.EventAdministrator.commands.list.List;
 import me.fuzzystatic.EventAdministrator.commands.spawn.Spawn;
+import me.fuzzystatic.EventAdministrator.commands.teleport.Teleport;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -48,6 +49,9 @@ public class CommandParser implements CommandExecutor {
 				case "s" 			: new Spawn().runCommand(plugin, sender, args); break;
 				case "spawn" 		: new Spawn().runCommand(plugin, sender, args); break;
 
+				case "tp" 			: new Teleport().runCommand(plugin, sender, args); break;
+				case "teleport" 	: new Teleport().runCommand(plugin, sender, args); break;
+				
 				case "l" 			: new List().runCommand(plugin, sender, args); break;
 				case "list" 		: new List().runCommand(plugin, sender, args); break;
 				}

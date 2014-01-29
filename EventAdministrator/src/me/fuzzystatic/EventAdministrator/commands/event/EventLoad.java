@@ -11,7 +11,7 @@ import com.sk89q.worldedit.EmptyClipboardException;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldguard.bukkit.BukkitUtil;
 
-import me.fuzzystatic.EventAdministrator.command.Command;
+import me.fuzzystatic.EventAdministrator.commands.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 import me.fuzzystatic.EventAdministrator.utilities.WorldEditSession;

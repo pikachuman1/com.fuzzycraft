@@ -2,11 +2,13 @@ package me.fuzzystatic.EventAdministrator;
 
 import java.io.File;
 
-import me.fuzzystatic.EventAdministrator.command.CommandParser;
+import me.fuzzystatic.EventAdministrator.commands.CommandParser;
+import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.listeners.BossDeathListener;
 import me.fuzzystatic.EventAdministrator.schedules.StartEvent;
+import me.fuzzystatic.EventAdministrator.sql.SQLConnection;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 
@@ -31,10 +33,14 @@ public class EventAdministrator extends JavaPlugin {
 		
 		// Create directory structure
 		getDataFolder().mkdir();
-		//DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
-		//dcs.createFileStructure();
+		DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
+		dcs.createFileStructure();
 		DirectoryStructure.createEventDirectory(getDataFolder());
 		DirectoryStructure.createSchematicDirectory(getDataFolder());
+		
+		// Connect to database
+		SQLConnection sc = new SQLConnection(plugin);
+		sc.connect();
 		
 		// Initialize commands
 		getCommand("ea").setExecutor(new CommandParser(plugin));

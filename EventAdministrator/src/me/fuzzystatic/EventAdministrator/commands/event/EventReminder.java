@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
-import me.fuzzystatic.EventAdministrator.command.Command;
+import me.fuzzystatic.EventAdministrator.commands.Command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;

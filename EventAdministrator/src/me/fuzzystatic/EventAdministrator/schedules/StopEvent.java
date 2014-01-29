@@ -40,7 +40,7 @@ public class StopEvent {
 		ecs.createFileStructure();
 		if(ecs.existsPasteLocation()) {
 			Entities eventEntities = new Entities(ecs.getPasteLocation().getWorld());
-			if (ecs.existsExit()) {
+			if (ecs.hasExit()) {
 				eventEntities.teleportAllPlayers(ecs.getExit());
 			}
 			eventEntities.removeAllNonPlayerEntities();

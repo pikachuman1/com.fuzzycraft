@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class SpawnList extends List {
+public class ListSpawn extends List {
 
 	@Override
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
