@@ -1,8 +1,8 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 
@@ -29,7 +29,7 @@ public class DefaultConfigurationStructure implements FileStructure {
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;
 	
-	public DefaultConfigurationStructure(EventAdministrator plugin) {
+	public DefaultConfigurationStructure(JavaPlugin plugin) {
 		this.configAccessor = new ConfigAccessor(plugin, "config.yml");
 		this.config = configAccessor.getConfig();
 	}

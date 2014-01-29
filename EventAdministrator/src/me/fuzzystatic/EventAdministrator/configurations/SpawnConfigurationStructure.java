@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
@@ -9,6 +8,7 @@ import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpawnConfigurationStructure implements FileStructure{
 	
@@ -69,7 +69,7 @@ public class SpawnConfigurationStructure implements FileStructure{
 		return mobEntityType;
 	}
 	
-	public SpawnConfigurationStructure(EventAdministrator plugin, String eventName, String spawnName) {
+	public SpawnConfigurationStructure(JavaPlugin plugin, String eventName, String spawnName) {
 		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + eventName + ".yml");
 		this.config = configAccessor.getConfig();
 		this.spawnPrefix = SPAWNS + "." + spawnName + ".";

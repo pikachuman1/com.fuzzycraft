@@ -1,15 +1,15 @@
 package me.fuzzystatic.EventAdministrator.commands.spawn;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.command.Command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Spawn extends Command {
 
 	@Override
-	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String[] args) {
+	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String[] args) {
 		if(args.length > 1) {
 			switch(args[1]) {
 			case "amount" 		: new SpawnAmount().runCommand(plugin, sender, args); break;

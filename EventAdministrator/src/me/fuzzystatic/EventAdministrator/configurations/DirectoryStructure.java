@@ -2,13 +2,13 @@ package me.fuzzystatic.EventAdministrator.configurations;
 
 import java.io.File;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class DirectoryStructure {
 	
-	private EventAdministrator plugin;
+	private JavaPlugin plugin;
 	
-	public DirectoryStructure(EventAdministrator plugin) {
+	public DirectoryStructure(JavaPlugin plugin) {
 		this.plugin = plugin;
 	}
 	

@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.command;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 import org.bukkit.ChatColor;
@@ -8,10 +7,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Command {
 		
-	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) {
+	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) {
 		return true;
 	}
 	

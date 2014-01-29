@@ -2,7 +2,6 @@ package me.fuzzystatic.EventAdministrator.commands.list;
 
 import java.io.File;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
@@ -11,11 +10,12 @@ import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class EventList extends List {
 
 	@Override
-	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
+	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
 		String eventName = new CommandSenderEventMap().get().get(sender);
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
 		ecs.createFileStructure();

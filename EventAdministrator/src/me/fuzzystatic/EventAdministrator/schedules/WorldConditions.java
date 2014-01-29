@@ -1,17 +1,17 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class WorldConditions {
 	
-	private EventAdministrator plugin;
+	private JavaPlugin plugin;
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
 	
-	public WorldConditions(EventAdministrator plugin, String eventName) {
+	public WorldConditions(JavaPlugin plugin, String eventName) {
 		this.plugin = plugin;
 		this.eventName = eventName;
 		this.ecs = new EventConfigurationStructure(plugin, eventName);

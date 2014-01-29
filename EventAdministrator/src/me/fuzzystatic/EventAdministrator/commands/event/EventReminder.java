@@ -1,15 +1,15 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.command.Command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class EventReminder extends Command {
 	
 	@Override
-	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String[] args) {
+	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String[] args) {
 		if(args.length > 1) {
 			switch(args[1]) {
 			case "c" 			: new EventReminderCycleTime().runCommand(plugin, sender, args); break;

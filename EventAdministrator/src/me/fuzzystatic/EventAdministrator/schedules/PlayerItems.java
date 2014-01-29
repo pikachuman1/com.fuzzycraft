@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.Entities;
 
@@ -9,14 +8,15 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class PlayerItems {
 	
-	private EventAdministrator plugin;
+	private JavaPlugin plugin;
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
 	
-	public PlayerItems(EventAdministrator plugin, String eventName) {
+	public PlayerItems(JavaPlugin plugin, String eventName) {
 		this.plugin = plugin;
 		this.eventName = eventName;
 		this.ecs = new EventConfigurationStructure(plugin, eventName);

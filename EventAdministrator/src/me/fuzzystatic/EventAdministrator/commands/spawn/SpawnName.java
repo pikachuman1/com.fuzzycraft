@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.commands.spawn;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderSpawnMap;
@@ -8,11 +7,12 @@ import me.fuzzystatic.EventAdministrator.entities.CommandSenderSpawnMap;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpawnName extends Spawn {
 	
 	@Override
-	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
+	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
 		if (hasPermissionNode(sender)) {
 			if (args.length > 2) {
 				String eventName = new CommandSenderEventMap().get().get(sender);

@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.command.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
@@ -10,11 +9,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class EventLocations extends Command {
 
 	@Override
-	public boolean runCommand(EventAdministrator plugin, CommandSender sender, String args[]) { 
+	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
 		String eventName = new CommandSenderEventMap().get().get(sender);
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);
 		if (args.length > 1) {

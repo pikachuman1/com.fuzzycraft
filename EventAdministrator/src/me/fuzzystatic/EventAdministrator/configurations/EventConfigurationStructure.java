@@ -5,8 +5,8 @@ import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
@@ -42,7 +42,7 @@ public class EventConfigurationStructure implements FileStructure {
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;
 	
-	public EventConfigurationStructure(EventAdministrator plugin, String eventName) {
+	public EventConfigurationStructure(JavaPlugin plugin, String eventName) {
 		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + eventName + ".yml");
 		this.config = configAccessor.getConfig();
 	}
