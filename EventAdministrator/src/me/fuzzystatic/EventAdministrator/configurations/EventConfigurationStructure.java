@@ -43,7 +43,8 @@ public class EventConfigurationStructure implements FileStructure {
 	private final FileConfiguration config;
 	
 	public EventConfigurationStructure(JavaPlugin plugin, String eventName) {
-		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + eventName + ".yml");
+		DirectoryStructure ds = new DirectoryStructure(plugin);
+		this.configAccessor = new ConfigAccessor(plugin, ds.getEventDirPath() + eventName + ".yml");
 		this.config = configAccessor.getConfig();
 	}
 	

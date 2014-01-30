@@ -8,7 +8,7 @@ import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.EditSession;
@@ -23,7 +23,7 @@ import com.sk89q.worldedit.schematic.SchematicFormat;
 
 public class WorldEditSession {
 	
-	private final Plugin plugin;
+	private final JavaPlugin plugin;
 	private final Player player;
 	private final WorldEditPlugin wep;
 	private final LocalPlayer localPlayer;
@@ -31,8 +31,10 @@ public class WorldEditSession {
 	private final CuboidClipboard clipboard;
 	private final LocalWorld localWorld;
 	private final EditSession editSession;
+	private final DirectoryStructure ds;
 	
-	public WorldEditSession(Plugin plugin, Player player) throws EmptyClipboardException {
+	public WorldEditSession(JavaPlugin plugin, Player player) throws EmptyClipboardException {
+		this.ds = new DirectoryStructure(plugin);
 		this.plugin = plugin;
 		this.player = player;
 		this.wep = (WorldEditPlugin) plugin.getServer().getPluginManager().getPlugin("WorldEdit");
@@ -43,7 +45,8 @@ public class WorldEditSession {
 		this.editSession = this.localSession.createEditSession(this.localPlayer);
 	}
 	
-	public WorldEditSession(Plugin plugin, World world) {
+	public WorldEditSession(JavaPlugin plugin, World world) {
+		this.ds = new DirectoryStructure(plugin);
 		this.plugin = plugin;
 		this.player = null;
 		this.wep = null;
@@ -55,7 +58,7 @@ public class WorldEditSession {
 	}
 	
 	public void saveSchematic(String eventName) {
-		File file = new File(plugin.getDataFolder() + File.separator + DirectoryStructure.SCHEMATICS_DIR + File.separator + eventName + ".schematic");
+		File file = new File(plugin.getDataFolder() + File.separator + ds.getSchematicDir() + File.separator + eventName + ".schematic");
 		try {
 		    SchematicFormat.MCEDIT.save(clipboard, file);	
 		    this.player.sendMessage(ChatColor.GREEN + "Schematic saved.");
@@ -66,10 +69,10 @@ public class WorldEditSession {
 	}
 	
 	public CuboidClipboard loadSchematic(String eventName) {
-		CuboidClipboard clipboard = null;
-		File file = new File(this.plugin.getDataFolder() + File.separator + DirectoryStructure.SCHEMATICS_DIR + File.separator + eventName + ".schematic");
+		File file = new File(this.plugin.getDataFolder() + File.separator + ds.getSchematicDir() + File.separator + eventName + ".schematic");
 		try {
-			clipboard = SchematicFormat.MCEDIT.load(file);	
+			SchematicFormat.MCEDIT.load(file);	
+		    this.player.sendMessage(ChatColor.GREEN + "Schematic loaded.");
 		} catch (IOException | DataException e) {
 			this.player.sendMessage(ChatColor.DARK_RED + "Schematic failed to load.");
 			e.printStackTrace();

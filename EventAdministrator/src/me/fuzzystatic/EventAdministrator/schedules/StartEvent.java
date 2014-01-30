@@ -9,8 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class StartEvent {
 	
 	private JavaPlugin plugin;
-	private int id;
 	private final String eventName;
+	
+	private int id;
 	
 	public StartEvent(JavaPlugin plugin, String eventName) {
 		this.plugin = plugin;

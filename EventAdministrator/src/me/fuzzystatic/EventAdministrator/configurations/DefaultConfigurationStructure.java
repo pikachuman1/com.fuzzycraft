@@ -23,8 +23,7 @@ public class DefaultConfigurationStructure implements FileStructure {
 	private static final String defaultMySQLPassword = "pass";
 	private static final String defaultMySQLDatabase = "db";
 	private static final String defaultMySQLPrefix = "EA_";
-
-	//private static final boolean defaultUseWESchematicDir = false;
+	private static final boolean defaultUseWESchematicDir = false;
 	
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;
@@ -64,10 +63,10 @@ public class DefaultConfigurationStructure implements FileStructure {
 		this.configAccessor.saveConfig();
 	}
 	
-	/*private void setUseWESchematicDir(boolean useWESchematicDir) {
+	private void setUseWESchematicDir(boolean useWESchematicDir) {
 		this.config.set(WORLD_EDIT_BOOLEAN, useWESchematicDir);
 		this.configAccessor.saveConfig();
-	}*/
+	}
 	
 	@Override
 	public boolean createFileStructure() {
@@ -96,10 +95,10 @@ public class DefaultConfigurationStructure implements FileStructure {
 			setMySQLPrefix(defaultMySQLPrefix);
 			configAltered = true;
 		}
-		/*if(this.config.get(WORLD_EDIT_BOOLEAN) == null) {
+		if(this.config.get(WORLD_EDIT_BOOLEAN) == null) {
 			setUseWESchematicDir(defaultUseWESchematicDir);
 			configAltered = true;
-		}*/
+		}
 		if (configAltered) {
 			this.configAccessor.saveConfig();
 		}
@@ -130,7 +129,7 @@ public class DefaultConfigurationStructure implements FileStructure {
 		return config.getString(MYSQL_PREFIX);
 	}
 	
-	/*public boolean getUseWESchematicDir() {
+	public boolean getUseWESchematicDir() {
 		return config.getBoolean(WORLD_EDIT_BOOLEAN);
-	}*/
+	}
 }

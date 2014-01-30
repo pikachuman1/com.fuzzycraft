@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.commands;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.commands.event.EventAutoStart;
 import me.fuzzystatic.EventAdministrator.commands.event.EventClear;
 import me.fuzzystatic.EventAdministrator.commands.event.EventCycleTime;
@@ -18,12 +17,13 @@ import me.fuzzystatic.EventAdministrator.commands.teleport.Teleport;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class CommandParser implements CommandExecutor {
 	
-	private EventAdministrator plugin;
+	private JavaPlugin plugin;
 	
-	public CommandParser(EventAdministrator plugin) {
+	public CommandParser(JavaPlugin plugin) {
 		this.plugin = plugin;
 	}
 

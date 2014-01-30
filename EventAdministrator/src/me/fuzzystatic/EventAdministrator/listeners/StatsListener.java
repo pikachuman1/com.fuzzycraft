@@ -2,6 +2,9 @@ package me.fuzzystatic.EventAdministrator.listeners;
 
 import java.sql.Connection;
 
+import me.fuzzystatic.EventAdministrator.entities.Entities;
+
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -20,7 +23,8 @@ public class StatsListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-	
+		Player player = event.getEntity();
+		Entities entities = new Entities(player.getWorld());
 	}
 	
 	@EventHandler

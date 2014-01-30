@@ -19,11 +19,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class EventAdministrator extends JavaPlugin {
 			
 	private SQLConnection sc = new SQLConnection(this);	
+	private DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(this);	
+	private DirectoryStructure ds = new DirectoryStructure(this);
 	
+	// Listeners
 	private BossDeathListener bdl = new BossDeathListener(this);
 	private StatsListener sl = new StatsListener(this, sc.getConnection());
 			
 	public void onEnable() {
+		// Check for dependancies
 		PluginManager pm = getServer().getPluginManager();
 		if(!pm.isPluginEnabled("WorldEdit")) ConsoleLogs.sendMessage("EventManager requires the WorldEdit plugin");
 		if(!pm.isPluginEnabled("WorldGuard")) ConsoleLogs.sendMessage("EventManager requires the WorldGuard plugin");
@@ -34,10 +38,10 @@ public class EventAdministrator extends JavaPlugin {
 
 		// Create directory structure
 		getDataFolder().mkdir();
-		DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(this);	
+		ConsoleLogs.sendMessage(getDataFolder().getParent());
 		dcs.createFileStructure();
-		DirectoryStructure.createEventDirectory(getDataFolder());
-		DirectoryStructure.createSchematicDirectory(getDataFolder());
+		ds.createEventDirectory();
+		ds.createSchematicDirectory();
 		
 		// Create database structure
 		sc.createPlayersTable(sc.getConnection());
@@ -47,7 +51,6 @@ public class EventAdministrator extends JavaPlugin {
 		getCommand("ea").setExecutor(new CommandParser(this));
 		
 		// Auto-start any applicable events.
-		DirectoryStructure ds = new DirectoryStructure(this);
 		for (File file : ds.eventFiles()) {
 			String eventName = FilenameUtils.removeExtension(file.getName());
 			EventConfigurationStructure ecs = new EventConfigurationStructure(this, eventName);	

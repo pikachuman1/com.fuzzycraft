@@ -70,7 +70,8 @@ public class SpawnConfigurationStructure implements FileStructure{
 	}
 	
 	public SpawnConfigurationStructure(JavaPlugin plugin, String eventName, String spawnName) {
-		this.configAccessor = new ConfigAccessor(plugin, DirectoryStructure.EVENT_DIR + eventName + ".yml");
+		DirectoryStructure ds = new DirectoryStructure(plugin);
+		this.configAccessor = new ConfigAccessor(plugin, ds.getEventDirPath() + eventName + ".yml");
 		this.config = configAccessor.getConfig();
 		this.spawnPrefix = SPAWNS + "." + spawnName + ".";
 		this.locationYML = spawnPrefix + "location";
