@@ -7,53 +7,58 @@ import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStru
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.listeners.BossDeathListener;
+import me.fuzzystatic.EventAdministrator.listeners.StatsListener;
 import me.fuzzystatic.EventAdministrator.schedules.StartEvent;
 import me.fuzzystatic.EventAdministrator.sql.SQLConnection;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EventAdministrator extends JavaPlugin {
-		
+			
+	private SQLConnection sc = new SQLConnection(this);	
+	
 	private BossDeathListener bdl = new BossDeathListener(this);
-	
-	public FileConfiguration config;
-	
-	private EventAdministrator plugin = this;
-		
+	private StatsListener sl = new StatsListener(this, sc.getConnection());
+			
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
-		if(!pm.isPluginEnabled("WorldEdit")) {
-			ConsoleLogs.sendMessage("EventManager requires the WorldEdit plugin");
-		}
-		pm.registerEvents(this.bdl, this);
+		if(!pm.isPluginEnabled("WorldEdit")) ConsoleLogs.sendMessage("EventManager requires the WorldEdit plugin");
+		if(!pm.isPluginEnabled("WorldGuard")) ConsoleLogs.sendMessage("EventManager requires the WorldGuard plugin");
 		
+		// Register listeners
+		pm.registerEvents(this.bdl, this);
+		pm.registerEvents(this.sl, this);
+
 		// Create directory structure
 		getDataFolder().mkdir();
-		DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
+		DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(this);	
 		dcs.createFileStructure();
 		DirectoryStructure.createEventDirectory(getDataFolder());
 		DirectoryStructure.createSchematicDirectory(getDataFolder());
 		
-		// Connect to database
-		SQLConnection sc = new SQLConnection(plugin);
-		sc.connect();
-		
+		// Create database structure
+		sc.createPlayersTable(sc.getConnection());
+		sc.createStatsTable(sc.getConnection());
+
 		// Initialize commands
-		getCommand("ea").setExecutor(new CommandParser(plugin));
+		getCommand("ea").setExecutor(new CommandParser(this));
 		
 		// Auto-start any applicable events.
-		DirectoryStructure ds = new DirectoryStructure(plugin);
+		DirectoryStructure ds = new DirectoryStructure(this);
 		for (File file : ds.eventFiles()) {
 			String eventName = FilenameUtils.removeExtension(file.getName());
-			EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
+			EventConfigurationStructure ecs = new EventConfigurationStructure(this, eventName);	
 			if(ecs.getAutoStart()) {
-				StartEvent startEvent = new StartEvent(plugin, eventName);
+				StartEvent startEvent = new StartEvent(this, eventName);
 				startEvent.start();
 			}
 		}
+	}
+	
+	public void onDisable() {
+		sc.disconnect(sc.getConnection());
 	}
 }

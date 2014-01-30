@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.listeners;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.entities.BossEventMap;
 import me.fuzzystatic.EventAdministrator.schedules.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.schedules.StopEvent;
@@ -8,12 +7,13 @@ import me.fuzzystatic.EventAdministrator.schedules.StopEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BossDeathListener implements Listener {
 
-	public EventAdministrator plugin;
+	private JavaPlugin plugin;
     
-	public BossDeathListener(EventAdministrator plugin) {
+	public BossDeathListener(JavaPlugin plugin) {
 		this.plugin = plugin;
 	}
 		
