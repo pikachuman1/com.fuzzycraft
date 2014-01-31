@@ -1,6 +1,7 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

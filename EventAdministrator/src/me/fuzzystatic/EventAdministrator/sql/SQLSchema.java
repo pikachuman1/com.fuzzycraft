@@ -14,7 +14,15 @@ public class SQLSchema {
 	public static String TABLE_PVE_STATS_TOTAL = "pve_stats_total";
 	public static String TABLE_PVP_STATS_TOTAL = "pvp_stats_total";
 	
-	public static String playersTable(String prefix) {
+	private final Connection connection;
+	private final String prefix;
+	
+	public SQLSchema(Connection connection, String prefix) {
+		this.connection = connection;
+		this.prefix = prefix;
+	}
+	
+	public String playersTable() {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PLAYERS + "`"
 				+ "("
 				+ "`id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
@@ -24,10 +32,10 @@ public class SQLSchema {
 				+ ")";
 	}
 	
-	public static boolean createPlayersTable(Connection connection, String prefix) {
+	public boolean createPlayersTable() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(playersTable(prefix));
+			statement.execute(playersTable());
 			return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create players table.");
@@ -36,7 +44,7 @@ public class SQLSchema {
 		return false;
 	}
 	
-	public static String totalPveStatsTable(String prefix) {
+	public String totalPveStatsTable() {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS_TOTAL + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
@@ -49,10 +57,10 @@ public class SQLSchema {
 				+ ")";
 	}
 
-	public static boolean createTotalPveStatsTable(Connection connection, String prefix) {
+	public boolean createTotalPveStatsTable() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(totalPveStatsTable(prefix));
+			statement.execute(totalPveStatsTable());
 			return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");
@@ -61,7 +69,7 @@ public class SQLSchema {
 		return false;
 	}
 	
-	public static String totalPvpStatsTable(String prefix) {
+	public String totalPvpStatsTable() {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS_TOTAL + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
@@ -73,10 +81,10 @@ public class SQLSchema {
 				+ ")";
 	}
 
-	public static boolean createTotalPvpStatsTable(Connection connection, String prefix) {
+	public boolean createTotalPvpStatsTable() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(totalPvpStatsTable(prefix));
+			statement.execute(totalPvpStatsTable());
 			return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");
@@ -85,7 +93,7 @@ public class SQLSchema {
 		return false;
 	}
 	
-	public static String eventPveStatsTable(String prefix, String eventName) {
+	public String eventPveStatsTable(String eventName) {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + TABLE_PVE_STATS + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
@@ -98,10 +106,10 @@ public class SQLSchema {
 				+ ")";
 	}
 
-	public static boolean createEventPveStatsTable(Connection connection, String prefix, String eventName) {
+	public boolean createEventPveStatsTable(String eventName) {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(eventPveStatsTable(prefix, eventName));
+			statement.execute(eventPveStatsTable(eventName));
 			return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");
@@ -110,7 +118,7 @@ public class SQLSchema {
 		return false;
 	}
 	
-	public static String eventPvpStatsTable(String prefix, String eventName) {
+	public String eventPvpStatsTable(String eventName) {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + TABLE_PVP_STATS + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
@@ -122,10 +130,10 @@ public class SQLSchema {
 				+ ")";
 	}
 
-	public static boolean createEventPvpStatsTable(Connection connection, String prefix, String eventName) {
+	public boolean createEventPvpStatsTable(String eventName) {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(eventPvpStatsTable(prefix, eventName));
+			statement.execute(eventPvpStatsTable(eventName));
 			return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");

@@ -3,7 +3,7 @@ package me.fuzzystatic.EventAdministrator.commands.list;
 import java.io.File;
 
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
-import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 
 import org.bukkit.ChatColor;

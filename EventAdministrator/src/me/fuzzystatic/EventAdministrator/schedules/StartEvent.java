@@ -3,6 +3,7 @@ package me.fuzzystatic.EventAdministrator.schedules;
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.utilities.Regeneration;
 
@@ -40,8 +41,8 @@ public class StartEvent {
 				
 				stopEvent.stopSubschedules(id);
 				stopEvent.clearEntities();
-				SQLSchema.createEventPveStatsTable(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), eventName);
-				SQLSchema.createEventPvpStatsTable(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), eventName);
+				new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPveStatsTable(eventName);
+				new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPvpStatsTable(eventName);
 				if (regeneration.regen()) {
 					spawning.start();
 					worldConditions.start();

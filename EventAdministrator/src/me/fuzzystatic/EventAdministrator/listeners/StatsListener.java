@@ -18,13 +18,13 @@ public class StatsListener implements Listener {
 	private final DefaultConfigurationStructure dcs;
     
 	public StatsListener(JavaPlugin plugin) {
-		this.dcs = new DefaultConfigurationStructure(plugin);	
+		this.dcs = new DefaultConfigurationStructure(plugin);
 	}
 	
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
-		SQLUpdate.playerData(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player.getPlayerListName());
+		new SQLUpdate(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player.getPlayerListName()).setPlayerData();
 	}
 	
 	@EventHandler

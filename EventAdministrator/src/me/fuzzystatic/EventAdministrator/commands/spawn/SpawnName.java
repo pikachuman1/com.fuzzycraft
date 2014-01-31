@@ -1,8 +1,8 @@
 package me.fuzzystatic.EventAdministrator.commands.spawn;
 
 import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
-import me.fuzzystatic.EventAdministrator.entities.CommandSenderSpawnMap;
+import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.maps.CommandSenderSpawnMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

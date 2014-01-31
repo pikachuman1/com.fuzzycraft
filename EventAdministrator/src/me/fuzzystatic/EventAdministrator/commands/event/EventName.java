@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.fuzzystatic.EventAdministrator.commands.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
 public class EventName extends Command {
 		

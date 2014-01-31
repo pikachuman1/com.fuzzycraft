@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.listeners;
 
-import me.fuzzystatic.EventAdministrator.entities.BossEventMap;
-import me.fuzzystatic.EventAdministrator.schedules.SchedulerEventMap;
+import me.fuzzystatic.EventAdministrator.maps.BossEventMap;
+import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.schedules.StopEvent;
 
 import org.bukkit.event.EventHandler;

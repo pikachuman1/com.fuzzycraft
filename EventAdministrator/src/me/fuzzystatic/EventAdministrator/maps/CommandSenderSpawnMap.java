@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.entities;
+package me.fuzzystatic.EventAdministrator.maps;
 
 import java.util.HashMap;
 import java.util.Map;

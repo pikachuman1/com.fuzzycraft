@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
 import me.fuzzystatic.EventAdministrator.commands.Command;
-import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 import me.fuzzystatic.EventAdministrator.schedules.StopEvent;
 
 import org.bukkit.ChatColor;

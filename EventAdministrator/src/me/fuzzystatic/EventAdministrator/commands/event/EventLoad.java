@@ -13,7 +13,7 @@ import com.sk89q.worldguard.bukkit.BukkitUtil;
 
 import me.fuzzystatic.EventAdministrator.commands.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 import me.fuzzystatic.EventAdministrator.utilities.WorldEditSession;
 
 public class EventLoad extends Command {
