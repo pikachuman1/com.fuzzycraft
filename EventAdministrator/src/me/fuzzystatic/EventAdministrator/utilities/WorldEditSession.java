@@ -23,7 +23,6 @@ import com.sk89q.worldedit.schematic.SchematicFormat;
 
 public class WorldEditSession {
 	
-	private final JavaPlugin plugin;
 	private final Player player;
 	private final WorldEditPlugin wep;
 	private final LocalPlayer localPlayer;
@@ -35,7 +34,6 @@ public class WorldEditSession {
 	
 	public WorldEditSession(JavaPlugin plugin, Player player) throws EmptyClipboardException {
 		this.ds = new DirectoryStructure(plugin);
-		this.plugin = plugin;
 		this.player = player;
 		this.wep = (WorldEditPlugin) plugin.getServer().getPluginManager().getPlugin("WorldEdit");
 		this.localPlayer = this.wep.wrapCommandSender(player);
@@ -47,7 +45,6 @@ public class WorldEditSession {
 	
 	public WorldEditSession(JavaPlugin plugin, World world) {
 		this.ds = new DirectoryStructure(plugin);
-		this.plugin = plugin;
 		this.player = null;
 		this.wep = null;
 		this.localPlayer = null;
@@ -58,7 +55,7 @@ public class WorldEditSession {
 	}
 	
 	public void saveSchematic(String eventName) {
-		File file = new File(plugin.getDataFolder() + File.separator + ds.getSchematicDir() + File.separator + eventName + ".schematic");
+		File file = new File(ds.getSchematicDir() + File.separator + eventName + ".schematic");
 		try {
 		    SchematicFormat.MCEDIT.save(clipboard, file);	
 		    this.player.sendMessage(ChatColor.GREEN + "Schematic saved.");
@@ -69,7 +66,7 @@ public class WorldEditSession {
 	}
 	
 	public CuboidClipboard loadSchematic(String eventName) {
-		File file = new File(this.plugin.getDataFolder() + File.separator + ds.getSchematicDir() + File.separator + eventName + ".schematic");
+		File file = new File(ds.getSchematicDir() + File.separator + eventName + ".schematic");
 		try {
 			SchematicFormat.MCEDIT.load(file);	
 		    this.player.sendMessage(ChatColor.GREEN + "Schematic loaded.");

@@ -29,6 +29,7 @@ public class DefaultConfigurationStructure implements FileStructure {
 	private final FileConfiguration config;
 	
 	public DefaultConfigurationStructure(JavaPlugin plugin) {
+		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
 		this.configAccessor = new ConfigAccessor(plugin, "config.yml");
 		this.config = configAccessor.getConfig();
 	}

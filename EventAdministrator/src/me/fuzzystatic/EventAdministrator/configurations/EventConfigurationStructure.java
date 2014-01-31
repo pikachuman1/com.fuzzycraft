@@ -43,6 +43,7 @@ public class EventConfigurationStructure implements FileStructure {
 	private final FileConfiguration config;
 	
 	public EventConfigurationStructure(JavaPlugin plugin, String eventName) {
+		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
 		DirectoryStructure ds = new DirectoryStructure(plugin);
 		this.configAccessor = new ConfigAccessor(plugin, ds.getEventDirPath() + eventName + ".yml");
 		this.config = configAccessor.getConfig();

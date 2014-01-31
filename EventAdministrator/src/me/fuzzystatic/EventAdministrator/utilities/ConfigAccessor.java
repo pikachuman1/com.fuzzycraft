@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
  
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,8 +19,7 @@ public class ConfigAccessor {
     private FileConfiguration fileConfiguration;
  
     public ConfigAccessor(JavaPlugin plugin, String filename) {
-        if (!plugin.isInitialized())
-            throw new IllegalArgumentException("plugin must be initiaized");
+		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
         this.plugin = plugin;
         this.filename = filename;
     }

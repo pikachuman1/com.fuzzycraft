@@ -70,6 +70,7 @@ public class SpawnConfigurationStructure implements FileStructure{
 	}
 	
 	public SpawnConfigurationStructure(JavaPlugin plugin, String eventName, String spawnName) {
+		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
 		DirectoryStructure ds = new DirectoryStructure(plugin);
 		this.configAccessor = new ConfigAccessor(plugin, ds.getEventDirPath() + eventName + ".yml");
 		this.config = configAccessor.getConfig();

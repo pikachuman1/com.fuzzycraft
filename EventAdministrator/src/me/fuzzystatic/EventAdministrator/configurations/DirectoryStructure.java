@@ -8,14 +8,15 @@ public class DirectoryStructure {
 	
 	private JavaPlugin plugin;
 	private final DefaultConfigurationStructure dcs;
+	private final String EVENT_DIR;
 	
 	public DirectoryStructure(JavaPlugin plugin) {
+		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
 		this.plugin = plugin;
 		this.dcs = new DefaultConfigurationStructure(plugin);
+		this.EVENT_DIR = plugin.getDataFolder() + File.separator + "events" + File.separator;
 	}
-	
-	private String EVENT_DIR = plugin.getDataFolder() + File.separator + "events" + File.separator;
-	
+		
 	public String getSchematicDir() {
 		if (this.dcs.getUseWESchematicDir()) {
 			return plugin.getDataFolder().getParent() + File.separator + "WorldEdit" + File.separator + "schematics" + File.separator;

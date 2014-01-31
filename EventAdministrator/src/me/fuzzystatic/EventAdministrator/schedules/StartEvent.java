@@ -1,6 +1,9 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
+import me.fuzzystatic.EventAdministrator.EventAdministrator;
+import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.utilities.Regeneration;
 
 import org.bukkit.Bukkit;
@@ -25,7 +28,9 @@ public class StartEvent {
 			public void run() {
 				SchedulerEventMap sem = new SchedulerEventMap();
 				sem.set(id, eventName);
-								
+										
+				DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
+
 				StopEvent stopEvent = new StopEvent(plugin, sem.get().get(id));
 				Regeneration regeneration = new Regeneration(plugin, sem.get().get(id));
 				Spawning spawning = new Spawning(plugin, id);
@@ -35,7 +40,9 @@ public class StartEvent {
 				
 				stopEvent.stopSubschedules(id);
 				stopEvent.clearEntities();
-				if(regeneration.regen()) {
+				SQLSchema.createEventPveStatsTable(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), eventName);
+				SQLSchema.createEventPvpStatsTable(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), eventName);
+				if (regeneration.regen()) {
 					spawning.start();
 					worldConditions.start();
 					reminder.start();

@@ -1,6 +1,7 @@
 package me.fuzzystatic.EventAdministrator;
 
 import java.io.File;
+import java.sql.Connection;
 
 import me.fuzzystatic.EventAdministrator.commands.CommandParser;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
@@ -10,42 +11,53 @@ import me.fuzzystatic.EventAdministrator.listeners.BossDeathListener;
 import me.fuzzystatic.EventAdministrator.listeners.StatsListener;
 import me.fuzzystatic.EventAdministrator.schedules.StartEvent;
 import me.fuzzystatic.EventAdministrator.sql.SQLConnection;
+import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * 
+ * @author FuzzyStatic
+ *
+ */
 public class EventAdministrator extends JavaPlugin {
-			
-	private SQLConnection sc = new SQLConnection(this);	
-	private DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(this);	
-	private DirectoryStructure ds = new DirectoryStructure(this);
-	
-	// Listeners
-	private BossDeathListener bdl = new BossDeathListener(this);
-	private StatsListener sl = new StatsListener(this, sc.getConnection());
+
+	private static Connection connection;
 			
 	public void onEnable() {
-		// Check for dependancies
+		SQLConnection sc = new SQLConnection(this);
+		DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(this);	
+		DirectoryStructure ds = new DirectoryStructure(this);
+		
+		// Listeners
+		BossDeathListener bdl = new BossDeathListener(this);
+		StatsListener sl = new StatsListener(this, sc.getConnection());
+		
+		// Check for dependencies
 		PluginManager pm = getServer().getPluginManager();
-		if(!pm.isPluginEnabled("WorldEdit")) ConsoleLogs.sendMessage("EventManager requires the WorldEdit plugin");
-		if(!pm.isPluginEnabled("WorldGuard")) ConsoleLogs.sendMessage("EventManager requires the WorldGuard plugin");
+		if(!pm.isPluginEnabled("WorldEdit")) ConsoleLogs.sendMessage(getName() + "EventManager requires the WorldEdit plugin");
+		if(!pm.isPluginEnabled("WorldGuard")) ConsoleLogs.sendMessage(getName() + "EventManager requires the WorldGuard plugin");
 		
 		// Register listeners
-		pm.registerEvents(this.bdl, this);
-		pm.registerEvents(this.sl, this);
+		pm.registerEvents(bdl, this);
+		pm.registerEvents(sl, this);
 
 		// Create directory structure
 		getDataFolder().mkdir();
-		ConsoleLogs.sendMessage(getDataFolder().getParent());
 		dcs.createFileStructure();
 		ds.createEventDirectory();
 		ds.createSchematicDirectory();
 		
+		
+		
 		// Create database structure
-		sc.createPlayersTable(sc.getConnection());
-		sc.createStatsTable(sc.getConnection());
+		connection = sc.getConnection();
+		if (SQLSchema.createPlayersTable(connection, dcs.getMySQLPrefix())) ConsoleLogs.sendMessage(getName() + "Players table created");
+		if (SQLSchema.createTotalPveStatsTable(connection, dcs.getMySQLPrefix())) ConsoleLogs.sendMessage(getName() + "Total PvE stats table created");
+		if (SQLSchema.createTotalPvpStatsTable(connection, dcs.getMySQLPrefix())) ConsoleLogs.sendMessage(getName() + "Total PvP stats table created");
 
 		// Initialize commands
 		getCommand("ea").setExecutor(new CommandParser(this));
@@ -62,6 +74,10 @@ public class EventAdministrator extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		sc.disconnect(sc.getConnection());
+		SQLConnection.disconnect(connection);
+	}
+	
+	public static Connection getConnection() {
+		return connection;
 	}
 }
