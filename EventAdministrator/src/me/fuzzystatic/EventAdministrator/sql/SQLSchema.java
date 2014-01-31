@@ -35,8 +35,7 @@ public class SQLSchema {
 	public boolean createPlayersTable() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(playersTable());
-			return true;
+			if (statement.execute(playersTable())) return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create players table.");
 			e.printStackTrace();
@@ -60,8 +59,7 @@ public class SQLSchema {
 	public boolean createTotalPveStatsTable() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(totalPveStatsTable());
-			return true;
+			if (statement.execute(totalPveStatsTable())) return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");
 			e.printStackTrace();
@@ -84,8 +82,7 @@ public class SQLSchema {
 	public boolean createTotalPvpStatsTable() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(totalPvpStatsTable());
-			return true;
+			if (statement.execute(totalPvpStatsTable())) return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");
 			e.printStackTrace();
@@ -109,8 +106,7 @@ public class SQLSchema {
 	public boolean createEventPveStatsTable(String eventName) {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(eventPveStatsTable(eventName));
-			return true;
+			if (statement.execute(eventPveStatsTable(eventName))) return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");
 			e.printStackTrace();
@@ -133,8 +129,7 @@ public class SQLSchema {
 	public boolean createEventPvpStatsTable(String eventName) {
 		try {
 			Statement statement = connection.createStatement();
-			statement.execute(eventPvpStatsTable(eventName));
-			return true;
+			if (statement.execute(eventPvpStatsTable(eventName))) return true;
 		} catch (SQLException e) {
 			ConsoleLogs.sendMessage("Error: Could not create stats table.");
 			e.printStackTrace();

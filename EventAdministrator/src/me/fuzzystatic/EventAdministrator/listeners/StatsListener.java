@@ -2,7 +2,7 @@ package me.fuzzystatic.EventAdministrator.listeners;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.sql.SQLUpdate;
+import me.fuzzystatic.EventAdministrator.sql.SQLUpdatePlayer;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -24,7 +24,7 @@ public class StatsListener implements Listener {
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
-		new SQLUpdate(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player.getPlayerListName()).setPlayerData();
+		new SQLUpdatePlayer(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player.getPlayerListName()).setPlayerData();
 	}
 	
 	@EventHandler
