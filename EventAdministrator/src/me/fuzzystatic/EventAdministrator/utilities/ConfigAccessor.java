@@ -26,10 +26,11 @@ public class ConfigAccessor {
  
     public void reloadConfig() {
         if (configFile == null) {
-            File dataFolder = plugin.getDataFolder();
+            /*File dataFolder = plugin.getDataFolder();
             if (dataFolder == null)
                 throw new IllegalStateException();
-            configFile = new File(dataFolder, filename);
+            configFile = new File(dataFolder, filename); */
+        	configFile = new File(filename);
         }
         fileConfiguration = YamlConfiguration.loadConfiguration(configFile);
  

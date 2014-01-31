@@ -36,6 +36,6 @@ public class List extends Command {
 	}
 	
 	public String usage() {
-		return super.usage() + " list";
+		return super.usage() + " l{ist}";
 	}
 }

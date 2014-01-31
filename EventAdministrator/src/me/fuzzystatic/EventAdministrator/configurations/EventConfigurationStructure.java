@@ -1,5 +1,6 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,7 +46,7 @@ public class EventConfigurationStructure implements FileStructure {
 	public EventConfigurationStructure(JavaPlugin plugin, String eventName) {
 		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
 		DirectoryStructure ds = new DirectoryStructure(plugin);
-		this.configAccessor = new ConfigAccessor(plugin, ds.getEventDirPath() + eventName + ".yml");
+		this.configAccessor = new ConfigAccessor(plugin, ds.getEventDirPath() + File.separator + eventName + ".yml");
 		this.config = configAccessor.getConfig();
 	}
 	

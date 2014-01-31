@@ -34,7 +34,6 @@ public class EventAdministrator extends JavaPlugin {
 		
 		// Listeners
 		BossDeathListener bdl = new BossDeathListener(this);
-		StatsListener sl = new StatsListener(this);
 		
 		// Check for dependencies
 		PluginManager pm = getServer().getPluginManager();
@@ -43,7 +42,6 @@ public class EventAdministrator extends JavaPlugin {
 		
 		// Register listeners
 		pm.registerEvents(bdl, this);
-		pm.registerEvents(sl, this);
 
 		// Create directory structure
 		getDataFolder().mkdir();
@@ -51,13 +49,17 @@ public class EventAdministrator extends JavaPlugin {
 		ds.createEventDirectory();
 		ds.createSchematicDirectory();
 		
-		// Create database structure
+		// Create database structure and register data listener
 		connection = sc.getConnection();
+		if(connection != null) {
+			if (new SQLSchema(connection, dcs.getMySQLPrefix()).createPlayersTable()) ConsoleLogs.sendMessage(getName() + "Players table created");
+			if (new SQLSchema(connection, dcs.getMySQLPrefix()).createTotalPveStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvE stats table created");
+			if (new SQLSchema(connection, dcs.getMySQLPrefix()).createTotalPvpStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvP stats table created");
 		
-		if (new SQLSchema(connection, dcs.getMySQLPrefix()).createPlayersTable()) ConsoleLogs.sendMessage(getName() + "Players table created");
-		if (new SQLSchema(connection, dcs.getMySQLPrefix()).createTotalPveStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvE stats table created");
-		if (new SQLSchema(connection, dcs.getMySQLPrefix()).createTotalPvpStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvP stats table created");
-
+			StatsListener sl = new StatsListener(this);
+			pm.registerEvents(sl, this);
+		}
+		
 		// Initialize commands
 		getCommand("ea").setExecutor(new CommandParser(this));
 		
@@ -73,7 +75,9 @@ public class EventAdministrator extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		SQLConnection.disconnect(connection);
+		if(connection != null) {
+			SQLConnection.disconnect(connection);
+		}
 	}
 	
 	public static Connection getConnection() {

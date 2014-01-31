@@ -31,9 +31,10 @@ public class ListEvent extends List {
 					String eventName = FilenameUtils.removeExtension(file.getName()).toString();
 					if (file.isFile()) {
 						if(new CommandSenderEventMap().get().containsValue(eventName)) {
-							sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(eventName) + " "  + ChatColor.WHITE + ChatColor.GOLD + "active" + "(" + ChatColor.WHITE + ")");
+							sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(eventName) + " "  + ChatColor.WHITE+ "("  + ChatColor.GOLD + "active" + ChatColor.WHITE + ")");
+						} else {
+							sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(eventName));
 						}
-						sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(eventName));
 					}
 				}
 				return true;

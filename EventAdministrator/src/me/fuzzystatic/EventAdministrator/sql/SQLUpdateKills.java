@@ -9,13 +9,13 @@ import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 public class SQLUpdateKills extends SQLUpdatePlayer{
 	
 	public SQLUpdateKills(Connection connection, String prefix, String player) {
-		super(connection, player, player);
+		super(connection, prefix, player);
 	}
 
-	private String updatePveTotalData() {
+	private String updatePveTotalData(String table) {
 		return "UPDATE "
-				+ prefix + SQLSchema.TABLE_PVE_STATS_TOTAL + " (name, lastlogin) "
-				+ "VALUES ('" + player + "', '" + System.currentTimeMillis()/1000 + "')";
+				+ prefix + table + " (player_id, kills) "
+				+ "VALUES ('" + super.getPlayerID() + "', '" + super.getPlayerID() + "')";
 	}
     
     private String insertTotalData(String table) {
@@ -28,7 +28,7 @@ public class SQLUpdateKills extends SQLUpdatePlayer{
     	try {
 			if(playerExists()) {	
 				if (playerIDExists(table)) {
-					PreparedStatement preparedStatement = this.connection.prepareStatement(insertTotalData(table));
+					PreparedStatement preparedStatement = this.connection.prepareStatement(updatePveTotalData(table));
 					preparedStatement.executeUpdate();
 				}
 			} else {

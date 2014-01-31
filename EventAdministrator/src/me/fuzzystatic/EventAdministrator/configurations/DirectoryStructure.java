@@ -26,7 +26,7 @@ public class DirectoryStructure {
 	}
 	
 	public void createEventDirectory() {
-		new File(plugin.getDataFolder() + File.separator + EVENT_DIR).mkdir();
+		new File(EVENT_DIR).mkdir();
 	}
 	
 	public void createSchematicDirectory() {

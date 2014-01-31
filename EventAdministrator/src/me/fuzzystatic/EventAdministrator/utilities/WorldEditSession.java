@@ -66,10 +66,10 @@ public class WorldEditSession {
 	}
 	
 	public CuboidClipboard loadSchematic(String eventName) {
+		CuboidClipboard clipboard = null;
 		File file = new File(ds.getSchematicDir() + File.separator + eventName + ".schematic");
 		try {
-			SchematicFormat.MCEDIT.load(file);	
-		    this.player.sendMessage(ChatColor.GREEN + "Schematic loaded.");
+			clipboard = SchematicFormat.MCEDIT.load(file);	
 		} catch (IOException | DataException e) {
 			this.player.sendMessage(ChatColor.DARK_RED + "Schematic failed to load.");
 			e.printStackTrace();

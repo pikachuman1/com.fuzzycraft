@@ -41,8 +41,10 @@ public class StartEvent {
 				
 				stopEvent.stopSubschedules(id);
 				stopEvent.clearEntities();
-				new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPveStatsTable(eventName);
-				new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPvpStatsTable(eventName);
+				if (EventAdministrator.getConnection() != null) {
+					new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPveStatsTable(eventName);
+					new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPvpStatsTable(eventName);
+				}
 				if (regeneration.regen()) {
 					spawning.start();
 					worldConditions.start();
