@@ -68,6 +68,7 @@ public class CommandParser implements CommandExecutor {
 				sender.sendMessage(new EventLoad().usage());
 				sender.sendMessage(new EventReminder().usage());
 				sender.sendMessage(new Spawn().usage());
+				sender.sendMessage(new Teleport().usage());
 				sender.sendMessage(new List().usage());
 				return false;
 			}
