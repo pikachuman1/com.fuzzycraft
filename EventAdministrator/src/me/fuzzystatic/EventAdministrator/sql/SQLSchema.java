@@ -8,8 +8,14 @@ import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 public class SQLSchema {
 	
+	public static String TABLE_PLAYERS = "players";
+	public static String TABLE_PVE_STATS = "pve_stats";
+	public static String TABLE_PVP_STATS = "pvp_stats";
+	public static String TABLE_PVE_STATS_TOTAL = "pve_stats_total";
+	public static String TABLE_PVP_STATS_TOTAL = "pvp_stats_total";
+	
 	public static String playersTable(String prefix) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + "players`"
+		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PLAYERS + "`"
 				+ "("
 				+ "`id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`player` VARCHAR(16) DEFAULT NULL UNIQUE,"
@@ -31,7 +37,7 @@ public class SQLSchema {
 	}
 	
 	public static String totalPveStatsTable(String prefix) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + "total_pve_stats`"
+		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS_TOTAL + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`kills` INT(10) DEFAULT NULL,"
@@ -56,7 +62,7 @@ public class SQLSchema {
 	}
 	
 	public static String totalPvpStatsTable(String prefix) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + "total_pve_stats`"
+		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS_TOTAL + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`kills` INT(10) DEFAULT NULL,"
@@ -80,7 +86,7 @@ public class SQLSchema {
 	}
 	
 	public static String eventPveStatsTable(String prefix, String eventName) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + "_pve_stats`"
+		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + TABLE_PVE_STATS + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`kills` INT(10) DEFAULT NULL,"
@@ -105,7 +111,7 @@ public class SQLSchema {
 	}
 	
 	public static String eventPvpStatsTable(String prefix, String eventName) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + "total_pve_stats`"
+		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + TABLE_PVP_STATS + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`kills` INT(10) DEFAULT NULL,"

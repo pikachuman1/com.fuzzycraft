@@ -27,14 +27,14 @@ public class EventAdministrator extends JavaPlugin {
 
 	private static Connection connection;
 			
-	public void onEnable() {
+	public void onEnable() {		
 		SQLConnection sc = new SQLConnection(this);
 		DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(this);	
 		DirectoryStructure ds = new DirectoryStructure(this);
 		
 		// Listeners
 		BossDeathListener bdl = new BossDeathListener(this);
-		StatsListener sl = new StatsListener(this, sc.getConnection());
+		StatsListener sl = new StatsListener(this);
 		
 		// Check for dependencies
 		PluginManager pm = getServer().getPluginManager();
@@ -50,8 +50,6 @@ public class EventAdministrator extends JavaPlugin {
 		dcs.createFileStructure();
 		ds.createEventDirectory();
 		ds.createSchematicDirectory();
-		
-		
 		
 		// Create database structure
 		connection = sc.getConnection();
