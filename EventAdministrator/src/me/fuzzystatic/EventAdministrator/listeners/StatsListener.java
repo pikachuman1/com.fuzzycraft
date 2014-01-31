@@ -2,9 +2,9 @@ package me.fuzzystatic.EventAdministrator.listeners;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.entities.Entities;
-import me.fuzzystatic.EventAdministrator.sql.SQLInsert;
+import me.fuzzystatic.EventAdministrator.sql.SQLUpdate;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,13 +24,20 @@ public class StatsListener implements Listener {
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
-		SQLInsert.insertPlayerData(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player.getPlayerListName());
+		SQLUpdate.playerData(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player.getPlayerListName());
 	}
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
-		Entities entities = new Entities(player.getWorld());
+		Entity killer = event.getEntity().getKiller();
+		if (killer instanceof Player) {
+			// Insert into PvP record
+			
+		} else {
+			// Insert into PvE record
+			
+		}
 	}
 	
 	@EventHandler

@@ -1,6 +1,5 @@
 package me.fuzzystatic.EventAdministrator.commands.list;
 
-import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
@@ -12,10 +11,9 @@ public class ListActiveEvent extends ListEvent {
 
 	@Override
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
-		String eventName = new CommandSenderEventMap().get().get(sender);
-		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
-		ecs.createFileStructure();
 		if (hasPermissionNode(sender)) {
+			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Active events on this server:");
+
 			for (String activeEvent : new CommandSenderEventMap().get().values()) {
 				sender.sendMessage(ChatColor.DARK_AQUA + activeEvent);
 			}
