@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.list;
 
-import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +14,7 @@ public class ListActiveEvent extends ListEvent {
 		if (hasPermissionNode(sender)) {
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Active events on this server:");
 
-			for (String activeEvent : new CommandSenderEventMap().get().values()) {
+			for (String activeEvent : new SchedulerEventMap().getUniqueValues()) {
 				sender.sendMessage(ChatColor.DARK_AQUA + activeEvent);
 			}
 			return true;

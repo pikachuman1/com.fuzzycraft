@@ -3,7 +3,7 @@ package me.fuzzystatic.EventAdministrator.commands.list;
 import java.io.File;
 
 import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
-import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
+import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 
 import org.bukkit.ChatColor;
@@ -30,7 +30,7 @@ public class ListEvent extends List {
 				for (File file : ds.eventFiles()) {
 					String eventName = FilenameUtils.removeExtension(file.getName()).toString();
 					if (file.isFile()) {
-						if(new CommandSenderEventMap().get().containsValue(eventName)) {
+						if(new SchedulerEventMap().getUniqueValues().contains(eventName)) {
 							sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(eventName) + " "  + ChatColor.WHITE+ "("  + ChatColor.GOLD + "active" + ChatColor.WHITE + ")");
 						} else {
 							sender.sendMessage(ChatColor.DARK_AQUA + FilenameUtils.removeExtension(eventName));

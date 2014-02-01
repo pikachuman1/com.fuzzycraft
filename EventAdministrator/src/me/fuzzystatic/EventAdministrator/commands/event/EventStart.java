@@ -18,13 +18,9 @@ public class EventStart extends Command {
 				StartEvent startEvent = new StartEvent(plugin, args[1]);
 				if(startEvent.start()) sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has started.");
 			} else {
-				if(isPlayer(sender)) {
-					String eventName = new CommandSenderEventMap().get().get(sender);
-					StartEvent startEvent = new StartEvent(plugin, eventName);
-					if(startEvent.start()) sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has started.");
-				} else {
-					sendMessage(sender, ChatColor.LIGHT_PURPLE + "TO START: " + usage());
-				}
+				String eventName = new CommandSenderEventMap().get().get(sender);
+				StartEvent startEvent = new StartEvent(plugin, eventName);
+				if(startEvent.start()) sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has started.");
 			}
 			return true;
 		}
