@@ -52,9 +52,10 @@ public class EventAdministrator extends JavaPlugin {
 		// Create database structure and register data listener
 		connection = sc.getConnection();
 		if(connection != null) {
-			if (new SQLSchema(connection, dcs.getMySQLPrefix()).createPlayersTable()) ConsoleLogs.sendMessage(getName() + "Players table created");
-			if (new SQLSchema(connection, dcs.getMySQLPrefix()).createTotalPveStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvE stats table created");
-			if (new SQLSchema(connection, dcs.getMySQLPrefix()).createTotalPvpStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvP stats table created");
+			SQLSchema ss = new SQLSchema(connection, dcs.getMySQLPrefix());
+			if (ss.createPlayersTable()) ConsoleLogs.sendMessage(getName() + "Players table created");
+			if (ss.createTotalPveStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvE stats table created");
+			if (ss.createTotalPvpStatsTable()) ConsoleLogs.sendMessage(getName() + "Total PvP stats table created");
 		
 			StatsListener sl = new StatsListener(this);
 			pm.registerEvents(sl, this);

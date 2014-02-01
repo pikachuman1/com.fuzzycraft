@@ -2,7 +2,9 @@ package me.fuzzystatic.EventAdministrator.listeners;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdatePlayer;
+import me.fuzzystatic.EventAdministrator.sql.SQLUpdateTotal;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -32,11 +34,27 @@ public class StatsListener implements Listener {
 		Player player = event.getEntity();
 		Entity killer = event.getEntity().getKiller();
 		if (killer instanceof Player) {
-			// Insert into PvP record
+			String table = SQLSchema.TABLE_PVP_STATS_TOTAL;
 			
+			// Add PvP kill for killer
+	    	new SQLUpdateTotal(EventAdministrator.getConnection(), 
+	    			dcs.getMySQLPrefix(), 
+	    			((Player) killer).getPlayerListName(), 
+	    			table).setTotalData(SQLSchema.COLUMN_KILLS);
+	    	
+	    	// Add PvP death for player
+	    	new SQLUpdateTotal(EventAdministrator.getConnection(), 
+	    			dcs.getMySQLPrefix(), 
+	    			player.getPlayerListName(), 
+	    			table).setTotalData(SQLSchema.COLUMN_DEATHS);
 		} else {
-			// Insert into PvE record
+			String table = SQLSchema.TABLE_PVE_STATS_TOTAL;
 			
+			// Add PvE death for player
+	    	new SQLUpdateTotal(EventAdministrator.getConnection(), 
+	    			dcs.getMySQLPrefix(), 
+	    			player.getPlayerListName(), 
+	    			table).setTotalData(SQLSchema.COLUMN_DEATHS);
 		}
 	}
 	

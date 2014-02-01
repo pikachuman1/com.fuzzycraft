@@ -1,5 +1,7 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
+import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,7 +32,7 @@ public class DefaultConfigurationStructure implements FileStructure {
 	
 	public DefaultConfigurationStructure(JavaPlugin plugin) {
 		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
-		this.configAccessor = new ConfigAccessor(plugin, "config.yml");
+		this.configAccessor = new ConfigAccessor(plugin, plugin.getDataFolder() + File.separator + "config.yml");
 		this.config = configAccessor.getConfig();
 	}
 	

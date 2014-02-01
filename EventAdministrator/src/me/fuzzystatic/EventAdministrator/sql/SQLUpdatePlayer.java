@@ -12,9 +12,9 @@ public class SQLUpdatePlayer {
 	protected final Connection connection;
 	protected final String prefix;
 	protected final String player;
+	private String table = SQLSchema.TABLE_PLAYERS;
 	
 	private int playerID;
-
 		
 	public SQLUpdatePlayer(Connection connection, String prefix, String player) {
 		this.connection = connection;
@@ -22,14 +22,18 @@ public class SQLUpdatePlayer {
 		this.player = player;
 	}
 	
-	public int getPlayerID() {
+	protected String checkQuery() {
+		 return"SELECT id FROM "+ this.prefix + this.table
+				 + " WHERE player = '" + this.player + "'";
+	}
+	
+	protected int getPlayerID() {
 		return playerID;
 	}
 	
     public boolean playerExists() {
-    	String checkQuery = "SELECT id, name FROM "+ this.prefix + SQLSchema.TABLE_PLAYERS + " WHERE name '" + this.player + "'";
     	try {
-    		PreparedStatement preparedStatement = this.connection.prepareStatement(checkQuery);
+    		PreparedStatement preparedStatement = this.connection.prepareStatement(checkQuery());
     		ResultSet resultSet = preparedStatement.executeQuery();
         	if(resultSet.next()) {
         		this.playerID = resultSet.getInt("id");
@@ -43,7 +47,8 @@ public class SQLUpdatePlayer {
     }
     
     public boolean playerIDExists(String table) {
-    	String checkQuery = "SELECT count(*) FROM "+ this.prefix + table + " WHERE player_id '" + getPlayerID() + "'";
+    	String checkQuery = "SELECT player_id FROM "+ this.prefix + table 
+    			+ " WHERE player_id = " + getPlayerID() + "";
     	try {
     		PreparedStatement preparedStatement = this.connection.prepareStatement(checkQuery);
     		ResultSet resultSet = preparedStatement.executeQuery();
@@ -57,15 +62,15 @@ public class SQLUpdatePlayer {
 		return false;    	
     }
 
-	private String updatePlayerData() {
-		return "UPDATE " + prefix + SQLSchema.TABLE_PLAYERS
-				+ "SET lastlogin='" + System.currentTimeMillis()/1000 + "'"
-				+ "WHERE name='" + player + "'";
+    protected String updatePlayerData() {
+		return "UPDATE " + this.prefix + this.table
+				+ " SET lastlogin = " + System.currentTimeMillis()/1000
+				+ " WHERE player = '" + player + "'";
 	}
 	
-	private String insertPlayerData() {
-		return "INSERT INTO " + this.prefix + SQLSchema.TABLE_PLAYERS + "(name, lastlogin)"
-				+ "VALUES ('" + this.player + "', '" + System.currentTimeMillis()/1000 + "')";
+	protected String insertPlayerData() {
+		return "INSERT INTO " + this.prefix + this.table + "(player, lastlogin)"
+				+ " VALUES ('" + this.player + "', " + System.currentTimeMillis()/1000 + ")";
 	}
     
     public boolean setPlayerData() {

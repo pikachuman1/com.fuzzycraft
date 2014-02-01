@@ -14,6 +14,12 @@ public class SQLSchema {
 	public static String TABLE_PVE_STATS_TOTAL = "pve_stats_total";
 	public static String TABLE_PVP_STATS_TOTAL = "pvp_stats_total";
 	
+	public static String COLUMN_KILLS = "kills";
+	public static String COLUMN_BOSSKILLS = "bosskills";
+	public static String COLUMN_DEATHS = "deaths";
+	public static String COLUMN_STREAK = "streak";
+	public static String COLUMN_MAXSTREAK = "maxstreak";
+	
 	private final Connection connection;
 	private final String prefix;
 	
@@ -47,11 +53,11 @@ public class SQLSchema {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS_TOTAL + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`kills` INT(10) DEFAULT NULL,"
-				+ "`bosskills` INT(10) DEFAULT NULL,"
-				+ "`deaths` INT(10) DEFAULT NULL,"
-				+ "`streak` INT(10) DEFAULT NULL,"
-				+ "`maxStreak` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_BOSSKILLS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
@@ -71,10 +77,10 @@ public class SQLSchema {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS_TOTAL + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`kills` INT(10) DEFAULT NULL,"
-				+ "`deaths` INT(10) DEFAULT NULL,"
-				+ "`streak` INT(10) DEFAULT NULL,"
-				+ "`maxStreak` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
@@ -91,14 +97,14 @@ public class SQLSchema {
 	}
 	
 	public String eventPveStatsTable(String eventName) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + TABLE_PVE_STATS + "`"
+		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS + "_" + eventName + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`kills` INT(10) DEFAULT NULL,"
-				+ "`bosskills` INT(10) DEFAULT NULL,"
-				+ "`deaths` INT(10) DEFAULT NULL,"
-				+ "`streak` INT(10) DEFAULT NULL,"
-				+ "`maxStreak` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_BOSSKILLS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
@@ -108,20 +114,20 @@ public class SQLSchema {
 			Statement statement = connection.createStatement();
 			if (statement.execute(eventPveStatsTable(eventName))) return true;
 		} catch (SQLException e) {
-			ConsoleLogs.sendMessage("Error: Could not create stats table.");
+			ConsoleLogs.sendMessage("Error: Could not create stats table for event " + eventName + ".");
 			e.printStackTrace();
 		}
 		return false;
 	}
 	
 	public String eventPvpStatsTable(String eventName) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + eventName + TABLE_PVP_STATS + "`"
+		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS + "_" + eventName + "`"
 				+ "("
 				+ "`player_id` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`kills` INT(10) DEFAULT NULL,"
-				+ "`deaths` INT(10) DEFAULT NULL,"
-				+ "`streak` INT(10) DEFAULT NULL,"
-				+ "`maxStreak` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
@@ -131,7 +137,7 @@ public class SQLSchema {
 			Statement statement = connection.createStatement();
 			if (statement.execute(eventPvpStatsTable(eventName))) return true;
 		} catch (SQLException e) {
-			ConsoleLogs.sendMessage("Error: Could not create stats table.");
+			ConsoleLogs.sendMessage("Error: Could not create stats table for event " + eventName + ".");
 			e.printStackTrace();
 		}
 		return false;

@@ -31,7 +31,8 @@ public class StartEvent {
 				sem.set(id, eventName);
 										
 				DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
-
+				SQLSchema ss = new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()); 
+				
 				StopEvent stopEvent = new StopEvent(plugin, sem.get().get(id));
 				Regeneration regeneration = new Regeneration(plugin, sem.get().get(id));
 				Spawning spawning = new Spawning(plugin, id);
@@ -42,8 +43,8 @@ public class StartEvent {
 				stopEvent.stopSubschedules(id);
 				stopEvent.clearEntities();
 				if (EventAdministrator.getConnection() != null) {
-					new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPveStatsTable(eventName);
-					new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()).createEventPvpStatsTable(eventName);
+					ss.createEventPveStatsTable(eventName);
+					ss.createEventPvpStatsTable(eventName);
 				}
 				if (regeneration.regen()) {
 					spawning.start();
