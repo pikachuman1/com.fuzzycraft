@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventAdministrator.sql;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -33,8 +32,7 @@ public class SQLUpdatePlayer {
 	
     public boolean playerExists() {
     	try {
-    		PreparedStatement preparedStatement = this.connection.prepareStatement(checkQuery());
-    		ResultSet resultSet = preparedStatement.executeQuery();
+    		ResultSet resultSet = this.connection.prepareStatement(checkQuery()).executeQuery();
         	if(resultSet.next()) {
         		this.playerID = resultSet.getInt("id");
         		return true;
@@ -47,11 +45,10 @@ public class SQLUpdatePlayer {
     }
     
     public boolean playerIDExists(String table) {
-    	String checkQuery = "SELECT player_id FROM "+ this.prefix + table 
+    	String checkQuery = "SELECT " + SQLSchema.COLUMN_PLAYER_ID + " FROM "+ this.prefix + table 
     			+ " WHERE player_id = " + getPlayerID() + "";
     	try {
-    		PreparedStatement preparedStatement = this.connection.prepareStatement(checkQuery);
-    		ResultSet resultSet = preparedStatement.executeQuery();
+    		ResultSet resultSet = this.connection.prepareStatement(checkQuery).executeQuery();
         	if(resultSet.next()) {
         		return true;
         	}
@@ -76,11 +73,9 @@ public class SQLUpdatePlayer {
     public boolean setPlayerData() {
 		try {
 			if(playerExists()) {	
-				PreparedStatement preparedStatement = this.connection.prepareStatement(updatePlayerData());
-				preparedStatement.executeUpdate();
+				this.connection.prepareStatement(updatePlayerData()).executeUpdate();
 			} else {
-				PreparedStatement preparedStatement = this.connection.prepareStatement(insertPlayerData());
-				preparedStatement.executeUpdate();
+				this.connection.prepareStatement(insertPlayerData()).executeUpdate();
 			}
 			return true;
 		} catch (SQLException e) {

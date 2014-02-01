@@ -10,22 +10,22 @@ import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 
 public class DefaultConfigurationStructure implements FileStructure {
 
-	public static final String MYSQL = "mysql";
-	public static final String MYSQL_HOST = MYSQL + "." + "host";
-	public static final String MYSQL_PORT = MYSQL + "." + "port";
-	public static final String MYSQL_USER = MYSQL + "." + "user";
-	public static final String MYSQL_PASSWORD = MYSQL + "." + "password";
-	public static final String MYSQL_DATABASE = MYSQL + "." + "database";
-	public static final String MYSQL_PREFIX = MYSQL + "." + "prefix";
-	public static final String WORLD_EDIT_BOOLEAN = "useWESchematicDir";
+	public static final String MYSQL 						= "mysql";
+	public static final String MYSQL_HOST 					= MYSQL + "." + "host";
+	public static final String MYSQL_PORT 					= MYSQL + "." + "port";
+	public static final String MYSQL_USER 					= MYSQL + "." + "user";
+	public static final String MYSQL_PASSWORD 				= MYSQL + "." + "password";
+	public static final String MYSQL_DATABASE 				= MYSQL + "." + "database";
+	public static final String MYSQL_PREFIX 				= MYSQL + "." + "prefix";
+	public static final String WORLD_EDIT_BOOLEAN 			= "useWESchematicDir";
 	
-	private static final String defaultMySQLHost = "localhost";
-	private static final int defaultMySQLPort = 3306;
-	private static final String defaultMySQLUser = "user";
-	private static final String defaultMySQLPassword = "pass";
-	private static final String defaultMySQLDatabase = "db";
-	private static final String defaultMySQLPrefix = "EA_";
-	private static final boolean defaultUseWESchematicDir = false;
+	private static final String defaultMySQLHost 			= "localhost";
+	private static final int defaultMySQLPort 				= 3306;
+	private static final String defaultMySQLUser 			= "user";
+	private static final String defaultMySQLPassword 		= "pass";
+	private static final String defaultMySQLDatabase 		= "db";
+	private static final String defaultMySQLPrefix 			= "EA_";
+	private static final boolean defaultUseWESchematicDir 	= false;
 	
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;

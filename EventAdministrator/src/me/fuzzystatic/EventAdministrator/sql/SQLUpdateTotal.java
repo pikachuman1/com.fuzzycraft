@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventAdministrator.sql;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
@@ -18,11 +17,11 @@ public class SQLUpdateTotal extends SQLUpdatePlayer{
 	private String updateTotalData(String column) {
 		return "UPDATE " + prefix + this.table
 				+ " SET " + column + "=" + column + " + 1"
-				+ " WHERE player_id = " + super.getPlayerID() + "";
+				+ " WHERE " + SQLSchema.COLUMN_PLAYER_ID + " = " + super.getPlayerID() + "";
 	}
     
     private String insertPlayerData(String column) {
-		return "INSERT INTO " + prefix + this.table + "(player_id, " + column + ")"
+		return "INSERT INTO " + prefix + this.table + "(" + SQLSchema.COLUMN_PLAYER_ID + ", " + column + ")"
 				+ " VALUES (" + super.getPlayerID() + ", 1)";
 	}
     
@@ -30,17 +29,13 @@ public class SQLUpdateTotal extends SQLUpdatePlayer{
     	try {
 			if(super.playerExists()) {	
 				if (super.playerIDExists(this.table)) {
-					PreparedStatement preparedStatement = this.connection.prepareStatement(updateTotalData(column));
-					preparedStatement.executeUpdate();
+					this.connection.prepareStatement(updateTotalData(column)).executeUpdate();
 				} else {
-					PreparedStatement preparedStatement = this.connection.prepareStatement(insertPlayerData(column));
-					preparedStatement.executeUpdate();
+					this.connection.prepareStatement(insertPlayerData(column)).executeUpdate();
 				}
 			} else {
-				PreparedStatement preparedStatement1 = this.connection.prepareStatement(super.insertPlayerData());
-				preparedStatement1.executeUpdate();
-				PreparedStatement preparedStatement2 = this.connection.prepareStatement(insertPlayerData(column));
-				preparedStatement2.executeUpdate();
+				this.connection.prepareStatement(super.insertPlayerData()).executeUpdate();
+				this.connection.prepareStatement(insertPlayerData(column)).executeUpdate();
 			}
 			return true;
 		} catch (SQLException e) {

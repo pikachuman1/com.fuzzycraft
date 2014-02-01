@@ -14,16 +14,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SpawnConfigurationStructure implements FileStructure{
 	
-	public static final String SPAWNS = "spawns"; 
+	public static final String SPAWNS 				= "spawns"; 
+		
+	private static final String defaultMob 			= "zombie";
+	private static final int defaultAmount 			= 1;
+	private static final long defaultStart 			= 0;
+	private static final long defaultCycle 			= -1;
+	private static final boolean defaultIsBoss 		= false;
 	
 	private final String locationYML, mobYML, amountYML, startTimeYML, cycleTimeYML, isBossYML;
-	
-	private static final String defaultMob = "zombie";
-	private static final int defaultAmount = 1;
-	private static final long defaultStart = 0;
-	private static final long defaultCycle = -1;
-	private static final boolean defaultIsBoss = false;
-	
 	private final ConfigAccessor configAccessor;
 	private final FileConfiguration config;
 	private final String spawnPrefix;
