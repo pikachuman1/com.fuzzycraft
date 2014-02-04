@@ -16,17 +16,11 @@ public class Command {
 	}
 	
 	public boolean isPlayer(CommandSender sender) {
-		if (sender instanceof Player) {
-			return true;	
-		}
-		return false;	
+		return sender instanceof Player;
 	}
 	
 	public boolean isConsoleCommandSender(CommandSender sender) {
-		if (sender instanceof ConsoleCommandSender) {
-			return true;	
-		}
-		return false;	
+		return sender instanceof ConsoleCommandSender;
 	}
 	
 	public Permission permission() {

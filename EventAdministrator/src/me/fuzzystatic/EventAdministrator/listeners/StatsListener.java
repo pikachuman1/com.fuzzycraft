@@ -32,30 +32,38 @@ public class StatsListener implements Listener {
 		if (event.getEntity() instanceof Player) {
 			if (event.getEntity().getKiller() instanceof Player) {
 				// Add PvP kill for killer
-				new SQLUpdateTotal(EventAdministrator.getConnection(), 
+				SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
 						dcs.getMySQLPrefix(), 
 						event.getEntity().getKiller().getPlayerListName(), 
-						SQLSchema.TABLE_PVP_STATS_TOTAL).setTotalData(SQLSchema.COLUMN_KILLS);
-
+						SQLSchema.TABLE_PVP_STATS_TOTAL);
+				killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
+				killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true);
+				
 				// Add PvP death for player
-				new SQLUpdateTotal(EventAdministrator.getConnection(), 
+				SQLUpdateTotal victumUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
 						dcs.getMySQLPrefix(), 
 						((Player) event.getEntity()).getPlayerListName(), 
-						SQLSchema.TABLE_PVP_STATS_TOTAL).setTotalData(SQLSchema.COLUMN_DEATHS);
+						SQLSchema.TABLE_PVP_STATS_TOTAL);
+				victumUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
+				victumUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
+
 			} else {
-				Player player = (Player) event.getEntity();
 				// Add PvE death for player
-				new SQLUpdateTotal(EventAdministrator.getConnection(), 
+				SQLUpdateTotal victumUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
 						dcs.getMySQLPrefix(), 
-						player.getPlayerListName(), 
-						SQLSchema.TABLE_PVE_STATS_TOTAL).setTotalData(SQLSchema.COLUMN_DEATHS);
+						((Player) event.getEntity()).getPlayerListName(), 
+						SQLSchema.TABLE_PVE_STATS_TOTAL);
+				victumUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
+				victumUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
 			}
 		} else if (event.getEntity().getKiller() instanceof Player) {
 			// Add PvE kill for player
-			new SQLUpdateTotal(EventAdministrator.getConnection(), 
+			SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
 					dcs.getMySQLPrefix(), 
 					event.getEntity().getKiller().getPlayerListName(), 
-					SQLSchema.TABLE_PVE_STATS_TOTAL).setTotalData(SQLSchema.COLUMN_KILLS);
+					SQLSchema.TABLE_PVE_STATS_TOTAL);
+			killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
+			killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true);
 		}
 	}
 }

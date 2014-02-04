@@ -14,28 +14,31 @@ public class SQLUpdateTotal extends SQLUpdatePlayer{
 		this.table = table;
 	}
 
-	private String updateTotalData(String column) {
+	private String updateTotalData(String column, String amount) {
 		return "UPDATE " + prefix + this.table
-				+ " SET " + column + "=" + column + " + 1"
+				+ " SET " + column + "=" + amount
 				+ " WHERE " + SQLSchema.COLUMN_PLAYER_ID + " = " + super.getPlayerID() + "";
 	}
     
-    private String insertPlayerData(String column) {
+    private String insertPlayerData(String column, String amount) {
 		return "INSERT INTO " + prefix + this.table + "(" + SQLSchema.COLUMN_PLAYER_ID + ", " + column + ")"
-				+ " VALUES (" + super.getPlayerID() + ", 1)";
+				+ " VALUES (" + super.getPlayerID() + ", " + amount + ")";
 	}
     
-    public boolean setTotalData(String column) {
+    public boolean setTotalData(String column, String amount, boolean update) {
+    	if (update) {
+    		amount = column + "+" + amount;
+    	}
     	try {
 			if(super.playerExists()) {	
 				if (super.playerIDExists(this.table)) {
-					this.connection.prepareStatement(updateTotalData(column)).executeUpdate();
+					this.connection.prepareStatement(updateTotalData(column, amount)).executeUpdate();
 				} else {
-					this.connection.prepareStatement(insertPlayerData(column)).executeUpdate();
+					this.connection.prepareStatement(insertPlayerData(column, amount)).executeUpdate();
 				}
 			} else {
 				this.connection.prepareStatement(super.insertPlayerData()).executeUpdate();
-				this.connection.prepareStatement(insertPlayerData(column)).executeUpdate();
+				this.connection.prepareStatement(insertPlayerData(column, amount)).executeUpdate();
 			}
 			return true;
 		} catch (SQLException e) {
