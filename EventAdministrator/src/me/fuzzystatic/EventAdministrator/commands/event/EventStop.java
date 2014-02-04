@@ -16,12 +16,14 @@ public class EventStop extends Command {
 		if (hasPermissionNode(sender)) {
 			if(args.length > 1) {
 				StopEvent stopEvent = new StopEvent(plugin, args[1]);
-				if(stopEvent.stop()) sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has stopped");
+				stopEvent.stop();
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has stopped");
 			} else {
 				if(isPlayer(sender)) {
 					String eventName = new CommandSenderEventMap().get().get(sender);
 					StopEvent stopEvent = new StopEvent(plugin, eventName);
-					if(stopEvent.stop()) sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has stopped");
+					stopEvent.stop();
+					sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has stopped");
 				} else {
 					sendMessage(sender, ChatColor.LIGHT_PURPLE + "TO START: " + usage());
 				}

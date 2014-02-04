@@ -79,6 +79,8 @@ public class EventAdministrator extends JavaPlugin {
 		if(connection != null) {
 			SQLConnection.disconnect(connection);
 		}
+		
+		getServer().getScheduler().cancelTasks(this);
 	}
 	
 	public static Connection getConnection() {

@@ -17,16 +17,15 @@ public class StopEvent {
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}
 	
-	public boolean stop() {
+	public void stop() {
 		SchedulerEventMap sem = new SchedulerEventMap();
 		for (Integer integer : sem.getInvert().get(eventName)) {
 			Bukkit.getScheduler().cancelTask(integer); 
 			sem.get().remove(integer);
 		}
-		return true;
 	}
 	
-	public boolean stopSubschedules(int id) {
+	public void stopSubschedules(int id) {
 		SchedulerEventMap sem = new SchedulerEventMap();
 		for (Integer integer : sem.getInvert().get(eventName)) {
 			if (integer != id) {
@@ -34,7 +33,6 @@ public class StopEvent {
 				sem.get().remove(integer);
 			}
 		}
-		return true;
 	}
 	
 	public boolean clearEntities() {
