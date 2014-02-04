@@ -37,7 +37,7 @@ public class StatsListener implements Listener {
 						event.getEntity().getKiller().getPlayerListName(), 
 						SQLSchema.TABLE_PVP_STATS_TOTAL);
 				killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
-				killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true);
+				if(killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true)) killerUpdate.setMaxStreakTotalData();
 				
 				// Add PvP death for player
 				SQLUpdateTotal victumUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
@@ -63,7 +63,7 @@ public class StatsListener implements Listener {
 					event.getEntity().getKiller().getPlayerListName(), 
 					SQLSchema.TABLE_PVE_STATS_TOTAL);
 			killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
-			killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true);
+			if(killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true)) killerUpdate.setMaxStreakTotalData();
 		}
 	}
 }
