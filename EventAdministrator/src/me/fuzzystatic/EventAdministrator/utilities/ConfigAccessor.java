@@ -25,13 +25,7 @@ public class ConfigAccessor {
     }
  
     public void reloadConfig() {
-        if (configFile == null) {
-            /*File dataFolder = plugin.getDataFolder();
-            if (dataFolder == null)
-                throw new IllegalStateException();
-            configFile = new File(dataFolder, filename); */
-        	configFile = new File(filename);
-        }
+        if (configFile == null) configFile = new File(filename);
         fileConfiguration = YamlConfiguration.loadConfiguration(configFile);
  
         // Look for defaults in the jar
@@ -43,16 +37,12 @@ public class ConfigAccessor {
     }
  
     public FileConfiguration getConfig() {
-        if (fileConfiguration == null) {
-            this.reloadConfig();
-        }
+        if (fileConfiguration == null) this.reloadConfig();
         return fileConfiguration;
     }
  
     public void saveConfig() {
-        if (fileConfiguration == null || configFile == null) {
-            return;
-        } else {
+    	if (fileConfiguration != null || configFile != null) {
             try {
                 getConfig().save(configFile);
             } catch (IOException ex) {
@@ -62,9 +52,7 @@ public class ConfigAccessor {
     }
  
     public void saveDefaultConfig() {
-        if (!configFile.exists()) {       
-            this.plugin.saveResource(filename, false);
-        }
+        if (!configFile.exists()) this.plugin.saveResource(filename, false);
     }
  
 }

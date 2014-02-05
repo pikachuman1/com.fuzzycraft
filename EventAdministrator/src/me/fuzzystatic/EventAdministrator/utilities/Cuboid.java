@@ -16,9 +16,7 @@ public class Cuboid {
 	private final int maxX, maxY, maxZ;
 
 	public Cuboid(Location loc1, Location loc2) {
-		if (loc1.getWorld() != loc2.getWorld()) {
-			throw new IllegalArgumentException("Locations must be on the same world");
-		}
+		if (loc1.getWorld() != loc2.getWorld()) throw new IllegalArgumentException("Locations must be on the same world");
 		world = loc1.getWorld().getName();
 		minX = Math.min(loc1.getBlockX(), loc2.getBlockX());
 		minY = Math.min(loc1.getBlockY(), loc2.getBlockY());
