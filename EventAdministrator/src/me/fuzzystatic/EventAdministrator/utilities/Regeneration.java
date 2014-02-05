@@ -1,22 +1,27 @@
 package me.fuzzystatic.EventAdministrator.utilities;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
+import java.io.File;
+import java.io.IOException;
+
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.bukkit.BukkitUtil;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldedit.schematic.SchematicFormat;
 
 public class Regeneration {
 	
-	private EventAdministrator plugin;
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
 	
-	public Regeneration(EventAdministrator plugin, String eventName) {
-		this.plugin = plugin;
+	public Regeneration(JavaPlugin plugin, String eventName) {
 		this.eventName = eventName;
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}
@@ -25,10 +30,10 @@ public class Regeneration {
 		if(ecs.existsPasteLocation()) {
 			Bukkit.getServer().broadcastMessage(ecs.getStartMessage());
 			try {
-				WorldEditSession worldEditSession = new WorldEditSession(plugin, ecs.getPasteLocation().getWorld());
-			   	CuboidClipboard clipboard = worldEditSession.loadSchematic(eventName);
-				clipboard.paste(worldEditSession.getEditSession(), BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir());
-			} catch (MaxChangedBlocksException e) {
+		        EditSession es = new EditSession(new BukkitWorld(ecs.getPasteLocation().getWorld()), Integer.MAX_VALUE);
+				CuboidClipboard cc = SchematicFormat.MCEDIT.load(new File(eventName + ".schematic"));
+				cc.paste(es, BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir(), true);
+			} catch (MaxChangedBlocksException | IOException | DataException e) {
 				e.printStackTrace();
 			}
 			return true;
