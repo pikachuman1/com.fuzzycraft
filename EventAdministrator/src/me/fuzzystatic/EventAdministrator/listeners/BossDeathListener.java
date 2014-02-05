@@ -25,7 +25,6 @@ public final class BossDeathListener implements Listener {
 		if(bem.get().containsKey(entityId)) {
 			StopEvent stopEvent = new StopEvent(plugin, sem.get().get(bem.get().get(entityId)));
 			stopEvent.stopSubschedules(bem.get().get(entityId));
-			bem.get().remove(entityId);
 		}
 	}
 }

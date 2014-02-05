@@ -46,7 +46,7 @@ public class SQLUpdatePlayer {
     
     public boolean playerIDExists(String table) {
     	String checkQuery = "SELECT " + SQLSchema.COLUMN_PLAYER_ID + " FROM "+ this.prefix + table 
-    			+ " WHERE player_id = " + getPlayerID() + "";
+    			+ " WHERE player_id = " + getPlayerID();
     	try {
     		ResultSet resultSet = this.connection.prepareStatement(checkQuery).executeQuery();
         	if(resultSet.next()) {

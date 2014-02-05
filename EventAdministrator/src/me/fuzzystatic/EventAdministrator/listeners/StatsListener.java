@@ -2,9 +2,12 @@ package me.fuzzystatic.EventAdministrator.listeners;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.maps.BossEventMap;
+import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdatePlayer;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdateTotal;
+import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,39 +34,37 @@ public class StatsListener implements Listener {
 	public void onEntityDeath(EntityDeathEvent event) {
 		if (event.getEntity() instanceof Player) {
 			if (event.getEntity().getKiller() instanceof Player) {
-				// Add PvP kill for killer
-				SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
-						dcs.getMySQLPrefix(), 
-						event.getEntity().getKiller().getPlayerListName(), 
-						SQLSchema.TABLE_PVP_STATS_TOTAL);
-				killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
-				if(killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true)) killerUpdate.setMaxStreakTotalData();
-				
-				// Add PvP death for player
-				SQLUpdateTotal victumUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
-						dcs.getMySQLPrefix(), 
-						((Player) event.getEntity()).getPlayerListName(), 
-						SQLSchema.TABLE_PVP_STATS_TOTAL);
-				victumUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
-				victumUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
-
+				updateKillerTotals(event.getEntity().getKiller().getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
+				updateVictimTotals(((Player) event.getEntity()).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
 			} else {
-				// Add PvE death for player
-				SQLUpdateTotal victumUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
-						dcs.getMySQLPrefix(), 
-						((Player) event.getEntity()).getPlayerListName(), 
-						SQLSchema.TABLE_PVE_STATS_TOTAL);
-				victumUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
-				victumUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
+				updateVictimTotals(((Player) event.getEntity()).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
 			}
 		} else if (event.getEntity().getKiller() instanceof Player) {
-			// Add PvE kill for player
-			SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), 
-					dcs.getMySQLPrefix(), 
-					event.getEntity().getKiller().getPlayerListName(), 
-					SQLSchema.TABLE_PVE_STATS_TOTAL);
-			killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
-			if(killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true)) killerUpdate.setMaxStreakTotalData();
+			updateKillerTotals(event.getEntity().getKiller().getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
+
+			BossEventMap bem = new BossEventMap();
+			Integer entityId = event.getEntity().getEntityId();
+			if(bem.get().containsKey(entityId)) {
+				updateKillerBossKills(event.getEntity().getKiller().getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
+				bem.get().remove(entityId);
+			}
 		}
+	}
+	
+	public void updateKillerTotals(String player, String table) {
+		SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
+		killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
+		if(killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true)) killerUpdate.setMaxStreakTotalData();
+	}
+	
+	public void updateKillerBossKills(String player, String table) {
+		SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
+		killerUpdate.setTotalData(SQLSchema.COLUMN_BOSSKILLS, "1", true);
+	}
+	
+	public void updateVictimTotals(String player, String table) {
+		SQLUpdateTotal victumUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
+		victumUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
+		victumUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
 	}
 }

@@ -56,11 +56,11 @@ public class SQLSchema {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS_TOTAL + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_BOSSKILLS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_BOSSKILLS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
@@ -79,10 +79,10 @@ public class SQLSchema {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS_TOTAL + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
@@ -101,11 +101,11 @@ public class SQLSchema {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS + "_" + eventName + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_BOSSKILLS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_BOSSKILLS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
@@ -124,10 +124,10 @@ public class SQLSchema {
 		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS + "_" + eventName + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
-				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT NULL,"
-				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT NULL,"
+				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
+				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
 				+ "PRIMARY KEY (`player_id`)"
 				+ ")";
 	}
