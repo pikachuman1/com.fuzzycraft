@@ -1,6 +1,7 @@
 package me.fuzzystatic.EventAdministrator.commands.list;
 
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
@@ -12,15 +13,28 @@ public class ListSpawn extends List {
 
 	@Override
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
-		String eventName = new CommandSenderEventMap().get().get(sender);
-		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
-		ecs.createFileStructure();
+		EventConfigurationStructure ecs;
+		String eventName;
 		if (hasPermissionNode(sender)) {			
-			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spawns in event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + ": ");
-			
+			if (args.length > 3) {	
+				eventName = args[3];
+				ecs = new EventConfigurationStructure(plugin, eventName);	
+				ecs.createFileStructure();
+			} else {
+				eventName = new CommandSenderEventMap().get().get(sender);
+				ecs = new EventConfigurationStructure(plugin, eventName);	
+				ecs.createFileStructure();
+			}
+			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Spawns in event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + ": ");	
 			if (ecs.getSpawns() != null) {
 				for (String spawnName : ecs.getSpawns()) {
-					sender.sendMessage(ChatColor.DARK_AQUA + spawnName);
+					SpawnConfigurationStructure scs = new SpawnConfigurationStructure(plugin, eventName, spawnName);
+					scs.createFileStructure();
+					if (scs.getIsBoss()) {
+						sender.sendMessage(ChatColor.DARK_AQUA + spawnName + " "  + ChatColor.WHITE+ "("  + ChatColor.GOLD + "boss" + ChatColor.WHITE + ")");
+					} else {
+						sender.sendMessage(ChatColor.DARK_AQUA + spawnName);
+					}
 				}
 			} else {
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "The event has no " + ChatColor.DARK_AQUA + "spawns" + ChatColor.LIGHT_PURPLE + ".");
@@ -39,7 +53,7 @@ public class ListSpawn extends List {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " s{pawns}";
+		return super.usage() + " s{pawns} <event name>";
 	}
 	
 }

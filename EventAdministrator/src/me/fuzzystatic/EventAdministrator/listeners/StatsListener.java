@@ -3,11 +3,9 @@ package me.fuzzystatic.EventAdministrator.listeners;
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.BossEventMap;
-import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdatePlayer;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdateTotal;
-import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,8 +24,7 @@ public class StatsListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
-		Player player = event.getPlayer();
-		new SQLUpdatePlayer(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player.getPlayerListName()).setPlayerData();
+		new SQLUpdatePlayer(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), event.getPlayer().getPlayerListName()).setPlayerData();
 	}
 	
 	@EventHandler
@@ -63,8 +60,8 @@ public class StatsListener implements Listener {
 	}
 	
 	public void updateVictimTotals(String player, String table) {
-		SQLUpdateTotal victumUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
-		victumUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
-		victumUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
+		SQLUpdateTotal victimUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
+		victimUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
+		victimUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
 	}
 }
