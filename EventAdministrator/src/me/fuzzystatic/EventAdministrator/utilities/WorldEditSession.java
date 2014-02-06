@@ -55,7 +55,7 @@ public class WorldEditSession {
 	}
 	
 	public void saveSchematic(String eventName) {
-		File file = new File(ds.getSchematicDir() + File.separator + eventName + ".schematic");
+		File file = new File(ds.getSchematicsDirPath() + File.separator + eventName + ".schematic");
 		try {
 		    SchematicFormat.MCEDIT.save(clipboard, file);	
 		    this.player.sendMessage(ChatColor.GREEN + "Schematic saved.");
@@ -67,7 +67,7 @@ public class WorldEditSession {
 	
 	public CuboidClipboard loadSchematic(String eventName) {
 		CuboidClipboard clipboard = null;
-		File file = new File(ds.getSchematicDir() + File.separator + eventName + ".schematic");
+		File file = new File(ds.getSchematicsDirPath() + File.separator + eventName + ".schematic");
 		try {
 			clipboard = SchematicFormat.MCEDIT.load(file);	
 		} catch (IOException | DataException e) {

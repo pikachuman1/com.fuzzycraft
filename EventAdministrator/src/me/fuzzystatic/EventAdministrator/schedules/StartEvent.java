@@ -30,9 +30,6 @@ public class StartEvent {
 				SchedulerEventMap sem = new SchedulerEventMap();
 				sem.set(id, eventName);
 										
-				DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
-				SQLSchema ss = new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()); 
-				
 				StopEvent se = new StopEvent(plugin, sem.get().get(id));
 				WorldEditHook weh = new WorldEditHook(plugin, sem.get().get(id));
 				Spawning s = new Spawning(plugin, id);
@@ -41,12 +38,18 @@ public class StartEvent {
 				PlayerItems pi = new PlayerItems(plugin, sem.get().get(id));
 				
 				se.stopSubschedules(id);
-				se.clearEntities();
+				
+				// Create event databases
 				if (EventAdministrator.getConnection() != null) {
+					DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
+					SQLSchema ss = new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix());
 					ss.createEventPveStatsTable(eventName);
 					ss.createEventPvpStatsTable(eventName);
 				}
+				
+				// Start event
 				if (weh.load()) {
+					se.clearEntities();
 					s.start();
 					wc.start();
 					r.start();

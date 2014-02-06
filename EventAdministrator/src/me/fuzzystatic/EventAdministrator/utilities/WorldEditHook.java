@@ -3,6 +3,7 @@ package me.fuzzystatic.EventAdministrator.utilities;
 import java.io.File;
 import java.io.IOException;
 
+import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 
 import org.bukkit.Bukkit;
@@ -22,12 +23,14 @@ import com.sk89q.worldedit.schematic.SchematicFormat;
 public class WorldEditHook {
 	
 	private JavaPlugin plugin;
-	private String eventName;
+	private DirectoryStructure ds;
+	private File file;
 	private EventConfigurationStructure ecs;
 	
 	public WorldEditHook(JavaPlugin plugin, String eventName) {
 		this.plugin = plugin;
-		this.eventName = eventName;
+		this.ds = new DirectoryStructure(plugin);
+		this.file = new File(ds.getSchematicsDirPath() + File.separator + eventName + ".schematic");
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}
 	
@@ -36,7 +39,7 @@ public class WorldEditHook {
 		try {
 			WorldEditSession wes = new WorldEditSession(plugin, player);
 			CuboidClipboard cc = wes.getLocalSession().getClipboard();
-			SchematicFormat.MCEDIT.save(cc, new File(eventName + ".schematic"));
+			SchematicFormat.MCEDIT.save(cc, file);
 			ecs.setPasteLocation(sl.serialize());
 			return true;
 		} catch (EmptyClipboardException e) {
@@ -54,8 +57,8 @@ public class WorldEditHook {
 			Bukkit.getServer().broadcastMessage(ecs.getStartMessage());
 			try {
 		        EditSession es = new EditSession(new BukkitWorld(ecs.getPasteLocation().getWorld()), Integer.MAX_VALUE);
-				CuboidClipboard cc = SchematicFormat.MCEDIT.load(new File(eventName + ".schematic"));
-				cc.paste(es, BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir(), true);
+				CuboidClipboard cc = SchematicFormat.MCEDIT.load(file);
+				cc.paste(es, BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir(), false);
 			} catch (MaxChangedBlocksException | IOException | DataException e) {
 				e.printStackTrace();
 			}

@@ -17,7 +17,7 @@ public class DirectoryStructure {
 		this.EVENT_DIR = plugin.getDataFolder() + File.separator + "events" + File.separator;
 	}
 		
-	public String getSchematicDir() {
+	private String getSchematicsDir() {
 		if (this.dcs.getUseWESchematicDir()) {
 			return plugin.getDataFolder().getParent() + File.separator + "WorldEdit" + File.separator + "schematics" + File.separator;
 		} else {
@@ -30,19 +30,19 @@ public class DirectoryStructure {
 	}
 	
 	public void createSchematicDirectory() {
-		new File(getSchematicDir()).mkdir();
+		new File(getSchematicsDir()).mkdir();
 	}
 	
-	public File getEventDirPath() {
+	public File getEventsDirPath() {
 		return new File(EVENT_DIR);
 	}
 	
 	public File getSchematicsDirPath() {
-		return new File(getSchematicDir());
+		return new File(getSchematicsDir());
 	}
 	
 	public File[] eventFiles() {
-		return getEventDirPath().listFiles();
+		return getEventsDirPath().listFiles();
 	}
 	
 	public File[] schematicFiles() {
