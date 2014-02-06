@@ -8,6 +8,7 @@ import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.worldedit.WorldEditLoad;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class StartEvent {
@@ -56,7 +57,7 @@ public class StartEvent {
 					r.start();
 					pi.start();
 				} 
-				Bukkit.getServer().broadcastMessage(ecs.getStartMessage());
+				Bukkit.getServer().broadcastMessage(ChatColor.GREEN + ecs.getStartMessage());
 			}
 		}, 0, ecs.getCycleTime() * 20);
 		return true;

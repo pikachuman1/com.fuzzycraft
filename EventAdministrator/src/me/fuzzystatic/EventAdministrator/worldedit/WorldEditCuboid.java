@@ -4,7 +4,7 @@ import org.bukkit.Location;
 
 import com.sk89q.worldedit.Vector;
 
-public class WorldEditRectangle {
+public class WorldEditCuboid {
 
 	private final double originX;
 	private final double originY;
@@ -13,7 +13,7 @@ public class WorldEditRectangle {
 	private final double endY;
 	private final double endZ;
 	
-	public WorldEditRectangle(Vector origin, Vector size) {
+	public WorldEditCuboid(Vector origin, Vector size) {
 		this.originX = origin.getX();	
 		this.originY = origin.getY();	
 		this.originZ = origin.getZ();	
@@ -22,7 +22,7 @@ public class WorldEditRectangle {
 		this.endZ = originZ + size.getZ() - 1; 
 	}
 	
-	public boolean inRectangle(Location location) {
+	public boolean inCuboid(Location location) {
 		if (this.originX <= location.getX() && this.originY <= location.getY() && this.originZ <= location.getZ()) {
 			if (this.endX >= location.getX() && this.endY >= location.getY() && this.endZ >= location.getZ()) {
 				return true;

@@ -39,5 +39,4 @@ public class WorldEditLoad extends WorldEdit {
 		}
 		return false;
 	}
-
 }

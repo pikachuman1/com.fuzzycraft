@@ -3,12 +3,16 @@ package me.fuzzystatic.EventAdministrator.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.fuzzystatic.EventAdministrator.worldedit.WorldEditCuboid;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+
+import com.sk89q.worldedit.Vector;
 
 public class Entities {
 
@@ -24,6 +28,20 @@ public class Entities {
 	    		this.nonPlayerEntities.add(entity);
 	    	}
 		    if (entity instanceof LivingEntity && !(entity instanceof HumanEntity)) this.mobs.add((LivingEntity) entity);
+	    }
+	}
+	
+	public Entities(World world, Vector origin, Vector size) {
+		WorldEditCuboid wec = new WorldEditCuboid(origin, size);
+	    for (Entity entity : world.getEntities()) {
+	    	if (wec.inCuboid(entity.getLocation())) {
+		    	if (entity instanceof Player) {
+			    	this.players.add((Player) entity);
+		    	} else {
+		    		this.nonPlayerEntities.add(entity);
+		    	}
+			    if (entity instanceof LivingEntity && !(entity instanceof HumanEntity)) this.mobs.add((LivingEntity) entity);
+	    	}
 	    }
 	}
 	

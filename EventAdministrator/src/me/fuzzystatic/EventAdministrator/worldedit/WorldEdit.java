@@ -20,5 +20,4 @@ public class WorldEdit {
 		this.file = new File(this.ds.getSchematicsDirPath() + File.separator + eventName + ".schematic");
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}	
-
 }

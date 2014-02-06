@@ -16,8 +16,8 @@ public class ListSpawn extends List {
 		EventConfigurationStructure ecs;
 		String eventName;
 		if (hasPermissionNode(sender)) {			
-			if (args.length > 3) {	
-				eventName = args[3];
+			if (args.length > 2) {	
+				eventName = args[2];
 				ecs = new EventConfigurationStructure(plugin, eventName);	
 				ecs.createFileStructure();
 			} else {
