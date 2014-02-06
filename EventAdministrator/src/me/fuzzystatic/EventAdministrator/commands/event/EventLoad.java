@@ -1,5 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,7 @@ public class EventLoad extends Command {
 		if (hasPermissionNode(sender)) {
 			WorldEditHook weh = new WorldEditHook(plugin, eventName);
 			weh.load();
+			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " loaded.");
 			return true;
 		} else {
 			playerOnly(sender);

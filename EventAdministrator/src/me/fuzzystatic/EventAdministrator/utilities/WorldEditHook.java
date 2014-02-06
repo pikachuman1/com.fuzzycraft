@@ -59,6 +59,11 @@ public class WorldEditHook {
 		        EditSession es = new EditSession(new BukkitWorld(ecs.getPasteLocation().getWorld()), Integer.MAX_VALUE);
 				CuboidClipboard cc = SchematicFormat.MCEDIT.load(file);
 				cc.paste(es, BukkitUtil.toVector(ecs.getPasteLocation()), ecs.getNoAir(), false);
+				ConsoleLogs.sendMessage(cc.getOrigin().toString());
+				ConsoleLogs.sendMessage(cc.getOffset().toString());
+				ConsoleLogs.sendMessage(String.valueOf(cc.getHeight()));
+				ConsoleLogs.sendMessage(String.valueOf(cc.getLength()));
+				ConsoleLogs.sendMessage(String.valueOf(cc.getWidth()));
 			} catch (MaxChangedBlocksException | IOException | DataException e) {
 				e.printStackTrace();
 			}

@@ -5,6 +5,7 @@ import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStruct
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 import me.fuzzystatic.EventAdministrator.utilities.WorldEditHook;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
@@ -21,6 +22,7 @@ public class EventSave extends Command {
 			Player player = (Player) sender;
 			WorldEditHook weh = new WorldEditHook(plugin, eventName);
 			weh.save(player);
+			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " saved.");
 			return true;
 		} else {
 			playerOnly(sender);
