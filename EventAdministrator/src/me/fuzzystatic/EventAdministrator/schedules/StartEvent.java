@@ -5,7 +5,7 @@ import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStru
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
-import me.fuzzystatic.EventAdministrator.utilities.WorldEditHook;
+import me.fuzzystatic.EventAdministrator.worldedit.WorldEditLoad;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,16 +14,17 @@ public class StartEvent {
 	
 	private JavaPlugin plugin;
 	private final String eventName;
+	private final EventConfigurationStructure ecs;
 	
 	private int id;
 	
 	public StartEvent(JavaPlugin plugin, String eventName) {
 		this.plugin = plugin;
 		this.eventName = eventName;
+		this.ecs = new EventConfigurationStructure(this.plugin, eventName);
 	}
 	
 	public boolean start() {
-		EventConfigurationStructure ecs = new EventConfigurationStructure(this.plugin, eventName);
 		ecs.createFileStructure();
 		id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin, new Runnable() {
 			public void run() {
@@ -31,7 +32,7 @@ public class StartEvent {
 				sem.set(id, eventName);
 										
 				StopEvent se = new StopEvent(plugin, sem.get().get(id));
-				WorldEditHook weh = new WorldEditHook(plugin, sem.get().get(id));
+				WorldEditLoad wel = new WorldEditLoad(plugin, sem.get().get(id));
 				Spawning s = new Spawning(plugin, id);
 				WorldConditions wc = new WorldConditions(plugin, sem.get().get(id));
 				Reminder r = new Reminder(plugin, sem.get().get(id));
@@ -48,13 +49,14 @@ public class StartEvent {
 				}
 				
 				// Start event
-				if (weh.load()) {
+				if (wel.paste()) {
 					se.clearEntities();
 					s.start();
 					wc.start();
 					r.start();
 					pi.start();
 				} 
+				Bukkit.getServer().broadcastMessage(ecs.getStartMessage());
 			}
 		}, 0, ecs.getCycleTime() * 20);
 		return true;

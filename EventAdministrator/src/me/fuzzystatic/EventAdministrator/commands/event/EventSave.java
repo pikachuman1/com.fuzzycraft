@@ -3,7 +3,7 @@ package me.fuzzystatic.EventAdministrator.commands.event;
 import me.fuzzystatic.EventAdministrator.commands.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
-import me.fuzzystatic.EventAdministrator.utilities.WorldEditHook;
+import me.fuzzystatic.EventAdministrator.worldedit.WorldEditSave;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -20,8 +20,8 @@ public class EventSave extends Command {
 		ecs.createFileStructure();
 		if (hasPermissionNode(sender) && isPlayer(sender)) {
 			Player player = (Player) sender;
-			WorldEditHook weh = new WorldEditHook(plugin, eventName);
-			weh.save(player);
+			WorldEditSave wes = new WorldEditSave(plugin, eventName);
+			wes.save(player);
 			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " saved.");
 			return true;
 		} else {
