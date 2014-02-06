@@ -64,6 +64,7 @@ public class WorldEditHook {
 				ConsoleLogs.sendMessage(String.valueOf(cc.getHeight()));
 				ConsoleLogs.sendMessage(String.valueOf(cc.getLength()));
 				ConsoleLogs.sendMessage(String.valueOf(cc.getWidth()));
+				ConsoleLogs.sendMessage(String.valueOf(cc.getSize()));
 			} catch (MaxChangedBlocksException | IOException | DataException e) {
 				e.printStackTrace();
 			}
