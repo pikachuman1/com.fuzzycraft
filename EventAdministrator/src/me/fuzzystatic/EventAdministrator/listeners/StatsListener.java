@@ -7,6 +7,7 @@ import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdatePlayer;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdateTotal;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,51 +17,53 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class StatsListener implements Listener {
 
-	private final DefaultConfigurationStructure dcs;
+	protected final String prefix;
     
 	public StatsListener(JavaPlugin plugin) {
-		this.dcs = new DefaultConfigurationStructure(plugin);
+		this.prefix = new DefaultConfigurationStructure(plugin).getMySQLPrefix();
 	}
 	
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
-		new SQLUpdatePlayer(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), event.getPlayer().getPlayerListName()).setPlayerData();
+		new SQLUpdatePlayer(EventAdministrator.getConnection(), prefix, event.getPlayer().getPlayerListName()).setPlayerData();
 	}
 	
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
-		if (event.getEntity() instanceof Player) {
-			if (event.getEntity().getKiller() instanceof Player) {
-				updateKillerTotals(event.getEntity().getKiller().getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
-				updateVictimTotals(((Player) event.getEntity()).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
+		Entity killer = event.getEntity().getKiller();
+		Entity victim = event.getEntity();
+		if (victim instanceof Player) {
+			if (killer instanceof Player) {
+				updateKillerStats(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
+				updateVictimStats(((Player) victim).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
 			} else {
-				updateVictimTotals(((Player) event.getEntity()).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
+				updateVictimStats(((Player) victim).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
 			}
 		} else if (event.getEntity().getKiller() instanceof Player) {
-			updateKillerTotals(event.getEntity().getKiller().getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
+			updateKillerStats(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
 
 			BossEventMap bem = new BossEventMap();
 			Integer entityId = event.getEntity().getEntityId();
 			if(bem.get().containsKey(entityId)) {
-				updateKillerBossKills(event.getEntity().getKiller().getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
+				updateKillerBossKillsStat(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
 				bem.get().remove(entityId);
 			}
 		}
 	}
 	
-	public void updateKillerTotals(String player, String table) {
-		SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
+	public void updateKillerStats(String player, String table) {
+		SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), prefix, player, table);
 		killerUpdate.setTotalData(SQLSchema.COLUMN_KILLS, "1", true);
 		if(killerUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "1", true)) killerUpdate.setMaxStreakTotalData();
 	}
 	
-	public void updateKillerBossKills(String player, String table) {
-		SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
+	public void updateKillerBossKillsStat(String player, String table) {
+		SQLUpdateTotal killerUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), prefix, player, table);
 		killerUpdate.setTotalData(SQLSchema.COLUMN_BOSSKILLS, "1", true);
 	}
 	
-	public void updateVictimTotals(String player, String table) {
-		SQLUpdateTotal victimUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), dcs.getMySQLPrefix(), player, table);
+	public void updateVictimStats(String player, String table) {
+		SQLUpdateTotal victimUpdate = new SQLUpdateTotal(EventAdministrator.getConnection(), prefix, player, table);
 		victimUpdate.setTotalData(SQLSchema.COLUMN_DEATHS, "1", true);
 		victimUpdate.setTotalData(SQLSchema.COLUMN_STREAK, "0", false);
 	}
