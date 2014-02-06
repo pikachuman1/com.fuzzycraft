@@ -5,7 +5,7 @@ import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStru
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
-import me.fuzzystatic.EventAdministrator.utilities.Regeneration;
+import me.fuzzystatic.EventAdministrator.utilities.WorldEditHook;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,24 +33,24 @@ public class StartEvent {
 				DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
 				SQLSchema ss = new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix()); 
 				
-				StopEvent stopEvent = new StopEvent(plugin, sem.get().get(id));
-				Regeneration regeneration = new Regeneration(plugin, sem.get().get(id));
-				Spawning spawning = new Spawning(plugin, id);
-				WorldConditions worldConditions = new WorldConditions(plugin, sem.get().get(id));
-				Reminder reminder = new Reminder(plugin, sem.get().get(id));
-				PlayerItems playerItems = new PlayerItems(plugin, sem.get().get(id));
+				StopEvent se = new StopEvent(plugin, sem.get().get(id));
+				WorldEditHook weh = new WorldEditHook(plugin, sem.get().get(id));
+				Spawning s = new Spawning(plugin, id);
+				WorldConditions wc = new WorldConditions(plugin, sem.get().get(id));
+				Reminder r = new Reminder(plugin, sem.get().get(id));
+				PlayerItems pi = new PlayerItems(plugin, sem.get().get(id));
 				
-				stopEvent.stopSubschedules(id);
-				stopEvent.clearEntities();
+				se.stopSubschedules(id);
+				se.clearEntities();
 				if (EventAdministrator.getConnection() != null) {
 					ss.createEventPveStatsTable(eventName);
 					ss.createEventPvpStatsTable(eventName);
 				}
-				if (regeneration.regen()) {
-					spawning.start();
-					worldConditions.start();
-					reminder.start();
-					playerItems.start();
+				if (weh.load()) {
+					s.start();
+					wc.start();
+					r.start();
+					pi.start();
 				} 
 			}
 		}, 0, ecs.getCycleTime() * 20);

@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.fuzzystatic.EventAdministrator.commands.Command;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
-import me.fuzzystatic.EventAdministrator.utilities.Regeneration;
+import me.fuzzystatic.EventAdministrator.utilities.WorldEditHook;
 
 public class EventLoad extends Command {
 
@@ -17,8 +17,8 @@ public class EventLoad extends Command {
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
 		ecs.createFileStructure();
 		if (hasPermissionNode(sender)) {
-			Regeneration r = new Regeneration(plugin, eventName);
-			r.regen();
+			WorldEditHook weh = new WorldEditHook(plugin, eventName);
+			weh.load();
 			return true;
 		} else {
 			playerOnly(sender);
