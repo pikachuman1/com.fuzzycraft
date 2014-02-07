@@ -1,13 +1,10 @@
 package me.fuzzystatic.EventAdministrator.listeners;
 
-import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.Entities;
 import me.fuzzystatic.EventAdministrator.maps.BossEventMap;
+import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
-import me.fuzzystatic.EventAdministrator.sql.SQLUpdatePlayer;
-import me.fuzzystatic.EventAdministrator.sql.SQLUpdateTotal;
 import me.fuzzystatic.EventAdministrator.worldedit.WorldEditLoad;
 
 import org.bukkit.World;
@@ -22,42 +19,46 @@ import com.sk89q.worldedit.Vector;
 
 public class EventStatsListener extends StatsListener implements Listener {
 
-	private final String eventName;
+	private final int eventID;
 	private final World world;
-	private final Vector origin;
-	private final Vector size;
+	private final Vector origin, size;
+	private final String tablePvE, tablePvP;
     
-	public EventStatsListener(JavaPlugin plugin, String eventName) {
+	public EventStatsListener(JavaPlugin plugin, String eventName, int eventID) {
 		super(plugin);
-		this.eventName = eventName;
+		this.eventID = eventID;
 		this.world = new EventConfigurationStructure(plugin, eventName).getPasteLocation().getWorld();
-		this.origin = new WorldEditLoad(plugin, eventName).getClipboard().getOrigin();
-		this.size = new WorldEditLoad(plugin, eventName).getClipboard().getOrigin();
+		WorldEditLoad wel = new WorldEditLoad(plugin, eventName);
+		this.origin = wel.getClipboard().getOrigin();
+		this.size = wel.getClipboard().getSize();
+		this.tablePvE = SQLSchema.TABLE_PVE_STATS + "_" + eventName;
+		this.tablePvP = SQLSchema.TABLE_PVP_STATS + "_" + eventName;
 	}
 	
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
-		Entities eventEntities = new Entities(world, origin, size);
-		Entity killer = event.getEntity().getKiller();
-		Entity victim = event.getEntity();
-		if (eventEntities.getEntities().contains(killer) && eventEntities.getEntities().contains(victim)) {
-			if (victim instanceof Player) {
-				if (killer instanceof Player) {
-					super.updateKillerStats(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL + "_" + eventName);
-					super.updateVictimStats(((Player) victim).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL + "_" + eventName);
+		if (new SchedulerEventMap().get().containsKey(eventID)) {
+			Entities eventEntities = new Entities(world, origin, size);
+			Entity killer = event.getEntity().getKiller();
+			Entity victim = event.getEntity();
+			if (victim instanceof Player && eventEntities.getLivingEntities().contains(victim.getEntityId())) {
+				if (killer instanceof Player && eventEntities.getLivingEntities().contains(killer.getEntityId())) {
+					super.updateKillerStats(((Player) killer).getPlayerListName(), tablePvP);
+					super.updateVictimStats(((Player) victim).getPlayerListName(), tablePvP);
 				} else {
-					super.updateVictimStats(((Player) victim).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL + "_" + eventName);
+					super.updateVictimStats(((Player) victim).getPlayerListName(), tablePvE);
 				}
-			} else if (event.getEntity().getKiller() instanceof Player) {
-				super.updateKillerStats(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL + "_" + eventName);
+			} else if (killer instanceof Player && eventEntities.getLivingEntities().contains(victim.getEntityId())) {
+				super.updateKillerStats(((Player) killer).getPlayerListName(), tablePvE);
 
 				BossEventMap bem = new BossEventMap();
-				Integer entityId = event.getEntity().getEntityId();
-				if(bem.get().containsKey(entityId)) {
-					super.updateKillerBossKillsStat(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL + "_" + eventName);
-					bem.get().remove(entityId);
+				Integer entityID = victim.getEntityId();
+				if(bem.get().containsKey(entityID)) {
+					super.updateKillerBossKillsStat(((Player) killer).getPlayerListName(), tablePvE);
+					bem.get().remove(entityID);
 				}
 			}
+
 		}
 	}
 }

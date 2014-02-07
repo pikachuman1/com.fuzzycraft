@@ -16,13 +16,13 @@ public class Spawning {
 	private JavaPlugin plugin;
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
-	private final int parentId;
+	private final int eventID;
 	
-	public Spawning(JavaPlugin plugin, int parentId) {
+	public Spawning(JavaPlugin plugin, int eventID) {
 		this.plugin = plugin;
-		this.eventName = new SchedulerEventMap().get().get(parentId);
+		this.eventName = new SchedulerEventMap().get().get(eventID);
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
-		this.parentId = parentId;
+		this.eventID = eventID;
 	}
 		
 	private int spawnLimit;
@@ -53,8 +53,8 @@ public class Spawning {
 		for(int i = 0; i < this.spawnLimit; i++) {
 			Entity entity = scs.getLocation().getWorld().spawnEntity(scs.getLocation(), scs.getMob());
 			if(scs.getIsBoss()) {
-				BossEventMap esm = new BossEventMap();
-				esm.set(entity.getEntityId(), this.parentId);
+				BossEventMap bem = new BossEventMap();
+				bem.set(entity.getEntityId(), this.eventID);
 			} 
 		}
 	}	

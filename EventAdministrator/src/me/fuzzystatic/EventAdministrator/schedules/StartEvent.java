@@ -3,12 +3,14 @@ package me.fuzzystatic.EventAdministrator.schedules;
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
 import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.listeners.EventStatsListener;
 import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.worldedit.WorldEditLoad;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class StartEvent {
@@ -41,12 +43,17 @@ public class StartEvent {
 				
 				se.stopSubschedules(id);
 				
-				// Create event databases
 				if (EventAdministrator.getConnection() != null) {
+					// Create event databases
 					DefaultConfigurationStructure dcs = new DefaultConfigurationStructure(plugin);	
 					SQLSchema ss = new SQLSchema(EventAdministrator.getConnection(), dcs.getMySQLPrefix());
 					ss.createEventPveStatsTable(eventName);
 					ss.createEventPvpStatsTable(eventName);
+					
+					// Start stats listener
+					EventStatsListener esl = new EventStatsListener(plugin, eventName, id);
+					PluginManager pm = plugin.getServer().getPluginManager();
+					pm.registerEvents(esl, plugin);
 				}
 				
 				// Start event

@@ -32,21 +32,22 @@ public class StatsListener implements Listener {
 	public void onEntityDeath(EntityDeathEvent event) {
 		Entity killer = event.getEntity().getKiller();
 		Entity victim = event.getEntity();
+		String tablePvE = SQLSchema.TABLE_PVE_STATS_TOTAL;
+		String tablePvP = SQLSchema.TABLE_PVP_STATS_TOTAL;
 		if (victim instanceof Player) {
 			if (killer instanceof Player) {
-				updateKillerStats(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
-				updateVictimStats(((Player) victim).getPlayerListName(), SQLSchema.TABLE_PVP_STATS_TOTAL);
+				updateKillerStats(((Player) killer).getPlayerListName(), tablePvP);
+				updateVictimStats(((Player) victim).getPlayerListName(), tablePvP);
 			} else {
-				updateVictimStats(((Player) victim).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
+				updateVictimStats(((Player) victim).getPlayerListName(), tablePvE);
 			}
 		} else if (event.getEntity().getKiller() instanceof Player) {
-			updateKillerStats(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
+			updateKillerStats(((Player) killer).getPlayerListName(), tablePvE);
 
 			BossEventMap bem = new BossEventMap();
 			Integer entityId = event.getEntity().getEntityId();
 			if(bem.get().containsKey(entityId)) {
-				updateKillerBossKillsStat(((Player) killer).getPlayerListName(), SQLSchema.TABLE_PVE_STATS_TOTAL);
-				bem.get().remove(entityId);
+				updateKillerBossKillsStat(((Player) killer).getPlayerListName(), tablePvE);
 			}
 		}
 	}

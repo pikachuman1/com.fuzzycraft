@@ -10,8 +10,8 @@ public class BossEventMap {
 	
 	private static final Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
-	public void set(Integer id, Integer eventParentId) {
-		map.put(id, eventParentId);
+	public void set(Integer id, Integer eventID) {
+		map.put(id, eventID);
 	}
 
 	public Map<Integer, Integer> get() {
