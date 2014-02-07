@@ -10,6 +10,7 @@ import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStruct
 import me.fuzzystatic.EventAdministrator.listeners.BossDeathListener;
 import me.fuzzystatic.EventAdministrator.listeners.StatsListener;
 import me.fuzzystatic.EventAdministrator.schedules.StartEvent;
+import me.fuzzystatic.EventAdministrator.schedules.StopEvent;
 import me.fuzzystatic.EventAdministrator.sql.SQLConnection;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
@@ -76,8 +77,17 @@ public class EventAdministrator extends JavaPlugin {
 	}
 	
 	public void onDisable() {
+		DirectoryStructure ds = new DirectoryStructure(this);
+		
 		if(connection != null) {
 			SQLConnection.disconnect(connection);
+		}
+		
+		for (File file : ds.eventFiles()) {
+			String eventName = FilenameUtils.removeExtension(file.getName());
+			StopEvent stopEvent = new StopEvent(this, eventName);
+			stopEvent.stop();
+			stopEvent.clearEntities();
 		}
 		
 		getServer().getScheduler().cancelTasks(this);
