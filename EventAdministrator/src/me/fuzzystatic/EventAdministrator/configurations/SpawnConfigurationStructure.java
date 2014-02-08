@@ -1,30 +1,24 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
-import java.io.File;
-
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
-import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
 import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 
 import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class SpawnConfigurationStructure implements FileStructure{
+public class SpawnConfigurationStructure extends EventConfigurationStructure implements FileStructure{
 	
 	public static final String SPAWNS 				= "spawns"; 
 		
 	private static final String defaultMob 			= "zombie";
 	private static final int defaultAmount 			= 1;
-	private static final long defaultStart 			= 0;
-	private static final long defaultCycle 			= -1;
+	private static final long defaultStartTime 		= 0;
+	private static final long defaultCycleTime 		= -1;
 	private static final boolean defaultIsBoss 		= false;
 	
 	private final String locationYML, mobYML, amountYML, startTimeYML, cycleTimeYML, isBossYML;
-	private final ConfigAccessor configAccessor;
-	private final FileConfiguration config;
 	private final String spawnPrefix;
 	
 	public EntityType getEntityType(String mobString) {
@@ -71,10 +65,7 @@ public class SpawnConfigurationStructure implements FileStructure{
 	}
 	
 	public SpawnConfigurationStructure(JavaPlugin plugin, String eventName, String spawnName) {
-		if (!plugin.isInitialized()) throw new IllegalArgumentException("Plugin must be initialized!");
-		DirectoryStructure ds = new DirectoryStructure(plugin);
-		this.configAccessor = new ConfigAccessor(plugin, ds.getEventsDirPath() + File.separator + eventName + ".yml");
-		this.config = configAccessor.getConfig();
+		super(plugin, eventName);
 		this.spawnPrefix = SPAWNS + "." + spawnName + ".";
 		this.locationYML = spawnPrefix + "location";
 		this.mobYML = spawnPrefix + "mob";
@@ -127,11 +118,11 @@ public class SpawnConfigurationStructure implements FileStructure{
 			configAltered = true;
 		}
 		if(this.config.get(this.startTimeYML) == null) {
-			setStartTime(defaultStart);
+			setStartTime(defaultStartTime);
 			configAltered = true;
 		}
 		if(this.config.get(this.cycleTimeYML) == null) {
-			setCycleTime(defaultCycle);
+			setCycleTime(defaultCycleTime);
 			configAltered = true;
 		}
 		if(this.config.get(this.isBossYML) == null) {

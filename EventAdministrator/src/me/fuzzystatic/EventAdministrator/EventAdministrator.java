@@ -79,10 +79,8 @@ public class EventAdministrator extends JavaPlugin {
 	public void onDisable() {
 		DirectoryStructure ds = new DirectoryStructure(this);
 		
-		if(connection != null) {
-			SQLConnection.disconnect(connection);
-		}
-		
+		getServer().getScheduler().cancelTasks(this);
+
 		for (File file : ds.eventFiles()) {
 			String eventName = FilenameUtils.removeExtension(file.getName());
 			StopEvent stopEvent = new StopEvent(this, eventName);
@@ -90,7 +88,9 @@ public class EventAdministrator extends JavaPlugin {
 			stopEvent.clearEntities();
 		}
 		
-		getServer().getScheduler().cancelTasks(this);
+		if(connection != null) {
+			SQLConnection.disconnect(connection);
+		}
 	}
 	
 	public static Connection getConnection() {

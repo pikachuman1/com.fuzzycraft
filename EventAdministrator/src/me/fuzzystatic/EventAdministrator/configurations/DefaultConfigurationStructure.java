@@ -36,37 +36,37 @@ public class DefaultConfigurationStructure implements FileStructure {
 		this.config = configAccessor.getConfig();
 	}
 	
-	private void setMySQLHost(String mySQLHost) {
+	public void setMySQLHost(String mySQLHost) {
 		this.config.set(MYSQL_HOST, mySQLHost);
 		this.configAccessor.saveConfig();
 	}
 	
-	private void setMySQLPort(int mySQLPort) {
+	public void setMySQLPort(int mySQLPort) {
 		this.config.set(MYSQL_PORT, mySQLPort);
 		this.configAccessor.saveConfig();
 	}
 	
-	private void setMySQLUser(String mySQLUser) {
+	public void setMySQLUser(String mySQLUser) {
 		this.config.set(MYSQL_USER, mySQLUser);
 		this.configAccessor.saveConfig();
 	}
 	
-	private void setMySQLPassword(String mySQLPassword) {
+	public void setMySQLPassword(String mySQLPassword) {
 		this.config.set(MYSQL_PASSWORD, mySQLPassword);
 		this.configAccessor.saveConfig();
 	}
 	
-	private void setMySQLDatabase(String mySQLDatabase) {
+	public void setMySQLDatabase(String mySQLDatabase) {
 		this.config.set(MYSQL_DATABASE, mySQLDatabase);
 		this.configAccessor.saveConfig();
 	}
 	
-	private void setMySQLPrefix(String mySQLPrefix) {
+	public void setMySQLPrefix(String mySQLPrefix) {
 		this.config.set(MYSQL_PREFIX, mySQLPrefix);
 		this.configAccessor.saveConfig();
 	}
 	
-	private void setUseWESchematicDir(boolean useWESchematicDir) {
+	public void setUseWESchematicDir(boolean useWESchematicDir) {
 		this.config.set(WORLD_EDIT_BOOLEAN, useWESchematicDir);
 		this.configAccessor.saveConfig();
 	}
