@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.listeners;
 
 import me.fuzzystatic.EventAdministrator.EventAdministrator;
-import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.BossEventMap;
 import me.fuzzystatic.EventAdministrator.sql.SQLSchema;
 import me.fuzzystatic.EventAdministrator.sql.SQLUpdatePlayer;

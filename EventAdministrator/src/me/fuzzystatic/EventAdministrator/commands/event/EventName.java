@@ -15,11 +15,11 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.fuzzystatic.EventAdministrator.commands.Command;
-import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.configurations.PlayerItemsConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
+import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
-import me.fuzzystatic.EventAdministrator.utilities.SerializableItem;
 
 public class EventName extends Command {
 		

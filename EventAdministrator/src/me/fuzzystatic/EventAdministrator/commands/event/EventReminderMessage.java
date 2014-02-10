@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
-import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;

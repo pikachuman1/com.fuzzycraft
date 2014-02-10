@@ -1,9 +1,9 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
 import me.fuzzystatic.EventAdministrator.commands.Command;
-import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableLocation;
+import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
-import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

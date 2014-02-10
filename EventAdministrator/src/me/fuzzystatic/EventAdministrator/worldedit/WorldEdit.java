@@ -2,8 +2,8 @@ package me.fuzzystatic.EventAdministrator.worldedit;
 
 import java.io.File;
 
-import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
-import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.DirectoryStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

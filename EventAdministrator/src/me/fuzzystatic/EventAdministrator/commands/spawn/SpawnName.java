@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.spawn;
 
-import me.fuzzystatic.EventAdministrator.configurations.SpawnConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.SpawnConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderSpawnMap;
 

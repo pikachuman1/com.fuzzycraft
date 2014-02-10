@@ -4,9 +4,9 @@ import java.io.File;
 import java.sql.Connection;
 
 import me.fuzzystatic.EventAdministrator.commands.CommandParser;
-import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
-import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
-import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.DefaultConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.DirectoryStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.listeners.BossDeathListener;
 import me.fuzzystatic.EventAdministrator.listeners.StatsListener;
 import me.fuzzystatic.EventAdministrator.schedules.StartEvent;

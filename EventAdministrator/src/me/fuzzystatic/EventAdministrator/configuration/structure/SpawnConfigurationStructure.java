@@ -1,7 +1,7 @@
-package me.fuzzystatic.EventAdministrator.configurations;
+package me.fuzzystatic.EventAdministrator.configuration.structure;
 
+import me.fuzzystatic.EventAdministrator.configuration.SerializableLocation;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
-import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
 import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 
 import org.bukkit.Location;

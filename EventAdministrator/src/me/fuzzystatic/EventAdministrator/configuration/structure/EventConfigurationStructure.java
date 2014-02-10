@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.configurations;
+package me.fuzzystatic.EventAdministrator.configuration.structure;
 
 import java.io.File;
 import java.util.Map;
@@ -8,9 +8,9 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.fuzzystatic.EventAdministrator.configuration.ConfigAccessor;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableLocation;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
-import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
-import me.fuzzystatic.EventAdministrator.utilities.SerializableLocation;
 import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 
 public class EventConfigurationStructure implements FileStructure {

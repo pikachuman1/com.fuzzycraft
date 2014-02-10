@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.utilities;
+package me.fuzzystatic.EventAdministrator.configuration;
 
 import java.io.File;
 import java.io.IOException;

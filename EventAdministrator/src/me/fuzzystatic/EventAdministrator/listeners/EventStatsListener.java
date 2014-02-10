@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.listeners;
 
-import me.fuzzystatic.EventAdministrator.configurations.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.Entities;
 import me.fuzzystatic.EventAdministrator.maps.BossEventMap;
 import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;

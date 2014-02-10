@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.fuzzystatic.EventAdministrator.configurations.DefaultConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.DefaultConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.utilities.ConsoleLogs;
 
 public class SQLConnection {

@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.configurations;
+package me.fuzzystatic.EventAdministrator.configuration.structure;
 
 import java.util.List;
 import java.util.Map;

@@ -2,7 +2,7 @@ package me.fuzzystatic.EventAdministrator.commands.list;
 
 import java.io.File;
 
-import me.fuzzystatic.EventAdministrator.configurations.DirectoryStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.DirectoryStructure;
 import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import net.minecraft.util.org.apache.commons.io.FilenameUtils;
 

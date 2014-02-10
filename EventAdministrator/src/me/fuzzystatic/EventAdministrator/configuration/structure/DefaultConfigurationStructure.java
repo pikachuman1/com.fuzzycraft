@@ -1,12 +1,12 @@
-package me.fuzzystatic.EventAdministrator.configurations;
+package me.fuzzystatic.EventAdministrator.configuration.structure;
 
 import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.fuzzystatic.EventAdministrator.configuration.ConfigAccessor;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
-import me.fuzzystatic.EventAdministrator.utilities.ConfigAccessor;
 
 public class DefaultConfigurationStructure implements FileStructure {
 
