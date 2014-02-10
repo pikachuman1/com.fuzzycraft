@@ -17,8 +17,8 @@ public class EventLocations extends Command {
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
 		String eventName = new CommandSenderEventMap().get().get(sender);
 		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);
-		if (args.length > 1) {
-			if (hasPermissionNode(sender) && isPlayer(sender)) {
+		if (hasPermissionNode(sender) && isPlayer(sender)) {
+			if (args.length > 1) {
 				if (args[1].equalsIgnoreCase("en") || args[1].equalsIgnoreCase("entrance")) {
 					Player player = (Player) sender;
 					SerializableLocation sl = new SerializableLocation(player.getLocation());

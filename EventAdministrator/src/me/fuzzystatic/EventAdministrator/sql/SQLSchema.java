@@ -33,12 +33,12 @@ public class SQLSchema {
 	}
 	
 	public String playersTable() {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PLAYERS + "`"
+		return "CREATE TABLE IF NOT EXISTS `" + this.prefix + TABLE_PLAYERS + "`"
 				+ "("
 				+ "`" + COLUMN_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`" + COLUMN_PLAYER + "` VARCHAR(16) DEFAULT NULL UNIQUE,"
 				+ "`" + COLUMN_LASTLOGIN + "` INT(10) DEFAULT NULL,"
-				+ "PRIMARY KEY (`id`)"
+				+ "PRIMARY KEY (`" + COLUMN_ID + "`)"
 				+ ")";
 	}
 	
@@ -53,7 +53,7 @@ public class SQLSchema {
 	}
 	
 	public String totalPveStatsTable() {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS_TOTAL + "`"
+		return "CREATE TABLE IF NOT EXISTS `" + this.prefix + TABLE_PVE_STATS_TOTAL + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
@@ -61,7 +61,7 @@ public class SQLSchema {
 				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
-				+ "PRIMARY KEY (`player_id`)"
+				+ "PRIMARY KEY (`" + COLUMN_PLAYER_ID + "`)"
 				+ ")";
 	}
 
@@ -76,14 +76,14 @@ public class SQLSchema {
 	}
 	
 	public String totalPvpStatsTable() {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS_TOTAL + "`"
+		return "CREATE TABLE IF NOT EXISTS `" + this.prefix + TABLE_PVP_STATS_TOTAL + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
-				+ "PRIMARY KEY (`player_id`)"
+				+ "PRIMARY KEY (`" + COLUMN_PLAYER_ID + "`)"
 				+ ")";
 	}
 
@@ -98,7 +98,7 @@ public class SQLSchema {
 	}
 	
 	public String eventPveStatsTable(String eventName) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVE_STATS + "_" + eventName + "`"
+		return "CREATE TABLE IF NOT EXISTS `" + this.prefix + TABLE_PVE_STATS + "_" + eventName + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
@@ -106,7 +106,7 @@ public class SQLSchema {
 				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
-				+ "PRIMARY KEY (`player_id`)"
+				+ "PRIMARY KEY (`" + COLUMN_PLAYER_ID + "`)"
 				+ ")";
 	}
 
@@ -121,14 +121,14 @@ public class SQLSchema {
 	}
 	
 	public String eventPvpStatsTable(String eventName) {
-		return "CREATE TABLE IF NOT EXISTS `" + prefix + TABLE_PVP_STATS + "_" + eventName + "`"
+		return "CREATE TABLE IF NOT EXISTS `" + this.prefix + TABLE_PVP_STATS + "_" + eventName + "`"
 				+ "("
 				+ "`" + COLUMN_PLAYER_ID + "` INT(10) NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "`" + COLUMN_KILLS + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_DEATHS + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_STREAK + "` INT(10) DEFAULT 0,"
 				+ "`" + COLUMN_MAXSTREAK + "` INT(10) DEFAULT 0,"
-				+ "PRIMARY KEY (`player_id`)"
+				+ "PRIMARY KEY (`" + COLUMN_PLAYER_ID + "`)"
 				+ ")";
 	}
 

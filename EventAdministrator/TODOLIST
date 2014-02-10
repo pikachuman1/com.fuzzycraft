@@ -9,3 +9,5 @@ inherited spawns
 random spawn times
 
 if player exists load clipboard to player
+
+make sur eplayer doesnt lose items upon join/leaving event

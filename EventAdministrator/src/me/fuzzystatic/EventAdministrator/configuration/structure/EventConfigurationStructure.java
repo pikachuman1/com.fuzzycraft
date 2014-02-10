@@ -15,21 +15,20 @@ import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 
 public class EventConfigurationStructure implements FileStructure {
 	
-	public static final String EVENT 								= "event";
-	public static final String PASTE_LOCATION 						= EVENT + "." + "pasteLocation";
-	public static final String ENTRANCE 							= EVENT + "." + "entrance";
-	public static final String EXIT 								= EVENT + "." + "exit";
-	public static final String CREATURE_LIMIT 						= EVENT + "." + "creatureLimit";
-	public static final String CYCLE_TIME 							= EVENT + "." + "cycleTime";
-	public static final String NO_AIR 								= EVENT + "." + "noAir";
-	public static final String WORLD_CONDITIONS 					= EVENT + "." + "worldConditions";
+	public static final String PASTE_LOCATION 						= "pasteLocation";
+	public static final String ENTRANCE 							= "entrance";
+	public static final String EXIT 								= "exit";
+	public static final String CREATURE_LIMIT 						= "creatureLimit";
+	public static final String CYCLE_TIME 							= "cycleTime";
+	public static final String NO_AIR 								= "noAir";
+	public static final String WORLD_CONDITIONS 					= "worldConditions";
 	public static final String WORLD_CONDITIONS_TIME 				= WORLD_CONDITIONS + "." + "time";
 	public static final String WORLD_CONDITIONS_TIME_CYCLE_TIME 	= WORLD_CONDITIONS + "." + "timeCycleTime";
-	public static final String START_MESSAGE 						= EVENT + "." + "startMessage";
-	public static final String REMINDER 							= EVENT + "." + "reminder";
+	public static final String START_MESSAGE 						= "startMessage";
+	public static final String REMINDER 							= "reminder";
 	public static final String REMINDER_MESSAGE 					= REMINDER + "." + "message";
 	public static final String REMINDER_CYCLE_TIME 					= REMINDER + '.' + "cycleTime";
-	public static final String AUTO_START 							= EVENT + "." + "autoStart";
+	public static final String AUTO_START 							= "autoStart";
 	
 	private static final int defaultCreatureLimit 					= 201;
 	private static final long defaultCycle 							= 14400;

@@ -11,13 +11,13 @@ import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 public class PlayerItemsConfigurationStructure extends EventConfigurationStructure implements FileStructure {
 
 	public static final String PLAYER_ITEMS 		= "playerItems";
-	public static final String HELM 				= PLAYER_ITEMS + "." + "helm";
-	public static final String CHEST 				= PLAYER_ITEMS + "." + "chest";
+	public static final String HELMET 				= PLAYER_ITEMS + "." + "helm";
+	public static final String CHESTPLATE 			= PLAYER_ITEMS + "." + "chest";
 	public static final String LEGS 				= PLAYER_ITEMS + "." + "legs";
 	public static final String BOOTS 				= PLAYER_ITEMS + "." + "boots";
 	public static final String INVENTORY 			= PLAYER_ITEMS + "." + "inventory";
-	public static final String START_TIME 			= PLAYER_ITEMS + "." + "startTime";
-	public static final String CYCLE_TIME 			= PLAYER_ITEMS + "." + "cycleTime";
+	public static final String INVENTORY_START_TIME = PLAYER_ITEMS + "." + INVENTORY + "." + "startTime";
+	public static final String INVENTORY_CYCLE_TIME = PLAYER_ITEMS + "." + INVENTORY + "." + "cycleTime";
 		
 	private static final long defaultStartTime 		= 30;
 	private static final long defaultCycleTime 		= 0;
@@ -26,17 +26,17 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		super(plugin, eventName);
 	}
 	
-	public void setHelm(Map<String, Object> map) {
-		this.config.set(HELM, map);
+	public void setHelmet(Map<String, Object> map) {
+		this.config.set(HELMET, map);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setChest(Map<String, Object> map) {
-		this.config.set(CHEST, map);
+	public void setChestplate(Map<String, Object> map) {
+		this.config.set(CHESTPLATE, map);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setLegs(Map<String, Object> map) {
+	public void setLeggings(Map<String, Object> map) {
 		this.config.set(LEGS, map);
 		this.configAccessor.saveConfig();
 	}
@@ -51,56 +51,59 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setStartTime(long startTime) {
-		this.config.set(START_TIME, startTime);
+	public void setInventoryStartTime(long startTime) {
+		this.config.set(INVENTORY_START_TIME, startTime);
 		this.configAccessor.saveConfig();
 	}
 	
-	@Override
-	public void setCycleTime(long cycleTime) {
-		this.config.set(CYCLE_TIME, cycleTime);
+	public void setInventoryCycleTime(long cycleTime) {
+		this.config.set(INVENTORY_CYCLE_TIME, cycleTime);
 		this.configAccessor.saveConfig();
 	}
 
 	@Override
 	public boolean createFileStructure() {
 		boolean configAltered = false;
-		if(this.config.get(HELM) == null) {
-			setHelm(null);
+		if(this.config.get(HELMET) == null) {
+			setHelmet(null);
 			configAltered = true;
 		}
-		if(this.config.get(CHEST) == null) {
-			setChest(null);
+		if(this.config.get(CHESTPLATE) == null) {
+			setChestplate(null);
 			configAltered = true;
 		}
 		if(this.config.get(LEGS) == null) {
-			setLegs(null);
+			setLeggings(null);
 			configAltered = true;
 		}
 		if(this.config.get(BOOTS) == null) {
 			setBoots(null);
 			configAltered = true;
 		}
-		if(this.config.get(START_TIME) == null) {
-			setStartTime(defaultStartTime);
+		if(this.config.get(INVENTORY) == null) {
+			setInventory(null);
 			configAltered = true;
 		}
-		if(this.config.get(CYCLE_TIME) == null) {
-			setCycleTime(defaultCycleTime);
+		if(this.config.get(INVENTORY_START_TIME) == null) {
+			setInventoryStartTime(defaultStartTime);
+			configAltered = true;
+		}
+		if(this.config.get(INVENTORY_CYCLE_TIME) == null) {
+			setInventoryCycleTime(defaultCycleTime);
 			configAltered = true;
 		}
 		return configAltered;
 	}
 	
-	public ItemStack getHelm() {
-		return config.getItemStack(HELM);
+	public ItemStack getHelmet() {
+		return config.getItemStack(HELMET);
 	}
 	
-	public ItemStack getChest() {
-		return config.getItemStack(CHEST);
+	public ItemStack getChestplate() {
+		return config.getItemStack(CHESTPLATE);
 	}
 	
-	public ItemStack getLegs() {
+	public ItemStack getLeggings() {
 		return config.getItemStack(LEGS);
 	}
 	
@@ -112,11 +115,11 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		return config.getList(INVENTORY);
 	}
 	
-	public long getStartTime() {
-		return config.getLong(START_TIME);
+	public long getInventoryStartTime() {
+		return config.getLong(INVENTORY_START_TIME);
 	}
 	
-	public long getCycleTime() {
-		return config.getLong(CYCLE_TIME);
+	public long getInventoryCycleTime() {
+		return config.getLong(INVENTORY_CYCLE_TIME);
 	}
 }

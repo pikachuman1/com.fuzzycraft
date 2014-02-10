@@ -10,6 +10,7 @@ import me.fuzzystatic.EventAdministrator.commands.event.EventSave;
 import me.fuzzystatic.EventAdministrator.commands.event.EventStart;
 import me.fuzzystatic.EventAdministrator.commands.event.EventStop;
 import me.fuzzystatic.EventAdministrator.commands.event.EventReminder;
+import me.fuzzystatic.EventAdministrator.commands.event.item.Item;
 import me.fuzzystatic.EventAdministrator.commands.list.List;
 import me.fuzzystatic.EventAdministrator.commands.spawn.Spawn;
 import me.fuzzystatic.EventAdministrator.commands.teleport.Teleport;
@@ -32,26 +33,24 @@ public class CommandParser implements CommandExecutor {
 			if(args.length > 0) {
 				switch(args[0]) {
 				case "as" 			: new EventAutoStart().runCommand(plugin, sender, args); break;
-				case "autostart" 	: new EventAutoStart().runCommand(plugin, sender, args); break;
+				case "autostart" 	: new EventAutoStart().runCommand(plugin, sender, args); break;		
 				case "clear" 		: new EventClear().runCommand(plugin, sender, args); break;
 				case "cycle" 		: new EventCycleTime().runCommand(plugin, sender, args); break;
 				case "load" 		: new EventLoad().runCommand(plugin, sender, args); break;
-				case "loc" 			: new EventLocations().runCommand(plugin, sender, args); break;
-				case "location" 	: new EventLocations().runCommand(plugin, sender, args); break;
 				case "name" 		: new EventName().runCommand(plugin, sender, args); break;
 				case "save" 		: new EventSave().runCommand(plugin, sender, args); break;
 				case "start" 		: new EventStart().runCommand(plugin, sender, args); break;
 				case "stop" 		: new EventStop().runCommand(plugin, sender, args); break;
-				
+				case "loc" 			: new EventLocations().runCommand(plugin, sender, args); break;
+				case "location" 	: new EventLocations().runCommand(plugin, sender, args); break;
+				case "i" 			: new Item().runCommand(plugin, sender, args); break;
+				case "item" 		: new Item().runCommand(plugin, sender, args); break;
 				case "rem" 			: new EventReminder().runCommand(plugin, sender, args); break;
 				case "reminder" 	: new EventReminder().runCommand(plugin, sender, args); break;
-
 				case "s" 			: new Spawn().runCommand(plugin, sender, args); break;
 				case "spawn" 		: new Spawn().runCommand(plugin, sender, args); break;
-
 				case "tp" 			: new Teleport().runCommand(plugin, sender, args); break;
 				case "teleport" 	: new Teleport().runCommand(plugin, sender, args); break;
-				
 				case "l" 			: new List().runCommand(plugin, sender, args); break;
 				case "list" 		: new List().runCommand(plugin, sender, args); break;
 				}
@@ -61,12 +60,13 @@ public class CommandParser implements CommandExecutor {
 				sender.sendMessage(new EventSave().usage());
 				sender.sendMessage(new EventLocations().usage());
 				sender.sendMessage(new EventCycleTime().usage());
+				sender.sendMessage(new Item().usage());
+				sender.sendMessage(new EventReminder().usage());
 				sender.sendMessage(new EventStart().usage());
 				sender.sendMessage(new EventAutoStart().usage());
 				sender.sendMessage(new EventStop().usage());
 				sender.sendMessage(new EventClear().usage());
 				sender.sendMessage(new EventLoad().usage());
-				sender.sendMessage(new EventReminder().usage());
 				sender.sendMessage(new Spawn().usage());
 				sender.sendMessage(new Teleport().usage());
 				sender.sendMessage(new List().usage());
