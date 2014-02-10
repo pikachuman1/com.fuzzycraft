@@ -4,8 +4,8 @@ Scale mobs by number of players with possible algorithms
 
 schedule time?
 
-player stats
-
 inherited spawns
 
 random spawn times
+
+if player exists load clipboard to player

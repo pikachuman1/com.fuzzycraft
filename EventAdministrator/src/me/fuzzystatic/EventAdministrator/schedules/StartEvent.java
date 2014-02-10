@@ -57,8 +57,8 @@ public class StartEvent {
 				}
 				
 				// Start event
+				se.clearEntities();
 				if (wel.paste()) {
-					se.clearEntities();
 					s.start();
 					wc.start();
 					r.start();

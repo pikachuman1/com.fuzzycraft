@@ -1,9 +1,8 @@
 package me.fuzzystatic.EventAdministrator.configurations;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,45 +18,36 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 	public static final String INVENTORY 			= PLAYER_ITEMS + "." + "inventory";
 	public static final String START_TIME 			= PLAYER_ITEMS + "." + "startTime";
 	public static final String CYCLE_TIME 			= PLAYER_ITEMS + "." + "cycleTime";
-	
-	private static final ItemStack bow = new ItemStack(Material.BOW, 1);
-	private static final ItemStack arrows = new ItemStack(Material.ARROW, 64);
-	private static final ItemStack food = new ItemStack(Material.BREAD, 6);
-	
-	private static final List<ItemStack> defaultInventory = new ArrayList<ItemStack>();
-	
+		
 	private static final long defaultStartTime 		= 30;
 	private static final long defaultCycleTime 		= 0;
-	
+		
 	public PlayerItemsConfigurationStructure(JavaPlugin plugin, String eventName) {
 		super(plugin, eventName);
-		defaultInventory.add(bow);
-		defaultInventory.add(arrows);
-		defaultInventory.add(food);
 	}
 	
-	public void setHelm(ItemStack helm) {
-		this.config.set(HELM, helm);
+	public void setHelm(Map<String, Object> map) {
+		this.config.set(HELM, map);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setChest(ItemStack chest) {
-		this.config.set(CHEST, chest);
+	public void setChest(Map<String, Object> map) {
+		this.config.set(CHEST, map);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setLegs(ItemStack legs) {
-		this.config.set(LEGS, legs);
+	public void setLegs(Map<String, Object> map) {
+		this.config.set(LEGS, map);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setBoots(ItemStack boots) {
-		this.config.set(BOOTS, boots);
+	public void setBoots(Map<String, Object> map) {
+		this.config.set(BOOTS, map);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setInventory(List<ItemStack> inventory) {
-		this.config.set(INVENTORY, inventory);
+	public void setInventory(Map<String, Object> map) {
+		this.config.set(INVENTORY, map);
 		this.configAccessor.saveConfig();
 	}
 	
@@ -89,10 +79,6 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		}
 		if(this.config.get(BOOTS) == null) {
 			setBoots(null);
-			configAltered = true;
-		}
-		if(this.config.get(INVENTORY) == null) {
-			setInventory(defaultInventory);
 			configAltered = true;
 		}
 		if(this.config.get(START_TIME) == null) {

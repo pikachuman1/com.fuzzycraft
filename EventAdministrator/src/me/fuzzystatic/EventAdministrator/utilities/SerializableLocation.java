@@ -38,20 +38,16 @@ public class SerializableLocation implements ConfigurationSerializable {
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("world", location.getWorld().getName());
-        map.put("x", location.getX());
-        map.put("y", location.getY());
-        map.put("z", location.getZ());
-        map.put("pitch", Float.floatToIntBits(location.getPitch()));
-        map.put("yaw", Float.floatToIntBits(location.getYaw()));
+        map.put("world", world);
+        map.put("x", x);
+        map.put("y", y);
+        map.put("z", z);
+        map.put("pitch", pitch);
+        map.put("yaw", yaw);
         return map;
     }
     
     public Location getLocation() {
         return this.location;
-    }
-    
-    public World getWorld() {
-        return this.world;
     }
 }
