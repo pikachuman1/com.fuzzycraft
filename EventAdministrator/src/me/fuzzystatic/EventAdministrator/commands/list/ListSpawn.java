@@ -53,7 +53,7 @@ public class ListSpawn extends List {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " s{pawns} <event name>";
+		return super.usage() + " s{pawns} [event name]";
 	}
 	
 }

@@ -37,6 +37,6 @@ public class EventAutoStart extends Command {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " a{uto}s{tart} [true|false]>";
+		return super.usage() + " a{uto}s{tart} [true|false]";
 	}
 }

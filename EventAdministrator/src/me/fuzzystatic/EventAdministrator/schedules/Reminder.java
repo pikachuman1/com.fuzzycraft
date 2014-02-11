@@ -1,13 +1,14 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
 import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.interfaces.SerializableConstants;
 import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Reminder {
+public class Reminder implements SerializableConstants {
 
 	private JavaPlugin plugin;
 	private final String eventName;
@@ -23,7 +24,7 @@ public class Reminder {
 		if (ecs.getReminderCycleTime() >= 0) {
 			int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 				public void run() {
-					Bukkit.getServer().broadcastMessage(ChatColor.GREEN + ecs.getReminderMessage());
+					Bukkit.getServer().broadcastMessage(ChatColor.GREEN + ecs.getReminderMessage().replaceAll(COLOR_CODE_CHAR, REPLACEMENT_COLOR_CODE_CHAR));
 				}
 			}, ecs.getReminderCycleTime() * 20, ecs.getReminderCycleTime() * 20);
 			SchedulerEventMap esm = new SchedulerEventMap();
