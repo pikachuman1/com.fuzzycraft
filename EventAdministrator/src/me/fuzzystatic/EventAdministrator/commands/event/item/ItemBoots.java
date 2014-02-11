@@ -20,10 +20,15 @@ public class ItemBoots extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			SerializableItem si = new SerializableItem(inventory.getBoots());
-			pics.setBoots(si.serialize());
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Boots for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
-			return true;
+			if (inventory.getBoots() != null) {
+				SerializableItem si = new SerializableItem(inventory.getBoots());
+				pics.setBoots(si.serialize());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Boots for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
+				return true;
+			} else {
+				sendMessage(sender, ChatColor.DARK_RED + "No boots equipped. Please equip boots.");
+				return false;
+			}
 		}
 		return false;
 	}

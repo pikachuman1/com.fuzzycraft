@@ -20,10 +20,15 @@ public class ItemChestplate extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			SerializableItem si = new SerializableItem(inventory.getChestplate());
-			pics.setChestplate(si.serialize());
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Chestplate for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
-			return true;
+			if (inventory.getChestplate() != null) {
+				SerializableItem si = new SerializableItem(inventory.getChestplate());
+				pics.setChestplate(si.serialize());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Chestplate for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
+				return true;
+			} else {
+				sendMessage(sender, ChatColor.DARK_RED + "No chestplate equipped. Please equip a chestplate.");
+				return false;
+			}
 		}
 		return false;
 	}
@@ -37,6 +42,6 @@ public class ItemChestplate extends Item {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " c{hest}";
+		return super.usage() + " c{hestplate}";
 	}
 }

@@ -20,11 +20,16 @@ public class ItemHelmet extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			SerializableItem si = new SerializableItem(inventory.getHelmet());
-			pics.setHelmet(si.serialize());
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Helmet for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
-		    inventory.addItem(si.deserialize(pics.getHelmet()));
-			return true;
+			if (inventory.getHelmet() != null) {
+				SerializableItem si = new SerializableItem(inventory.getHelmet());
+				pics.setHelmet(si.serialize());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Helmet for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
+			    inventory.addItem(si.deserialize(pics.getHelmet()));
+				return true;
+			} else {
+				sendMessage(sender, ChatColor.DARK_RED + "No helmet equipped. Please equip a helmet.");
+				return false;
+			}
 		}
 		return false;
 	}

@@ -20,10 +20,15 @@ public class ItemLeggings extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			SerializableItem si = new SerializableItem(inventory.getLeggings());
-			pics.setLeggings(si.serialize());
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Leggings for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
-			return true;
+			if (inventory.getLeggings() != null) {
+				SerializableItem si = new SerializableItem(inventory.getLeggings());
+				pics.setLeggings(si.serialize());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Leggings for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
+				return true;
+			} else {
+				sendMessage(sender, ChatColor.DARK_RED + "No leggings equipped. Please equip leggings.");
+				return false;
+			}
 		}
 		return false;
 	}

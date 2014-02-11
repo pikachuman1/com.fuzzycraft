@@ -3,7 +3,6 @@ package me.fuzzystatic.EventAdministrator.configuration.structure;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
