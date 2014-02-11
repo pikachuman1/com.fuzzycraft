@@ -1,7 +1,6 @@
 package me.fuzzystatic.EventAdministrator.configuration.structure;
 
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,28 +24,28 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		super(plugin, eventName);
 	}
 	
-	public void setHelmet(String string) {
-		this.config.set(HELMET, string);
+	public void setHelmet(String helmet) {
+		this.config.set(HELMET, helmet);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setChestplate(String string) {
-		this.config.set(CHESTPLATE, string);
+	public void setChestplate(String chestplate) {
+		this.config.set(CHESTPLATE, chestplate);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setLeggings(String string) {
-		this.config.set(LEGGINGS, string);
+	public void setLeggings(String leggings) {
+		this.config.set(LEGGINGS, leggings);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setBoots(String string) {
-		this.config.set(BOOTS, string);
+	public void setBoots(String boots) {
+		this.config.set(BOOTS, boots);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setInventory(Map<String, Object> map) {
-		this.config.set(INVENTORY, map);
+	public void setInventory(List<String> itemList) {
+		this.config.set(INVENTORY, itemList);
 		this.configAccessor.saveConfig();
 	}
 	

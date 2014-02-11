@@ -1,11 +1,16 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,7 +24,12 @@ public class ItemInventory extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			//pics.setLeggings(inventory.getContents().serialize());
+			List<String> itemList = new ArrayList<String>();
+			for (ItemStack item : inventory.getContents()) {
+				SerializableItemString sis = new SerializableItemString(item);
+				itemList.add(sis.serialize());
+			}
+			pics.setInventory(itemList);
 			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Inventory for event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has been set.");
 			return true;
 		}

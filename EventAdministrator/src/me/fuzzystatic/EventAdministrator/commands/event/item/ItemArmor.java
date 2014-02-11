@@ -20,16 +20,34 @@ public class ItemArmor extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			SerializableItemString sisHelmet = new SerializableItemString(inventory.getHelmet());
-			SerializableItemString sisChestplate = new SerializableItemString(inventory.getChestplate());
-			SerializableItemString sisLeggings = new SerializableItemString(inventory.getLeggings());
-			SerializableItemString sisBoots = new SerializableItemString(inventory.getBoots());
-			pics.setHelmet(sisHelmet.serialize());
-			pics.setChestplate(sisChestplate.serialize());
-			pics.setLeggings(sisLeggings.serialize());
-			pics.setBoots(sisBoots.serialize());
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Armor for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
-			return true;
+			boolean hasArmor = false;
+			if (inventory.getHelmet() != null) {
+				SerializableItemString sisHelmet = new SerializableItemString(inventory.getHelmet());
+				pics.setHelmet(sisHelmet.serialize());
+				hasArmor = true;
+			}
+			if (inventory.getHelmet() != null) {
+				SerializableItemString sisChestplate = new SerializableItemString(inventory.getChestplate());
+				pics.setChestplate(sisChestplate.serialize());
+				hasArmor = true;
+			}
+			if (inventory.getHelmet() != null) {
+				SerializableItemString sisLeggings = new SerializableItemString(inventory.getLeggings());
+				pics.setLeggings(sisLeggings.serialize());
+				hasArmor = true;
+			}
+			if (inventory.getHelmet() != null) {
+				SerializableItemString sisBoots = new SerializableItemString(inventory.getBoots());
+				pics.setBoots(sisBoots.serialize());
+				hasArmor = true;
+			}
+			if (hasArmor) {
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Armor for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
+				return true;
+			} else {
+				sendMessage(sender, ChatColor.DARK_RED + "No armor equipped. Please equip some armor.");
+				return false;
+			}
 		}
 		return false;
 	}

@@ -1,14 +1,14 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
+import me.fuzzystatic.EventAdministrator.configuration.DeserializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
+import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.Entities;
 import me.fuzzystatic.EventAdministrator.maps.SchedulerEventMap;
 import me.fuzzystatic.EventAdministrator.worldedit.WorldEditLoad;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,27 +24,20 @@ public class PlayerItems {
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
 	}
 	
-	private final ItemStack bow = new ItemStack(Material.BOW, 1);
-	private final ItemStack arrows = new ItemStack(Material.ARROW, 64);
-	private final ItemStack food = new ItemStack(Material.BREAD, 6);
-	
 	public void start() {
 		int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run() {
 				WorldEditLoad wel = new WorldEditLoad(plugin, eventName);
+				PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 				Entities eventEntities = new Entities(ecs.getPasteLocation().getWorld(), wel.getClipboard().getOrigin(), wel.getClipboard().getSize());
 				for (Player player : eventEntities.getPlayers()) {
 					PlayerInventory inventory = player.getInventory();
-				    inventory.addItem(bow);
-				    inventory.addItem(arrows);
-				    inventory.addItem(arrows);
-				    inventory.addItem(arrows);
-				    inventory.addItem(arrows);
-				    inventory.addItem(arrows);
-				    inventory.addItem(arrows);
-				    inventory.addItem(arrows);
-				    inventory.addItem(food);
-				    inventory.addItem(bow);
+					DeserializableItemString dis = new DeserializableItemString();
+					inventory.setHelmet(dis.deserialize(pics.getHelmet()));
+					inventory.setChestplate(dis.deserialize(pics.getChestplate()));
+					inventory.setLeggings(dis.deserialize(pics.getLeggings()));
+					inventory.setBoots(dis.deserialize(pics.getBoots()));
+					for (Object object : pics.getInventory()) inventory.addItem(dis.deserialize(object.toString()));
 				}	
 			}
 		}, 60* 20, 90 * 20);
