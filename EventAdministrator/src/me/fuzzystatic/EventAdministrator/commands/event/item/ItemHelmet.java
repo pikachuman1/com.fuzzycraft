@@ -22,7 +22,7 @@ public class ItemHelmet extends Item {
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getHelmet() != null) {
 				SerializableItemString sis = new SerializableItemString(inventory.getHelmet());
-				pics.setHelmet(sis.serialize());
+				pics.setItem(sis.serialize(), PlayerItemsConfigurationStructure.HELMET);
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Helmet for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 				return true;
 			} else {

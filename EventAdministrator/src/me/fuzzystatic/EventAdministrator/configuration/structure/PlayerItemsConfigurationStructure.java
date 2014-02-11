@@ -24,26 +24,10 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		super(plugin, eventName);
 	}
 	
-	public void setHelmet(String helmet) {
-		this.config.set(HELMET, helmet);
+	public void setItem(StringBuilder stringBuilder, String key) {
+		this.config.set(key, stringBuilder);
 		this.configAccessor.saveConfig();
 	}
-	
-	public void setChestplate(String chestplate) {
-		this.config.set(CHESTPLATE, chestplate);
-		this.configAccessor.saveConfig();
-	}
-	
-	public void setLeggings(String leggings) {
-		this.config.set(LEGGINGS, leggings);
-		this.configAccessor.saveConfig();
-	}
-	
-	public void setBoots(String boots) {
-		this.config.set(BOOTS, boots);
-		this.configAccessor.saveConfig();
-	}
-	
 	public void setInventory(List<String> itemList) {
 		this.config.set(INVENTORY, itemList);
 		this.configAccessor.saveConfig();
@@ -62,22 +46,6 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 	@Override
 	public boolean createFileStructure() {
 		boolean configAltered = false;
-		if(this.config.get(HELMET) == null) {
-			setHelmet(null);
-			configAltered = true;
-		}
-		if(this.config.get(CHESTPLATE) == null) {
-			setChestplate(null);
-			configAltered = true;
-		}
-		if(this.config.get(LEGGINGS) == null) {
-			setLeggings(null);
-			configAltered = true;
-		}
-		if(this.config.get(BOOTS) == null) {
-			setBoots(null);
-			configAltered = true;
-		}
 		if(this.config.get(INVENTORY) == null) {
 			setInventory(null);
 			configAltered = true;
@@ -93,20 +61,8 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		return configAltered;
 	}
 	
-	public String getHelmet() {
-		return config.getString(HELMET);
-	}
-	
-	public String getChestplate() {
-		return config.getString(CHESTPLATE);
-	}
-	
-	public String getLeggings() {
-		return config.getString(LEGGINGS);
-	}
-	
-	public String getBoots() {
-		return config.getString(BOOTS);
+	public String getItem(String key) {
+		return config.getString(key);
 	}
 	
 	public List<?> getInventory() {

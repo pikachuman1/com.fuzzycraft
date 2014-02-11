@@ -9,13 +9,9 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 
 public class DeserializableItemString implements SerializableConstants {
-
-	private static final String LORE_SPLIT = ",";	
-	private static final String DURABILITY_KEY = "durability" + SUB_SPLIT;
-	private static final String DISPLAY_NAME_KEY = "name" + SUB_SPLIT;
-	private static final String LORE_KEY = "lore" + SUB_SPLIT;
 	
 	private ItemStack item;
 	private ItemMeta meta;
@@ -27,7 +23,9 @@ public class DeserializableItemString implements SerializableConstants {
 		this.item.setAmount(Integer.valueOf(array[1]));
 		this.meta = this.item.getItemMeta();
 		for (int i = 2; i < array.length; i++) {
-			if (array[i].contains(DURABILITY_KEY)) {
+			if (array[i].contains(MATERIAL_DATA_KEY)) {
+				//item.setData(array[i].split(SUB_SPLIT)[1]);
+			} else if (array[i].contains(DURABILITY_KEY)) {
 				item.setDurability(Short.valueOf(array[i].split(SUB_SPLIT)[1]));
 			} else if (array[i].contains(DISPLAY_NAME_KEY)) {
 				meta.setDisplayName(array[i].split(SUB_SPLIT)[1].replaceAll("_", " ").replaceAll(REPLACEMENT_COLOR_CODE_CHAR, COLOR_CODE_CHAR));

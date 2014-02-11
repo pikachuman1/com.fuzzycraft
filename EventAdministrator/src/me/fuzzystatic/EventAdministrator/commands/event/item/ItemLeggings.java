@@ -22,7 +22,7 @@ public class ItemLeggings extends Item {
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getLeggings() != null) {
 				SerializableItemString sis = new SerializableItemString(inventory.getLeggings());
-				pics.setLeggings(sis.serialize());
+				pics.setItem(sis.serialize(), PlayerItemsConfigurationStructure.LEGGINGS);
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Leggings for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 				return true;
 			} else {

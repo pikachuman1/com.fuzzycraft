@@ -23,22 +23,22 @@ public class ItemArmor extends Item {
 			boolean hasArmor = false;
 			if (inventory.getHelmet() != null) {
 				SerializableItemString sisHelmet = new SerializableItemString(inventory.getHelmet());
-				pics.setHelmet(sisHelmet.serialize());
+				pics.setItem(sisHelmet.serialize(), PlayerItemsConfigurationStructure.HELMET);
 				hasArmor = true;
 			}
 			if (inventory.getHelmet() != null) {
 				SerializableItemString sisChestplate = new SerializableItemString(inventory.getChestplate());
-				pics.setChestplate(sisChestplate.serialize());
+				pics.setItem(sisChestplate.serialize(), PlayerItemsConfigurationStructure.CHESTPLATE);
 				hasArmor = true;
 			}
 			if (inventory.getHelmet() != null) {
 				SerializableItemString sisLeggings = new SerializableItemString(inventory.getLeggings());
-				pics.setLeggings(sisLeggings.serialize());
+				pics.setItem(sisLeggings.serialize(), PlayerItemsConfigurationStructure.LEGGINGS);
 				hasArmor = true;
 			}
 			if (inventory.getHelmet() != null) {
 				SerializableItemString sisBoots = new SerializableItemString(inventory.getBoots());
-				pics.setBoots(sisBoots.serialize());
+				pics.setItem(sisBoots.serialize(), PlayerItemsConfigurationStructure.BOOTS);
 				hasArmor = true;
 			}
 			if (hasArmor) {

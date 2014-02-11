@@ -22,7 +22,7 @@ public class ItemBoots extends Item {
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getBoots() != null) {
 				SerializableItemString sis = new SerializableItemString(inventory.getBoots());
-				pics.setBoots(sis.serialize());
+				pics.setItem(sis.serialize(), PlayerItemsConfigurationStructure.BOOTS);
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Boots for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 				return true;
 			} else {

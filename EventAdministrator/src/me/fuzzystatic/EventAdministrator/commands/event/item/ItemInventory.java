@@ -11,7 +11,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,11 +22,12 @@ public class ItemInventory extends Item {
 			String eventName = new CommandSenderEventMap().get().get(sender);
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
-			PlayerInventory inventory = player.getInventory();
 			List<String> itemList = new ArrayList<String>();
-			for (ItemStack item : inventory.getContents()) {
-				SerializableItemString sis = new SerializableItemString(item);
-				itemList.add(sis.serialize());
+			for (ItemStack item : player.getInventory().getContents()) {
+				if (item != null) {
+					SerializableItemString sis = new SerializableItemString(item);
+					itemList.add(sis.serialize().toString());
+				}
 			}
 			pics.setInventory(itemList);
 			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Inventory for event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has been set.");

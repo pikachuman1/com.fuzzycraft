@@ -22,7 +22,7 @@ public class ItemChestplate extends Item {
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getChestplate() != null) {
 				SerializableItemString sis = new SerializableItemString(inventory.getChestplate());
-				pics.setChestplate(sis.serialize());
+				pics.setItem(sis.serialize(), PlayerItemsConfigurationStructure.CHESTPLATE);
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Chestplate for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 				return true;
 			} else {

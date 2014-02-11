@@ -33,10 +33,10 @@ public class PlayerItems {
 				for (Player player : eventEntities.getPlayers()) {
 					PlayerInventory inventory = player.getInventory();
 					DeserializableItemString dis = new DeserializableItemString();
-					inventory.setHelmet(dis.deserialize(pics.getHelmet()));
-					inventory.setChestplate(dis.deserialize(pics.getChestplate()));
-					inventory.setLeggings(dis.deserialize(pics.getLeggings()));
-					inventory.setBoots(dis.deserialize(pics.getBoots()));
+					inventory.setHelmet(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.HELMET)));
+					inventory.setChestplate(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.CHESTPLATE)));
+					inventory.setLeggings(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.LEGGINGS)));
+					inventory.setBoots(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.BOOTS)));
 					for (Object object : pics.getInventory()) inventory.addItem(dis.deserialize(object.toString()));
 				}	
 			}
