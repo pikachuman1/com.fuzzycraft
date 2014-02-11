@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.configuration;
+package me.fuzzystatic.EventAdministrator.configuration.serializable;
 
 import java.util.ArrayList;
 import java.util.List;

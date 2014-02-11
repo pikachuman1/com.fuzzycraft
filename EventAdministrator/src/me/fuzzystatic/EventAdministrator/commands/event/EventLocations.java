@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
 import me.fuzzystatic.EventAdministrator.commands.Command;
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
+import me.fuzzystatic.EventAdministrator.configuration.serializable.SerializableLocationMap;
 import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 

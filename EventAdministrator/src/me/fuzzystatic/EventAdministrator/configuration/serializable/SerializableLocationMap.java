@@ -1,4 +1,4 @@
-package me.fuzzystatic.EventAdministrator.configuration;
+package me.fuzzystatic.EventAdministrator.configuration.serializable;
 
 import java.util.HashMap;
 import java.util.Map;

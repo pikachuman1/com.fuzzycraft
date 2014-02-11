@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.fuzzystatic.EventAdministrator.configuration.ConfigAccessor;
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
+import me.fuzzystatic.EventAdministrator.configuration.serializable.SerializableLocationMap;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 

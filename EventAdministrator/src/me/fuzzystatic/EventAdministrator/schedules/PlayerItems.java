@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.schedules;
 
-import me.fuzzystatic.EventAdministrator.configuration.DeserializableItemString;
+import me.fuzzystatic.EventAdministrator.configuration.serializable.DeserializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.entities.Entities;

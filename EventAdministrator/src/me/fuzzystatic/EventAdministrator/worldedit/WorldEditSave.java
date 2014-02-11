@@ -2,7 +2,7 @@ package me.fuzzystatic.EventAdministrator.worldedit;
 
 import java.io.IOException;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
+import me.fuzzystatic.EventAdministrator.configuration.serializable.SerializableLocationMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

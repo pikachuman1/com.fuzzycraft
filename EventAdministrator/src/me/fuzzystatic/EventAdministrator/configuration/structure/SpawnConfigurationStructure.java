@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.configuration.structure;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
+import me.fuzzystatic.EventAdministrator.configuration.serializable.SerializableLocationMap;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 
