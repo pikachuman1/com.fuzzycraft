@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -21,8 +21,8 @@ public class ItemLeggings extends Item {
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getLeggings() != null) {
-				SerializableItem si = new SerializableItem(inventory.getLeggings());
-				pics.setLeggings(si.serialize());
+				SerializableItemString sis = new SerializableItemString(inventory.getLeggings());
+				pics.setLeggings(sis.serialize());
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Leggings for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 				return true;
 			} else {

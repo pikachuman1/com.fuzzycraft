@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.configuration.structure;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocation;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 
@@ -76,8 +76,8 @@ public class SpawnConfigurationStructure extends EventConfigurationStructure imp
 	}
 	
 	public void setLocation(Location location) {
-   		SerializableLocation sl = new SerializableLocation(location);
-		new YMLLocation().setLocation(sl.serialize(), this.config, locationYML);
+   		SerializableLocationMap slm = new SerializableLocationMap(location);
+		new YMLLocation().setLocation(slm.serialize(), this.config, locationYML);
 		this.configAccessor.saveConfig();
 	}
 	
@@ -137,7 +137,7 @@ public class SpawnConfigurationStructure extends EventConfigurationStructure imp
 	
 	public Location getLocation() {
 		YMLLocation ymlLocation = new YMLLocation();
-		return new SerializableLocation(ymlLocation.getLocation(config, locationYML)).getLocation();
+		return new SerializableLocationMap(ymlLocation.getLocation(config, locationYML)).getLocation();
 	}
 	
 	public EntityType getMob() {

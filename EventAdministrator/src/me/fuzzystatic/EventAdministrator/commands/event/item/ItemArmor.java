@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -20,14 +20,14 @@ public class ItemArmor extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			SerializableItem siHelmet = new SerializableItem(inventory.getHelmet());
-			SerializableItem siChestplate = new SerializableItem(inventory.getChestplate());
-			SerializableItem siLeggings = new SerializableItem(inventory.getLeggings());
-			SerializableItem siBoots = new SerializableItem(inventory.getBoots());
-			pics.setHelmet(siHelmet.serialize());
-			pics.setChestplate(siChestplate.serialize());
-			pics.setLeggings(siLeggings.serialize());
-			pics.setBoots(siBoots.serialize());
+			SerializableItemString sisHelmet = new SerializableItemString(inventory.getHelmet());
+			SerializableItemString sisChestplate = new SerializableItemString(inventory.getChestplate());
+			SerializableItemString sisLeggings = new SerializableItemString(inventory.getLeggings());
+			SerializableItemString sisBoots = new SerializableItemString(inventory.getBoots());
+			pics.setHelmet(sisHelmet.serialize());
+			pics.setChestplate(sisChestplate.serialize());
+			pics.setLeggings(sisLeggings.serialize());
+			pics.setBoots(sisBoots.serialize());
 			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Armor for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 			return true;
 		}

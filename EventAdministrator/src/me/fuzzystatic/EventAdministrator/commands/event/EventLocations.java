@@ -1,7 +1,7 @@
 package me.fuzzystatic.EventAdministrator.commands.event;
 
 import me.fuzzystatic.EventAdministrator.commands.Command;
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocation;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
 import me.fuzzystatic.EventAdministrator.configuration.structure.EventConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -21,13 +21,13 @@ public class EventLocations extends Command {
 			if (args.length > 1) {
 				if (args[1].equalsIgnoreCase("en") || args[1].equalsIgnoreCase("entrance")) {
 					Player player = (Player) sender;
-					SerializableLocation sl = new SerializableLocation(player.getLocation());
+					SerializableLocationMap sl = new SerializableLocationMap(player.getLocation());
 					ecs.setEntrance(sl.serialize());
 					sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event entrance set.");
 				}
 				if (args[1].equalsIgnoreCase("ex") || args[1].equalsIgnoreCase("exit")) {
 					Player player = (Player) sender;
-					SerializableLocation sl = new SerializableLocation(player.getLocation());
+					SerializableLocationMap sl = new SerializableLocationMap(player.getLocation());
 					ecs.setExit(sl.serialize());
 					sender.sendMessage(ChatColor.LIGHT_PURPLE + "New event exit set.");
 				}

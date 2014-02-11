@@ -8,14 +8,14 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
  
-public class SerializableLocation implements ConfigurationSerializable {
+public class SerializableLocationMap implements ConfigurationSerializable {
     
 	private final World world;
 	private final double x, y, z;
 	private final float yaw, pitch;
 	private final Location location;
  
-    public SerializableLocation(Location location) {
+    public SerializableLocationMap(Location location) {
     	this.world = location.getWorld();
     	this.x = location.getBlockX();
     	this.y = location.getBlockY();
@@ -25,7 +25,7 @@ public class SerializableLocation implements ConfigurationSerializable {
         this.location = location;
     }
  
-    public SerializableLocation(Map<String, Object> map) {
+    public SerializableLocationMap(Map<String, Object> map) {
     	this.world = Bukkit.getWorld(map.get("world").toString());
     	this.x = (Double) map.get("x");
     	this.y = (Double) map.get("y");

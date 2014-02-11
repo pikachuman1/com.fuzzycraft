@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -21,8 +21,8 @@ public class ItemChestplate extends Item {
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getChestplate() != null) {
-				SerializableItem si = new SerializableItem(inventory.getChestplate());
-				pics.setChestplate(si.serialize());
+				SerializableItemString sis = new SerializableItemString(inventory.getChestplate());
+				pics.setChestplate(sis.serialize());
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Chestplate for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 				return true;
 			} else {

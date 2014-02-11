@@ -10,7 +10,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class SerializableItem {
+public class SerializableItemString {
 	
 	private static final String MAIN_SPLIT = " ";
 	private static final String SUB_SPLIT = ":";
@@ -33,7 +33,7 @@ public class SerializableItem {
 	private String itemBuilder = new String();
 	private List<String> loreBuilder = new ArrayList<String>();
 		
-	public SerializableItem(ItemStack item) {
+	public SerializableItemString(ItemStack item) {
 		this.type = item.getType();
         this.amount = item.getAmount();
         this.durability = item.getDurability();

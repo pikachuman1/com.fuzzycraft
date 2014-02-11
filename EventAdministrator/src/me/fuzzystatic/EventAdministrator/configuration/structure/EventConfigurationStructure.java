@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.fuzzystatic.EventAdministrator.configuration.ConfigAccessor;
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocation;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
 import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 import me.fuzzystatic.EventAdministrator.utilities.YMLLocation;
 
@@ -157,7 +157,7 @@ public class EventConfigurationStructure implements FileStructure {
 	
 	public Location getPasteLocation() {
 		Map<String, Object> map = new YMLLocation().getLocation(config, PASTE_LOCATION);
-		return new SerializableLocation(map).getLocation();
+		return new SerializableLocationMap(map).getLocation();
 	}
 	
 	public boolean existsPasteLocation() {
@@ -170,12 +170,12 @@ public class EventConfigurationStructure implements FileStructure {
 	
 	public Location getEntrance() {
 		Map<String, Object> map = new YMLLocation().getLocation(config, ENTRANCE);
-		return new SerializableLocation(map).getLocation();
+		return new SerializableLocationMap(map).getLocation();
 	}
 	
 	public Location getExit() {
 		Map<String, Object> map = new YMLLocation().getLocation(config, EXIT);
-		return new SerializableLocation(map).getLocation();
+		return new SerializableLocationMap(map).getLocation();
 	}
 	
 	public int getCreatureLimit() {

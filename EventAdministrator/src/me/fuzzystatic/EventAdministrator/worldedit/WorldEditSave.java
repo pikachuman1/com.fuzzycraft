@@ -2,7 +2,7 @@ package me.fuzzystatic.EventAdministrator.worldedit;
 
 import java.io.IOException;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableLocation;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableLocationMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -29,10 +29,10 @@ public class WorldEditSave extends WorldEdit {
 	}
 	
 	public boolean save(Player player) {
-		SerializableLocation sl = new SerializableLocation(player.getLocation());
+		SerializableLocationMap slm = new SerializableLocationMap(player.getLocation());
 		try {
 			SchematicFormat.MCEDIT.save(getClipboard(player), super.file);
-			this.ecs.setPasteLocation(sl.serialize());
+			this.ecs.setPasteLocation(slm.serialize());
 			return true;
 		} catch (IOException | DataException e) {
 			player.sendMessage(ChatColor.DARK_RED + "Could not load schematic.");

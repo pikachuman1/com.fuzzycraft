@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -21,10 +21,10 @@ public class ItemHelmet extends Item {
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getHelmet() != null) {
-				SerializableItem si = new SerializableItem(inventory.getHelmet());
-				pics.setHelmet(si.serialize());
+				SerializableItemString sis = new SerializableItemString(inventory.getHelmet());
+				pics.setHelmet(sis.serialize());
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Helmet for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
-			    inventory.addItem(si.deserialize(pics.getHelmet()));
+			    inventory.addItem(sis.deserialize(pics.getHelmet()));
 				return true;
 			} else {
 				sendMessage(sender, ChatColor.DARK_RED + "No helmet equipped. Please equip a helmet.");

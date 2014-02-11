@@ -1,6 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
-import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItemString;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -21,8 +21,8 @@ public class ItemBoots extends Item {
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
 			if (inventory.getBoots() != null) {
-				SerializableItem si = new SerializableItem(inventory.getBoots());
-				pics.setBoots(si.serialize());
+				SerializableItemString sis = new SerializableItemString(inventory.getBoots());
+				pics.setBoots(sis.serialize());
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Boots for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 				return true;
 			} else {
