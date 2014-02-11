@@ -9,7 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
+//import org.bukkit.material.MaterialData;
 
 public class DeserializableItemString implements SerializableConstants {
 	
@@ -22,6 +22,7 @@ public class DeserializableItemString implements SerializableConstants {
 		this.item = new ItemStack(Material.getMaterial(array[0]));
 		this.item.setAmount(Integer.valueOf(array[1]));
 		this.meta = this.item.getItemMeta();
+		//MaterialData data = item.getData();
 		for (int i = 2; i < array.length; i++) {
 			if (array[i].contains(MATERIAL_DATA_KEY)) {
 				//item.setData(array[i].split(SUB_SPLIT)[1]);

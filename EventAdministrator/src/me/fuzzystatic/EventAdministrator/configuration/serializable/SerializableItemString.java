@@ -10,12 +10,12 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
+//import org.bukkit.material.MaterialData;
 
 public class SerializableItemString implements SerializableConstants {
 	
 	private final Material type;
-	private final MaterialData data;
+	//private final MaterialData data;
 	private final Integer amount;
 	private final Short durability;
 	private final String displayName;
@@ -25,7 +25,7 @@ public class SerializableItemString implements SerializableConstants {
 		
 	public SerializableItemString(ItemStack item) {
 		this.type = item.getType();
-		this.data = item.getData();
+		//this.data = item.getData();
         this.amount = item.getAmount();
         this.durability = item.getDurability();
         ItemMeta meta = item.getItemMeta();
@@ -38,7 +38,7 @@ public class SerializableItemString implements SerializableConstants {
 		StringBuilder itemBuilder = new StringBuilder();
         if(this.type != null) itemBuilder.append(this.type.toString());
         if(this.amount != null) itemBuilder.append(MAIN_SPLIT).append(this.amount);
-        if(this.data != null) itemBuilder.append(MAIN_SPLIT).append(MATERIAL_DATA_KEY).append(this.data);
+        //if(this.data != null) itemBuilder.append(MAIN_SPLIT).append(MATERIAL_DATA_KEY).append(this.data);
         if(this.durability != null) itemBuilder.append(MAIN_SPLIT).append(DURABILITY_KEY).append(this.durability);
         if(this.displayName != null) itemBuilder.append(MAIN_SPLIT).append(DISPLAY_NAME_KEY).append(this.displayName.replaceAll(" ", "_").replaceAll(COLOR_CODE_CHAR, REPLACEMENT_COLOR_CODE_CHAR));
         if(this.lore != null) itemBuilder.append(MAIN_SPLIT).append(LORE_KEY).append(this.lore.toString().replaceAll("\\, ", "\\,").replaceAll("\\[", "").replaceAll("\\]", "").replaceAll(" ", "_").replaceAll(COLOR_CODE_CHAR, REPLACEMENT_COLOR_CODE_CHAR));
