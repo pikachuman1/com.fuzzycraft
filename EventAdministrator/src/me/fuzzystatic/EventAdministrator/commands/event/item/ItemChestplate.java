@@ -1,5 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -19,8 +20,9 @@ public class ItemChestplate extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			pics.setChestplate(inventory.getChestplate().serialize());
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Chestplate for event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has been set.");
+			SerializableItem si = new SerializableItem(inventory.getChestplate());
+			pics.setChestplate(si.serialize());
+			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Chestplate for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 			return true;
 		}
 		return false;
@@ -28,13 +30,13 @@ public class ItemChestplate extends Item {
 	
 	@Override
 	public Permission permission() {
-		Permission permission = new Permission("chestplate");
+		Permission permission = new Permission("chest");
 		permission.addParent(super.permission(), true);
 		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return super.usage() + " c{hestplate}";
+		return super.usage() + " c{hest}";
 	}
 }

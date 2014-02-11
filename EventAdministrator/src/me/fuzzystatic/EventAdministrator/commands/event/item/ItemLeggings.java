@@ -1,5 +1,6 @@
 package me.fuzzystatic.EventAdministrator.commands.event.item;
 
+import me.fuzzystatic.EventAdministrator.configuration.SerializableItem;
 import me.fuzzystatic.EventAdministrator.configuration.structure.PlayerItemsConfigurationStructure;
 import me.fuzzystatic.EventAdministrator.maps.CommandSenderEventMap;
 
@@ -19,8 +20,9 @@ public class ItemLeggings extends Item {
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
-			pics.setLeggings(inventory.getLeggings().serialize());
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Leggings for event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has been set.");
+			SerializableItem si = new SerializableItem(inventory.getLeggings());
+			pics.setLeggings(si.serialize());
+			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Leggings for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
 			return true;
 		}
 		return false;
@@ -28,13 +30,13 @@ public class ItemLeggings extends Item {
 	
 	@Override
 	public Permission permission() {
-		Permission permission = new Permission("leggings");
+		Permission permission = new Permission("legs");
 		permission.addParent(super.permission(), true);
 		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return super.usage() + " l{eggings}";
+		return super.usage() + " l{egs}";
 	}
 }

@@ -11,9 +11,9 @@ import me.fuzzystatic.EventAdministrator.interfaces.FileStructure;
 public class PlayerItemsConfigurationStructure extends EventConfigurationStructure implements FileStructure {
 
 	public static final String PLAYER_ITEMS 		= "playerItems";
-	public static final String HELMET 				= PLAYER_ITEMS + "." + "helm";
-	public static final String CHESTPLATE 			= PLAYER_ITEMS + "." + "chest";
-	public static final String LEGS 				= PLAYER_ITEMS + "." + "legs";
+	public static final String HELMET 				= PLAYER_ITEMS + "." + "helmet";
+	public static final String CHESTPLATE 			= PLAYER_ITEMS + "." + "chestplate";
+	public static final String LEGGINGS 			= PLAYER_ITEMS + "." + "leggings";
 	public static final String BOOTS 				= PLAYER_ITEMS + "." + "boots";
 	public static final String INVENTORY 			= PLAYER_ITEMS + "." + "inventory";
 	public static final String INVENTORY_START_TIME = PLAYER_ITEMS + "." + INVENTORY + "." + "startTime";
@@ -26,23 +26,23 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		super(plugin, eventName);
 	}
 	
-	public void setHelmet(Map<String, Object> map) {
-		this.config.set(HELMET, map);
+	public void setHelmet(String string) {
+		this.config.set(HELMET, string);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setChestplate(Map<String, Object> map) {
-		this.config.set(CHESTPLATE, map);
+	public void setChestplate(String string) {
+		this.config.set(CHESTPLATE, string);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setLeggings(Map<String, Object> map) {
-		this.config.set(LEGS, map);
+	public void setLeggings(String string) {
+		this.config.set(LEGGINGS, string);
 		this.configAccessor.saveConfig();
 	}
 	
-	public void setBoots(Map<String, Object> map) {
-		this.config.set(BOOTS, map);
+	public void setBoots(String string) {
+		this.config.set(BOOTS, string);
 		this.configAccessor.saveConfig();
 	}
 	
@@ -72,7 +72,7 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 			setChestplate(null);
 			configAltered = true;
 		}
-		if(this.config.get(LEGS) == null) {
+		if(this.config.get(LEGGINGS) == null) {
 			setLeggings(null);
 			configAltered = true;
 		}
@@ -95,20 +95,20 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		return configAltered;
 	}
 	
-	public ItemStack getHelmet() {
-		return config.getItemStack(HELMET);
+	public String getHelmet() {
+		return config.getString(HELMET);
 	}
 	
-	public ItemStack getChestplate() {
-		return config.getItemStack(CHESTPLATE);
+	public String getChestplate() {
+		return config.getString(CHESTPLATE);
 	}
 	
-	public ItemStack getLeggings() {
-		return config.getItemStack(LEGS);
+	public String getLeggings() {
+		return config.getString(LEGGINGS);
 	}
 	
-	public ItemStack getBoots() {
-		return config.getItemStack(BOOTS);
+	public String getBoots() {
+		return config.getString(BOOTS);
 	}
 	
 	public List<?> getInventory() {
