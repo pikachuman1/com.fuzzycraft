@@ -17,18 +17,20 @@ public class PlayerItems {
 	private JavaPlugin plugin;
 	private final String eventName;
 	private final EventConfigurationStructure ecs;
+	private final PlayerItemsConfigurationStructure pics;
 	
 	public PlayerItems(JavaPlugin plugin, String eventName) {
 		this.plugin = plugin;
 		this.eventName = eventName;
 		this.ecs = new EventConfigurationStructure(plugin, eventName);
+		this.pics = new PlayerItemsConfigurationStructure(plugin, eventName);
+
 	}
 	
 	public void start() {
 		int id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run() {
 				WorldEditLoad wel = new WorldEditLoad(plugin, eventName);
-				PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 				Entities eventEntities = new Entities(ecs.getPasteLocation().getWorld(), wel.getClipboard().getOrigin(), wel.getClipboard().getSize());
 				for (Player player : eventEntities.getPlayers()) {
 					PlayerInventory inventory = player.getInventory();
@@ -40,7 +42,7 @@ public class PlayerItems {
 					for (Object object : pics.getInventoryItems()) inventory.addItem(dis.deserialize(object.toString()));
 				}	
 			}
-		}, 60* 20, 90 * 20);
+		}, pics.getInventoryStartTime() * 20, pics.getInventoryCycleTime() * 20);
 		SchedulerEventMap esm = new SchedulerEventMap();
 		esm.set(id, eventName);
 	}
