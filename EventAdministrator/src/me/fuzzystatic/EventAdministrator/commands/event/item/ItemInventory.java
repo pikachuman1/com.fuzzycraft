@@ -26,7 +26,12 @@ public class ItemInventory extends Item {
 			return true;
 		} else {
 			if (hasPermissionNode(sender) && isPlayer(sender)) {
-				String eventName = new CommandSenderEventMap().get().get(sender);
+				String eventName; 
+				if(args.length > 2) {
+					eventName = args[2];
+				} else {
+					eventName = new CommandSenderEventMap().get().get(sender);
+				}
 				PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 				pics.createFileStructure();
 				Player player = (Player) sender;
@@ -54,6 +59,6 @@ public class ItemInventory extends Item {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " i{nventory}";
+		return super.usage() + " i{nventory} [event name]";
 	}
 }

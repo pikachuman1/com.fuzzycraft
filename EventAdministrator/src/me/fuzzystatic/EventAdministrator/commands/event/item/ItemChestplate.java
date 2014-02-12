@@ -16,7 +16,12 @@ public class ItemChestplate extends Item {
 	@Override
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
 		if (hasPermissionNode(sender) && isPlayer(sender)) {
-			String eventName = new CommandSenderEventMap().get().get(sender);
+			String eventName; 
+			if (args.length > 2) {
+				eventName = args[2];
+			} else {
+				eventName = new CommandSenderEventMap().get().get(sender);
+			}
 			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
 			Player player = (Player) sender;
 			PlayerInventory inventory = player.getInventory();
@@ -42,6 +47,6 @@ public class ItemChestplate extends Item {
 	
 	@Override
 	public String usage() {
-		return super.usage() + " c{hestplate}";
+		return super.usage() + " c{hestplate} [event name]";
 	}
 }
