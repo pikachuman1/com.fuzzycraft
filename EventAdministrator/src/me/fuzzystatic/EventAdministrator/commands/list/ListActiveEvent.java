@@ -13,7 +13,6 @@ public class ListActiveEvent extends ListEvent {
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
 		if (hasPermissionNode(sender)) {
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + "Active events on this server:");
-
 			for (String activeEvent : new SchedulerEventMap().getUniqueValues()) {
 				sender.sendMessage(ChatColor.DARK_AQUA + activeEvent);
 			}

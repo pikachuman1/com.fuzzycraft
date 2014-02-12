@@ -18,20 +18,29 @@ public class ItemInventory extends Item {
 	
 	@Override
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
-		if (hasPermissionNode(sender) && isPlayer(sender)) {
-			String eventName = new CommandSenderEventMap().get().get(sender);
-			PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
-			Player player = (Player) sender;
-			List<String> itemList = new ArrayList<String>();
-			for (ItemStack item : player.getInventory().getContents()) {
-				if (item != null) {
-					SerializableItemString sis = new SerializableItemString(item);
-					itemList.add(sis.serialize().toString());
-				}
+		if(args.length > 2) {
+			switch(args[2]) {
+			case "cycle" : new ItemInventoryCycleTime().runCommand(plugin, sender, args); break;
+			case "start" : new ItemInventoryStartTime().runCommand(plugin, sender, args); break;
 			}
-			pics.setInventory(itemList);
-			sendMessage(sender, ChatColor.LIGHT_PURPLE + "Inventory for event " + ChatColor.DARK_AQUA + args[1] + ChatColor.LIGHT_PURPLE + " has been set.");
 			return true;
+		} else {
+			if (hasPermissionNode(sender) && isPlayer(sender)) {
+				String eventName = new CommandSenderEventMap().get().get(sender);
+				PlayerItemsConfigurationStructure pics = new PlayerItemsConfigurationStructure(plugin, eventName);
+				pics.createFileStructure();
+				Player player = (Player) sender;
+				List<String> itemList = new ArrayList<String>();
+				for (ItemStack item : player.getInventory().getContents()) {
+					if (item != null) {
+						SerializableItemString sis = new SerializableItemString(item);
+						itemList.add(sis.serialize().toString());
+					}
+				}
+				pics.setInventoryItems(itemList);
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Inventory for event " + ChatColor.DARK_AQUA + eventName + ChatColor.LIGHT_PURPLE + " has been set.");
+				return true;
+			}
 		}
 		return false;
 	}

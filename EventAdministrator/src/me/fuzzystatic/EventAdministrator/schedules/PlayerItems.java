@@ -33,11 +33,11 @@ public class PlayerItems {
 				for (Player player : eventEntities.getPlayers()) {
 					PlayerInventory inventory = player.getInventory();
 					DeserializableItemString dis = new DeserializableItemString();
-					if (inventory.getHelmet() == null) inventory.setHelmet(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.HELMET)));
-					if (inventory.getChestplate() == null) inventory.setChestplate(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.CHESTPLATE)));
-					if (inventory.getLeggings() == null) inventory.setLeggings(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.LEGGINGS)));
-					if (inventory.getBoots() == null) inventory.setBoots(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.BOOTS)));
-					for (Object object : pics.getInventory()) inventory.addItem(dis.deserialize(object.toString()));
+					if (inventory.getHelmet() == null && pics.hasItem(PlayerItemsConfigurationStructure.HELMET)) inventory.setHelmet(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.HELMET)));
+					if (inventory.getChestplate() == null && pics.hasItem(PlayerItemsConfigurationStructure.CHESTPLATE)) inventory.setChestplate(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.CHESTPLATE)));
+					if (inventory.getLeggings() == null && pics.hasItem(PlayerItemsConfigurationStructure.LEGGINGS)) inventory.setLeggings(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.LEGGINGS)));
+					if (inventory.getBoots() == null && pics.hasItem(PlayerItemsConfigurationStructure.BOOTS)) inventory.setBoots(dis.deserialize(pics.getItem(PlayerItemsConfigurationStructure.BOOTS)));
+					for (Object object : pics.getInventoryItems()) inventory.addItem(dis.deserialize(object.toString()));
 				}	
 			}
 		}, 60* 20, 90 * 20);

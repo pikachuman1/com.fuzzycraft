@@ -13,18 +13,18 @@ public class SpawnCycleTime extends Spawn {
 	
 	@Override
 	public boolean runCommand(JavaPlugin plugin, CommandSender sender, String args[]) { 
-		String eventName = new CommandSenderEventMap().get().get(sender);
-		String spawnName = new CommandSenderEventMap().get().get(sender);
-		EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
-		ecs.createFileStructure();
-		SpawnConfigurationStructure scs = new SpawnConfigurationStructure(plugin, eventName, spawnName);
-		scs.createFileStructure();
 		if (hasPermissionNode(sender)) {
+			String eventName = new CommandSenderEventMap().get().get(sender);
+			String spawnName = new CommandSenderEventMap().get().get(sender);
+			EventConfigurationStructure ecs = new EventConfigurationStructure(plugin, eventName);	
+			ecs.createFileStructure();
+			SpawnConfigurationStructure scs = new SpawnConfigurationStructure(plugin, eventName, spawnName);
+			scs.createFileStructure();
 			if (args.length > 2) {
 	    		scs.setCycleTime(Long.valueOf(args[2]));
 				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Cycle set to " + ChatColor.DARK_AQUA + args[2] + ChatColor.LIGHT_PURPLE + " for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + ".");
 			} else {
-				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current cycle for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + scs.getAmount() + ChatColor.LIGHT_PURPLE + ". TO SET: " + usage());
+				sendMessage(sender, ChatColor.LIGHT_PURPLE + "Current cycle for spawn " + ChatColor.DARK_AQUA + spawnName + ChatColor.LIGHT_PURPLE + " is " + ChatColor.DARK_AQUA + scs.getCycleTime() + ChatColor.LIGHT_PURPLE + ". TO SET: " + usage());
 			}
 			return true;
 		}
@@ -33,13 +33,13 @@ public class SpawnCycleTime extends Spawn {
 	
 	@Override
 	public Permission permission() {
-		Permission permission = new Permission("cycle");
+		Permission permission = new Permission("start");
 		permission.addParent(super.permission(), true);
 		return permission;
 	}
 	
 	@Override
 	public String usage() {
-		return super.usage() + " cycle <time (seconds)>";
+		return super.usage() + " start <time (seconds)>";
 	}
 }

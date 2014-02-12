@@ -14,8 +14,9 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 	public static final String LEGGINGS 			= PLAYER_ITEMS + "." + "leggings";
 	public static final String BOOTS 				= PLAYER_ITEMS + "." + "boots";
 	public static final String INVENTORY 			= PLAYER_ITEMS + "." + "inventory";
-	public static final String INVENTORY_START_TIME = PLAYER_ITEMS + "." + INVENTORY + "." + "startTime";
-	public static final String INVENTORY_CYCLE_TIME = PLAYER_ITEMS + "." + INVENTORY + "." + "cycleTime";
+	public static final String INVENTORY_ITEMS 		= INVENTORY + "." + "items";
+	public static final String INVENTORY_START_TIME = INVENTORY + "." + "startTime";
+	public static final String INVENTORY_CYCLE_TIME = INVENTORY + "." + "cycleTime";
 		
 	private static final long defaultStartTime 		= 30;
 	private static final long defaultCycleTime 		= 0;
@@ -28,8 +29,8 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 		this.config.set(key, stringBuilder);
 		this.configAccessor.saveConfig();
 	}
-	public void setInventory(List<String> itemList) {
-		this.config.set(INVENTORY, itemList);
+	public void setInventoryItems(List<String> itemList) {
+		this.config.set(INVENTORY_ITEMS, itemList);
 		this.configAccessor.saveConfig();
 	}
 	
@@ -46,10 +47,6 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 	@Override
 	public boolean createFileStructure() {
 		boolean configAltered = false;
-		if(this.config.get(INVENTORY) == null) {
-			setInventory(null);
-			configAltered = true;
-		}
 		if(this.config.get(INVENTORY_START_TIME) == null) {
 			setInventoryStartTime(defaultStartTime);
 			configAltered = true;
@@ -58,15 +55,24 @@ public class PlayerItemsConfigurationStructure extends EventConfigurationStructu
 			setInventoryCycleTime(defaultCycleTime);
 			configAltered = true;
 		}
+		if(this.config.get(INVENTORY_ITEMS) == null) {
+			setInventoryItems(null);
+			configAltered = true;
+		}
 		return configAltered;
+	}
+	
+	public boolean hasItem(String key) {
+		if (config.getString(key) != null) return true;
+		return false;
 	}
 	
 	public String getItem(String key) {
 		return config.getString(key);
 	}
 	
-	public List<?> getInventory() {
-		return config.getList(INVENTORY);
+	public List<?> getInventoryItems() {
+		return config.getList(INVENTORY_ITEMS);
 	}
 	
 	public long getInventoryStartTime() {

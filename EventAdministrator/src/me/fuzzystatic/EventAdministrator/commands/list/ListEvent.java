@@ -18,15 +18,13 @@ public class ListEvent extends List {
 		if (hasPermissionNode(sender)) {
 			if(args.length > 2) {
 				switch(args[2]) {
-				case "a" 			: new ListActiveEvent().runCommand(plugin, sender, args); break;
-				case "active" 		: new ListActiveEvent().runCommand(plugin, sender, args); break;
+				case "a" 		: new ListActiveEvent().runCommand(plugin, sender, args); break;
+				case "active" 	: new ListActiveEvent().runCommand(plugin, sender, args); break;
 				}
 				return true;
 			} else {
 				DirectoryStructure ds = new DirectoryStructure(plugin);
-				
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Events on this server:");
-				
 				for (File file : ds.eventFiles()) {
 					String eventName = FilenameUtils.removeExtension(file.getName()).toString();
 					if (file.isFile()) {

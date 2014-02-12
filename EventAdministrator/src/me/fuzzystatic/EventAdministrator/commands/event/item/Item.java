@@ -36,6 +36,8 @@ public class Item extends Command {
 			sender.sendMessage(new ItemLeggings().usage());
 			sender.sendMessage(new ItemBoots().usage());
 			sender.sendMessage(new ItemInventory().usage());
+			sender.sendMessage(new ItemInventoryStartTime().usage());
+			sender.sendMessage(new ItemInventoryCycleTime().usage());
 			return true;
 		}
 	}
