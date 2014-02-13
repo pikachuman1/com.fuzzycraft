@@ -54,7 +54,8 @@ public class Ninja extends Kit implements CommandExecutor {
 	public static void setInventory(Player player) {
 		PlayerInventory inventory = player.getInventory();
 	    inventory.clear();
-
+	
+	    ItemStack enderpearl = new ItemStack(Material.ENDER_PEARL, 16);
 	    ItemStack weapon1 = new ItemStack(Material.IRON_SWORD, 1);
 	    ItemStack weapon2 = new ItemStack(Material.BOW, 1);
 	    ItemStack potion = new ItemStack(Material.POTION, 3, (short)16420);
@@ -97,9 +98,9 @@ public class Ninja extends Kit implements CommandExecutor {
     	
     	boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
 	    
+	    inventory.addItem(enderpearl);
 	    inventory.addItem(weapon1);
 	    inventory.addItem(potion);
-	    inventory.addItem(food);
 	    inventory.addItem(food);
 	    inventory.addItem(food);
 	    inventory.addItem(food);
